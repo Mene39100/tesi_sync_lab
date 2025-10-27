@@ -1,0 +1,20 @@
+# File temporanei di Kathará
+**/__pycache__/
+**/*.log
+**/*.pcap
+**/*.tmp
+**/analysis/raw_logs/*
+**/tmp/*
+*.bak
+
+# Output locali di VSCode
+.vscode/
+*.code-workspace
+
+# File di sistema
+.DS_Store
+Thumbs.db
+
+# Output automatici o di cache
+*.swp
+*.swo
