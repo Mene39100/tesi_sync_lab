@@ -1,11 +1,14 @@
 #!/bin/bash
-bash "$(dirname "$0")/bootstrapT2.sh"
+set -e
+cd "$(dirname "$0")"
+bash ./bootstrapT2.sh
 
-echo "[+] Verifica offset Chrony..."
-grep "Offset" ../analysis/raw_logs/T2/chrony_client.txt || echo "Offset non trovato."
+echo "[+] Controllo offset Chrony..."
+grep -i "offset" ../analysis/raw_logs/T2/chrony_client.txt || echo "Chrony non sincronizzato"
 
-echo "[+] Verifica sincronizzazione NTP..."
-grep "\*" ../analysis/raw_logs/T2/ntp_client.txt || echo "NTP non sincronizzato."
+echo "[+] Controllo NTPsec..."
+grep "\*" ../analysis/raw_logs/T2/ntp_client.txt || echo "NTPsec non sincronizzato"
 
-echo "[+] Verifica log PTP..."
-grep "offset" ../analysis/raw_logs/T2/ptp_client.txt | tail -5
+echo "[+] Ultime righe log PTP..."
+tail -n 5 ../analysis/raw_logs/T2/ptp_client.txt || true
+

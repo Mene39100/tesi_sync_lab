@@ -10,8 +10,8 @@ for node in servergm clientchrony clientntp clientptp; do
   fi
 done
 if kathara exec -d "$TOPOLOGY_DIR" boundary 'ip link set eth2 down' >/dev/null 2>&1; then
-    echo "[+] eth1 disattivata in boundary"
+    echo "[+] eth2 disattivata in boundary"
   else
-    echo "[!] eth1 non presente in boundary"
+    echo "[!] eth2 non presente in boundary"
   fi
 echo "[✓] Connessione Internet disattivata in tutti i nodi."

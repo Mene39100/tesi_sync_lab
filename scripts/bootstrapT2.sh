@@ -1,31 +1,50 @@
 #!/bin/bash
-set -e
-source "$(dirname "$0")/env_T2.sh"
+set -euo pipefail
 
-echo "[+] Pulizia ambiente e avvio topologia..."
-lclean
-lstart
+source ./scripts/envT2.sh
 
-echo "[+] Attesa avvio container..."
+echo "[+] Pulizia e avvio topologia T2..."
+kathara lclean -d "$TOPOLOGY_DIR" || true
+kathara lstart -d "$TOPOLOGY_DIR"
 sleep 10
 
-echo "[+] Test connettività base..."
-lcmd serverGM ping -c 2 boundary
-lcmd boundary ping -c 2 clientPTP
+echo "[+] Disconnessione Internet dai nodi..."
+./scripts/endInternetConnection.sh
+sleep 5
 
-echo "[+] Avvio servizi PTP..."
-lcmd serverGM "ptp4l -f /etc/ptp/server_gm.conf -m -i eth0 -s > /tmp/ptp_server.log 2>&1 &"
-lcmd boundary "ptp4l -f /etc/ptp/bc.conf -m -i eth0 -i eth1 -s > /tmp/ptp_boundary.log 2>&1 &"
-lcmd clientPTP "ptp4l -f /etc/ptp/client_ptp.conf -m -i eth0 > /tmp/ptp_client.log 2>&1 &"
+echo "[+] Test connettività interna..."
+kathara exec -d "$TOPOLOGY_DIR" servergm "ping -c 2 boundary" || echo "[!] Ping servergm→boundary fallito"
+kathara exec -d "$TOPOLOGY_DIR" boundary "ping -c 2 clientptp" || echo "[!] Ping boundary→clientptp fallito"
 
-echo "[+] Attesa stabilizzazione PTP..."
-sleep 20
+echo "[+] Avvio servizi PTP (grandmaster → boundary → client)..."
 
-echo "[+] Raccolta log sincronizzazione..."
-mkdir -p "$LOG_DIR"
-lcmd clientChrony chronyc tracking > "$LOG_DIR/chrony_client.txt"
-lcmd clientNTP ntpq -p > "$LOG_DIR/ntp_client.txt"
-lcmd clientPTP cat /tmp/ptp_client.log > "$LOG_DIR/ptp_client.txt"
+# --- Grandmaster ---
+kathara exec -d "$TOPOLOGY_DIR" servergm -- bash -lc \
+'ptp4l -f /etc/ptp/server_gm.conf -m -i eth0 -s &> /analysis/raw_logs/T2/ptp_server.log &'
+sleep 3
 
-echo "[+] Salvataggio completato in $LOG_DIR"
-echo "[+] Test terminato con successo!"
+# --- Boundary Clock ---
+kathara exec -d "$TOPOLOGY_DIR" boundary -- bash -lc \
+'ptp4l -f /etc/ptp/bc.conf -m -i eth1 -s &> /analysis/raw_logs/T2/ptp_boundary.log &'
+sleep 3
+
+# --- Client PTP ---
+kathara exec -d "$TOPOLOGY_DIR" clientptp -- bash -lc \
+'ptp4l -f /etc/ptp/client_ptp.conf -m -i eth0 -s &> /analysis/raw_logs/T2/ptp_client.log &'
+sleep 5
+
+
+
+# --- Attesa stabilizzazione PTP (opzionale) ---
+# echo "[+] Attesa stabilizzazione PTP..."
+# sleep 25
+
+# --- Raccolta log di sincronizzazione ---
+# echo "[+] Raccolta log di sincronizzazione..."
+# kathara exec -d "$TOPOLOGY_DIR" clientchrony "chronyc tracking" \
+#   > analysis/raw_logs/T2/chrony_client.log 2>&1 || echo "[!] Log Chrony non disponibile"
+# kathara exec -d "$TOPOLOGY_DIR" clientntp "ntpq -p" \
+#   > analysis/raw_logs/T2/ntp_client.log 2>&1 || echo "[!] Log NTPsec non disponibile"
+
+# echo "[+] Tutti i log salvati in analysis/raw_logs/T2/"
+# echo "[✓] Test completato con successo."

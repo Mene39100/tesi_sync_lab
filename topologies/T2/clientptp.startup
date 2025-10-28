@@ -1,17 +1,35 @@
-#!/bin/bash
-set -e
 ip addr add 10.0.20.3/24 dev eth0
 ip link set eth0 up
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
-apt update -y
-apt install -y linuxptp
+cat >> /etc/hosts <<'EOF'
+10.0.10.1 servergm
+10.0.10.2 boundary
+10.0.10.3 clientchrony
+10.0.20.2 clientntp
+10.0.20.3 clientptp
+EOF
 
+mkdir -p /etc/ptp
 # Configurazione PTP (client)
 cat > /etc/ptp/client_ptp.conf << 'EOF'
 [global]
 twoStepFlag 1
 domainNumber 24
 delay_mechanism E2E
+time_stamping software
 [eth0]
 EOF
+
+# Reset e impostazione repository Debian
+rm -rf /etc/apt/sources.list.d/*
+cat > /etc/apt/sources.list <<'EOF'
+deb http://deb.debian.org/debian bookworm main contrib non-free
+deb http://deb.debian.org/debian bookworm-updates main contrib non-free
+deb http://deb.debian.org/debian-security bookworm-security main contrib non-free
+EOF
+
+apt update -y
+apt install -y linuxptp
+
+
