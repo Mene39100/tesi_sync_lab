@@ -4,13 +4,14 @@
 
 ------------------------------------------------------------------------
 ### Kathara check
-System check
-Current Manager is: Docker (Kathara)
-Manager version is: 28.5.1
-Python version is: 3.11.13 (main, Jun  4 2025, 08:57:30) [GCC 13.3.0]
-Kathara version is: 3.8.0
-Operating System version is: Linux-6.8.0-79-generic-aarch64
-✓ Container run successfully.
+
+- System check
+- Current Manager is: Docker (Kathara)
+- Manager version is: 28.5.1
+- Python version is: 3.11.13 (main, Jun  4 2025, 08:57:30) [GCC 13.3.0]
+- Kathara version is: 3.8.0
+- Operating System version is: Linux-6.8.0-79-generic-aarch64
+- ✓ Container run successfully.
 ------------------------------------------------------------------------
 
 Creazione topologia T1 (topologies/T1.lab) [client <-> server] (ip statico) -> topologia base due nodi [seguiranno Tn topologie differenti]
