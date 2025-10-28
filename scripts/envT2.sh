@@ -1,0 +1,10 @@
+#!/bin/bash
+SERVER_GM_IP="10.0.10.1"
+BOUNDARY_IP_A="10.0.10.2"
+BOUNDARY_IP_B="10.0.20.1"
+CLIENT_CHRONY_IP="10.0.10.3"
+CLIENT_NTP_IP="10.0.20.2"
+CLIENT_PTP_IP="10.0.20.3"
+LOG_DIR="../analysis/raw_logs/T2"
+TOPOLOGY_DIR="topologies/T2"
+mkdir -p "$LOG_DIR"

@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+ip addr add 10.0.10.3/24 dev eth0
+ip link set eth0 up
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
+
+apt update -y
+apt install -y chrony
+
+# Configurazione Chrony (client)
+cat > /etc/chrony/chrony.conf << 'EOF'
+server 10.0.10.1 iburst
+driftfile /var/lib/chrony/chrony.drift
+log tracking measurements statistics
+EOF
+service chrony restart
