@@ -24,6 +24,8 @@ time_stamping software
 [eth1]
 EOF
 
+
+
 # Reset e impostazione repository Debian
 rm -rf /etc/apt/sources.list.d/*
 cat > /etc/apt/sources.list <<'EOF'
@@ -34,5 +36,16 @@ EOF
 
 apt update -y
 apt install -y linuxptp
+
+
+# se attivo, disattivo ptp sul resto per evitare conflitti di sinc sul clock del boundary slave-master, faccio giare solo ntp e niente ptp
+# apt install -y ntpsec
+# cat > /etc/ntpsec/ntp.conf << 'EOF'
+# server 10.0.10.1 iburst
+# restrict default kod nomodify notrap nopeer noquery limited
+# restrict 10.0.20.0 mask 255.255.255.0 nomodify notrap
+# EOF
+# service ntp restart
+
 
 
