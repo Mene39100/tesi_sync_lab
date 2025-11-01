@@ -29,6 +29,9 @@ twoStepFlag 1
 domainNumber 24
 delay_mechanism E2E
 time_stamping software
+slaveOnly 0
+priority1 128
+priority2 128
 [eth0]
 EOF
 

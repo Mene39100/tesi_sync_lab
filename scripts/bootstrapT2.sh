@@ -5,7 +5,7 @@ source ./scripts/envT2.sh
 
 echo "[+] Pulizia e avvio topologia T2..."
 kathara lclean -d "$TOPOLOGY_DIR" || true
-kathara lstart -d "$TOPOLOGY_DIR"
+sudo kathara lstart -d "$TOPOLOGY_DIR" --privileged
 sleep 25
 
 echo "[+] Disconnessione Internet dai nodi..."
@@ -29,49 +29,49 @@ echo "[+] Avvio servizi PTP (grandmaster → boundary → client)..."
 
 # --- Grandmaster ---
 echo "   > Avvio PTP su servergm (Grandmaster)..."
-kathara exec -d "$TOPOLOGY_DIR" servergm \
-  "ptp4l -f /etc/ptp/server_gm.conf -m -i eth0 -S > /analysis/raw_logs/T2/ptp_server.log 2>&1 &"
+kathara exec -d "$TOPOLOGY_DIR" servergm -- bash -lc \
+  'ptp4l -f /etc/ptp/server_gm.conf -m -i eth0 -S &> /analysis/raw_logs/T2/ptp_server.log &'
 sleep 3
+
 
 # --- Boundary Clock ---
 echo "   > Avvio PTP su boundary (Boundary Clock)..."
-kathara exec -d "$TOPOLOGY_DIR" boundary \
-  "ptp4l -f /etc/ptp/bc.conf -m -i eth0 -i eth1 -S > /analysis/raw_logs/T2/ptp_boundary.log 2>&1 &"
+kathara exec -d "$TOPOLOGY_DIR" boundary -- bash -lc \
+  'ptp4l -f /etc/ptp/bc.conf -m -i eth0 -i eth1 -S &> /analysis/raw_logs/T2/ptp_boundary.log &'
 sleep 3
 
 # --- Client PTP ---
 echo "   > Avvio PTP su clientptp (Slave)..."
-kathara exec -d "$TOPOLOGY_DIR" clientptp \
-  "ptp4l -f /etc/ptp/client_ptp.conf -m -i eth0 -S -s > /analysis/raw_logs/T2/ptp_client.log 2>&1 &"
-sleep 5
+kathara exec -d "$TOPOLOGY_DIR" clientptp -- bash -lc \
+  'ptp4l -f /etc/ptp/client_ptp.conf -m -i eth0 -S -s > /analysis/raw_logs/T2/ptp_client.log &'
+sleep 15
 
 echo "[+] Attesa stabilizzazione PTP..."
-sleep 20
+# sleep 20
 
-echo "[+] Raccolta log di sincronizzazione..."
-kathara exec -d "$TOPOLOGY_DIR" clientchrony \
-  "chronyc tracking" > analysis/raw_logs/T2/chrony_client.txt || echo "[!] Log Chrony non disponibile"
+# echo "[+] Raccolta log di sincronizzazione..."
+# kathara exec -d "$TOPOLOGY_DIR" clientchrony \
+#   "chronyc tracking" > analysis/raw_logs/T2/chrony_client.txt || echo "[!] Log Chrony non disponibile"
 
-kathara exec -d "$TOPOLOGY_DIR" clientntp \
-  "ntpq -p" > analysis/raw_logs/T2/ntp_client.txt || echo "[!] Log NTPsec non disponibile"
+# kathara exec -d "$TOPOLOGY_DIR" clientntp \
+#   "ntpq -p" > analysis/raw_logs/T2/ntp_client.txt || echo "[!] Log NTPsec non disponibile"
 
-kathara exec -d "$TOPOLOGY_DIR" clientptp \
-  "cat /analysis/raw_logs/T2/ptp_client.log" > analysis/raw_logs/T2/ptp_client.txt || echo "[!] Log PTP non disponibile"
+# kathara exec -d "$TOPOLOGY_DIR" clientptp \
+#   "cat /analysis/raw_logs/T2/ptp_client.log" > analysis/raw_logs/T2/ptp_client.txt || echo "[!] Log PTP non disponibile"
 
-echo "[+] Tutti i log salvati in analysis/raw_logs/T2/"
+# echo "[+] Tutti i log salvati in analysis/raw_logs/T2/"
 
-echo "[+] Pulizia processi PTP dai container..."
-for node in servergm boundary clientptp; do
-  kathara exec -d "$TOPOLOGY_DIR" "$node" "pkill ptp4l || true"
-done
+# echo "[+] Pulizia processi PTP dai container..."
+# for node in servergm boundary clientptp; do
+#   kathara exec -d "$TOPOLOGY_DIR" "$node" "pkill ptp4l || true"
+# done
 
-echo "[✓] Test completato con successo."
+# echo "[✓] Test completato con successo."
 
 ########################################################################################
 #VECCHIO SCRIPT
 ########################################################################################
 
-# #!/bin/bash
 # set -euo pipefail
 
 # source ./scripts/envT2.sh

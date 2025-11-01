@@ -18,6 +18,9 @@ twoStepFlag 1
 domainNumber 24
 delay_mechanism E2E
 time_stamping software
+summary_interval 1
+logging_level 6
+slaveOnly 1
 [eth0]
 EOF
 
