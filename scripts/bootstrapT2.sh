@@ -49,7 +49,7 @@ sleep 3
 # --- Client PTP ---
 echo "   > Avvio PTP su clientptp (Slave)..."
 kathara exec -d "$TOPOLOGY_DIR" clientptp -- bash -lc \
-  'ptp4l -f /etc/ptp/client_ptp.conf -m -i eth0 -S -s > /analysis/raw_logs/T2/ptp_client.log &'
+  'ptp4l -f /etc/ptp/client_ptp.conf -m -i eth0 -S -s &> /analysis/raw_logs/T2/ptp_client.log &'
 sleep 25
 
 echo "[+] Attesa stabilizzazione PTP..."

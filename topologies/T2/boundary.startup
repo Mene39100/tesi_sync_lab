@@ -4,9 +4,12 @@ ip link set eth0 up
 ip link set eth1 up
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
+#10.0.10.2 boundary
+
 cat >> /etc/hosts <<'EOF'
 10.0.10.1 servergm
-10.0.10.2 boundary
+10.0.10.2 boundary0
+10.0.20.1 boundary1
 10.0.10.3 clientchrony
 10.0.20.2 clientntp
 10.0.20.3 clientptp
@@ -23,6 +26,8 @@ time_stamping software
 slaveOnly 0
 priority1 200
 priority2 200
+announceReceiptTimeout 3
+tx_timestamp_timeout 20
 [eth0]
 [eth1]
 EOF
