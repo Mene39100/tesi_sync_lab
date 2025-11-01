@@ -25,6 +25,12 @@ else
   echo "[!] Ping boundary → clientptp fallito"
 fi
 
+if kathara exec -d "$TOPOLOGY_DIR" clientptp "ping -c 2 boundary" > /dev/null 2>&1; then
+  echo "[✓] Connessione clientptp → boundary OK"
+else
+  echo "[!] Ping clientptp → boundary fallito"
+fi
+
 echo "[+] Avvio servizi PTP (grandmaster → boundary → client)..."
 
 # --- Grandmaster ---
@@ -44,7 +50,7 @@ sleep 3
 echo "   > Avvio PTP su clientptp (Slave)..."
 kathara exec -d "$TOPOLOGY_DIR" clientptp -- bash -lc \
   'ptp4l -f /etc/ptp/client_ptp.conf -m -i eth0 -S -s > /analysis/raw_logs/T2/ptp_client.log &'
-sleep 15
+sleep 25
 
 echo "[+] Attesa stabilizzazione PTP..."
 # sleep 20
