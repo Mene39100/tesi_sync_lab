@@ -1,6 +1,5 @@
 # File temporanei di Kathará
 **/__pycache__/
-**/*.log
 **/*.pcap
 **/*.tmp
 **/tmp/*
