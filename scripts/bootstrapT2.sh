@@ -53,11 +53,20 @@ kathara exec -d "$TOPOLOGY_DIR" clientptp -- bash -lc \
 sleep 25
 
 echo "[+] Attesa stabilizzazione PTP..."
-# sleep 20
+sleep 20
 
-# echo "[+] Raccolta log di sincronizzazione..."
-# kathara exec -d "$TOPOLOGY_DIR" clientchrony \
-#   "chronyc tracking" > analysis/raw_logs/T2/chrony_client.txt || echo "[!] Log Chrony non disponibile"
+echo "[+] Raccolta log di sincronizzazione..."
+kathara exec -d "$TOPOLOGY_DIR" clientchrony \
+  "chronyc tracking" > analysis/raw_logs/T2/chrony_client.txt || echo "[!] Log Chrony non disponibile"
+
+echo "[+] Raccolta log aggiuntivi Chrony..."
+kathara exec -d "$TOPOLOGY_DIR" clientchrony "chronyc sources -v" > analysis/raw_logs/T2/chrony_sources.txt
+kathara exec -d "$TOPOLOGY_DIR" clientchrony "chronyc sourcestats" > analysis/raw_logs/T2/chrony_sourcestats.txt
+kathara exec -d "$TOPOLOGY_DIR" clientchrony "chronyc rtcdata" > analysis/raw_logs/T2/chrony_rtc.txt
+kathara exec -d "$TOPOLOGY_DIR" clientchrony "chronyc activity" > analysis/raw_logs/T2/chrony_activity.txt
+
+
+sleep 15
 
 # kathara exec -d "$TOPOLOGY_DIR" clientntp \
 #   "ntpq -p" > analysis/raw_logs/T2/ntp_client.txt || echo "[!] Log NTPsec non disponibile"

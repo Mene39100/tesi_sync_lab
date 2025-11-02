@@ -4,7 +4,8 @@ echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
 cat >> /etc/hosts <<'EOF'
 10.0.10.1 servergm
-10.0.10.2 boundary
+10.0.10.2 boundary0
+10.0.20.1 boundary1
 10.0.10.3 clientchrony
 10.0.20.2 clientntp
 10.0.20.3 clientptp
@@ -22,10 +23,17 @@ EOF
 apt update -y
 apt install -y chrony
 
+
 # Configurazione Chrony (client)
-cat > /etc/chrony/chrony.conf << 'EOF'
+cat > /etc/chrony/chrony.conf <<'EOF'
 server 10.0.10.1 iburst
 driftfile /var/lib/chrony/chrony.drift
-log tracking measurements statistics
+# log tracking measurements statistics
+logdir /analysis/raw_logs/T2/chrony_logs
+log measurements statistics tracking refclocks
+logchange 0.01
 EOF
-service chrony restart
+
+pkill chronyd 2>/dev/null
+sleep 2
+chronyd &
