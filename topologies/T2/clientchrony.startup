@@ -25,14 +25,8 @@ apt install -y chrony
 
 
 # Configurazione Chrony (client)
-cat > /etc/chrony/chrony.conf <<'EOF'
-server 10.0.10.1 iburst
-driftfile /var/lib/chrony/chrony.drift
-# log tracking measurements statistics
-logdir /analysis/raw_logs/T2/chrony_logs
-log measurements statistics tracking refclocks
-logchange 0.01
-EOF
+cp /tesi_sync_lab/configs/chrony/client_chrony.conf /etc/chrony/chrony.conf
+
 
 pkill chronyd 2>/dev/null
 sleep 2

@@ -26,18 +26,7 @@ apt install -y chrony linuxptp
 
 
 # Configurazione Chrony (server)
-cat > /etc/chrony/chrony.conf <<'EOF'
-server 127.127.1.0
-local stratum 8
-manual
-makestep 1 -1
-driftfile /var/lib/chrony/chrony.drift
-bindaddress 0.0.0.0
-allow 10.0.10.0/24
-# log tracking measurements statistics
-log measurements statistics tracking refclocks
-logchange 0.01
-EOF
+cp /tesi_sync_lab/configs/chrony/server_chrony.conf /etc/chrony/chrony.conf
 
 # Avvio Chrony manuale (nei container systemctl è inutile)
 pkill chronyd 2>/dev/null
@@ -45,19 +34,8 @@ sleep 2
 chronyd &
 
 # Configurazione PTP (Grandmaster)
-
 mkdir -p /etc/ptp
-cat > /etc/ptp/server_gm.conf << 'EOF'
-[global]
-twoStepFlag 1
-domainNumber 24
-delay_mechanism E2E
-time_stamping software
-slaveOnly 0
-priority1 128
-priority2 128
-[eth0]
-EOF
+cp /tesi_sync_lab/configs/ptp/server_ptp.conf /etc/ptp/server_gm.conf
 
 
 

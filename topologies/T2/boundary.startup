@@ -15,22 +15,9 @@ cat >> /etc/hosts <<'EOF'
 10.0.20.3 clientptp
 EOF
 
+#Configurazione ptp file
 mkdir -p /etc/ptp
-# Configurazione PTP (Boundary Clock)
-cat > /etc/ptp/bc.conf << 'EOF'
-[global]
-twoStepFlag 1
-domainNumber 24
-delay_mechanism E2E
-time_stamping software
-slaveOnly 0
-priority1 200
-priority2 200
-announceReceiptTimeout 3
-tx_timestamp_timeout 20
-[eth0]
-[eth1]
-EOF
+cp /tesi_sync_lab/configs/ptp/boundary_ptp.conf /etc/ptp/bc.conf
 
 
 

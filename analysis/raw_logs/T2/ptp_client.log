@@ -1,30 +1,29 @@
-ptp4l[3803.513]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
-ptp4l[3803.513]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
-ptp4l[3807.867]: port 1: new foreign master d6d17d.fffe.708909-2
-ptp4l[3811.123]: selected local clock 322a55.fffe.db8402 as best master
-ptp4l[3811.870]: selected best master clock 1287d6.fffe.c81e2e
-ptp4l[3811.870]: foreign master not using PTP timescale
-ptp4l[3811.870]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
-ptp4l[3814.871]: rms 725480 max 841917 freq +916145 +/-   0 delay 1048309 +/- 75152
-ptp4l[3816.874]: rms 414171 max 520021 freq +916145 +/-   0 delay 1002288 +/- 46020
-ptp4l[3818.874]: rms 232049 max 323759 freq +916145 +/-   0 delay 822463 +/- 71846
-ptp4l[3820.875]: rms 307246 max 427288 freq +916145 +/-   0 delay 723534 +/-   0
-ptp4l[3822.877]: rms 412576 max 533530 freq +916145 +/-   0 delay 619978 +/-   0
-ptp4l[3824.879]: rms 213025 max 294073 freq +916145 +/-   0 delay 619978 +/-   0
-ptp4l[3826.880]: rms 146185 max 205773 freq +916145 +/-   0 delay 607100 +/- 12878
-ptp4l[3828.880]: rms 173185 max 222671 freq +916145 +/-   0 delay 507122 +/- 36796
-ptp4l[3830.881]: rms 270673 max 316741 freq +848925 +/- 10855
-ptp4l[3830.881]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED
-ptp4l[3832.883]: rms 202621 max 229811 freq +856488 +/- 20134 delay 439978 +/-   0
-ptp4l[3834.885]: rms 203321 max 269543 freq +868012 +/- 18618 delay 434946 +/- 4580
-ptp4l[3836.886]: rms 40405 max 48468 freq +860580 +/- 3961 delay 437401 +/- 5103
-ptp4l[3838.891]: rms 347869 max 450702 freq +872397 +/- 32621 delay 445111 +/-   0
-ptp4l[3840.890]: rms 275911 max 294048 freq +831998 +/- 1749 delay 461626 +/-   0
-ptp4l[3842.893]: rms 319995 max 444706 freq +877578 +/- 26650 delay 480539 +/-   0
-ptp4l[3844.904]: rms 1353540 max 1902831 freq +966473 +/- 85679 delay 524843 +/- 24194
-ptp4l[3846.896]: rms 922086 max 1269607 freq +910805 +/- 78997 delay 587394 +/- 2954
-ptp4l[3848.895]: rms 372801 max 473488 freq +827104 +/- 12317 delay 590347 +/-   0
-ptp4l[3850.898]: rms 579330 max 660126 freq +870723 +/- 57599 delay 590347 +/-   0
-ptp4l[3852.897]: rms 429130 max 485050 freq +819214 +/- 6258 delay 697002 +/- 67418
-ptp4l[3854.898]: rms 539554 max 580876 freq +866098 +/- 54031 delay 744674 +/-   0
-ptp4l[3856.898]: rms 184399 max 251918 freq +845387 +/- 9352 delay 458885 +/- 95876
+ptp4l[4528.157]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[4528.157]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[4531.008]: port 1: new foreign master f60b4c.fffe.54b94a-2
+ptp4l[4535.011]: selected best master clock 02406f.fffe.0cc08b
+ptp4l[4535.011]: foreign master not using PTP timescale
+ptp4l[4535.011]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[4538.012]: rms 79250 max 108841 freq -258965 +/-   0 delay 137473 +/- 16709
+ptp4l[4540.012]: rms 234984 max 325563 freq -258965 +/-   0 delay 137473 +/-   0
+ptp4l[4542.013]: rms 57556 max 70873 freq -258965 +/-   0 delay 153311 +/- 6543
+ptp4l[4544.013]: rms 66314 max 93763 freq -258965 +/-   0 delay 160296 +/- 2360
+ptp4l[4546.013]: rms 26140 max 29278 freq -258965 +/-   0 delay 152810 +/-   0
+ptp4l[4548.014]: rms 100730 max 141308 freq -258965 +/-   0 delay 166115 +/- 8586
+ptp4l[4550.014]: rms 12328 max 14618 freq -258965 +/-   0 delay 170268 +/- 4434
+ptp4l[4552.014]: rms 87006 max 106486 freq -258965 +/-   0 delay 163340 +/- 3527
+ptp4l[4554.014]: rms 46987 max 52945 freq -257499 +/- 2028 delay 167908 +/- 9554
+ptp4l[4554.014]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED
+ptp4l[4556.014]: rms 37994 max 45439 freq -259277 +/- 824 delay 177462 +/-   0
+ptp4l[4558.016]: rms 86023 max 111323 freq -252385 +/- 8044 delay 172835 +/-   0
+ptp4l[4560.016]: rms 55957 max 59948 freq -261185 +/- 444 delay 190904 +/- 24008
+ptp4l[4562.017]: rms 91239 max 125658 freq -260485 +/- 7811 delay 292153 +/-   0
+ptp4l[4564.018]: rms 134033 max 171509 freq -268554 +/- 4499 delay 287030 +/- 15186
+ptp4l[4566.018]: rms 155567 max 158456 freq -271769 +/- 371 delay 302216 +/-   0
+ptp4l[4568.019]: rms 93643 max 132063 freq -263466 +/- 6176 delay 279960 +/- 22256
+ptp4l[4570.020]: rms 238811 max 290805 freq -279881 +/- 6099 delay 397950 +/- 11801
+ptp4l[4572.020]: rms 302052 max 308093 freq -287554 +/- 462 delay 466190 +/- 56439
+ptp4l[4574.022]: rms 99671 max 138573 freq -263185 +/- 8288 delay 276127 +/- 22748
+ptp4l[4576.023]: rms 105817 max 113530 freq -258377 +/- 10608 delay 256836 +/-   0
+ptp4l[4578.023]: rms 94288 max 117325 freq -260325 +/- 9093 delay 256836 +/-   0
+ptp4l[4580.023]: rms 134946 max 150149 freq -271292 +/- 1559 delay 244592 +/- 2190

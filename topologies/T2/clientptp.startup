@@ -13,25 +13,9 @@ cat >> /etc/hosts <<'EOF'
 10.0.20.3 clientptp
 EOF
 
+#Configurazione ptp file
 mkdir -p /etc/ptp
-# Configurazione PTP (client)
-cat > /etc/ptp/client_ptp.conf << 'EOF'
-[global]
-twoStepFlag 1
-domainNumber 24
-delay_mechanism E2E
-time_stamping software
-summary_interval 1
-logging_level 6
-slaveOnly 1
-announceReceiptTimeout 3
-tx_timestamp_timeout 20
-verbose 1
-logMinDelayReqInterval 0
-logAnnounceInterval 1
-logSyncInterval 0
-[eth0]
-EOF
+cp /tesi_sync_lab/configs/ptp/client_ptp.conf /etc/ptp/client_ptp.conf
 
 # Reset e impostazione repository Debian
 rm -rf /etc/apt/sources.list.d/*

@@ -13,7 +13,7 @@ echo "[+] Disconnessione Internet dai nodi..."
 sleep 5
 
 echo "[+] Test connettività interna..."
-if kathara exec -d "$TOPOLOGY_DIR" servergm "ping -c 2 boundary" > /dev/null 2>&1; then
+if kathara exec -d "$TOPOLOGY_DIR" servergm "ping -c 2 boundary0" > /dev/null 2>&1; then
   echo "[✓] Connessione servergm → boundary OK"
 else
   echo "[!] Ping servergm → boundary fallito"
@@ -25,7 +25,7 @@ else
   echo "[!] Ping boundary → clientptp fallito"
 fi
 
-if kathara exec -d "$TOPOLOGY_DIR" clientptp "ping -c 2 boundary" > /dev/null 2>&1; then
+if kathara exec -d "$TOPOLOGY_DIR" clientptp "ping -c 2 boundary1" > /dev/null 2>&1; then
   echo "[✓] Connessione clientptp → boundary OK"
 else
   echo "[!] Ping clientptp → boundary fallito"
@@ -36,20 +36,20 @@ echo "[+] Avvio servizi PTP (grandmaster → boundary → client)..."
 # --- Grandmaster ---
 echo "   > Avvio PTP su servergm (Grandmaster)..."
 kathara exec -d "$TOPOLOGY_DIR" servergm -- bash -lc \
-  'ptp4l -f /etc/ptp/server_gm.conf -m -i eth0 -S &> /analysis/raw_logs/T2/ptp_server.log &'
+  'ptp4l -f /etc/ptp/server_gm.conf -m -i eth0 -S &> /tesi_sync_lab/analysis/raw_logs/T2/ptp_server.log &'
 sleep 3
 
 
 # --- Boundary Clock ---
 echo "   > Avvio PTP su boundary (Boundary Clock)..."
 kathara exec -d "$TOPOLOGY_DIR" boundary -- bash -lc \
-  'ptp4l -f /etc/ptp/bc.conf -m -i eth0 -i eth1 -S &> /analysis/raw_logs/T2/ptp_boundary.log &'
+  'ptp4l -f /etc/ptp/bc.conf -m -i eth0 -i eth1 -S &> /tesi_sync_lab/analysis/raw_logs/T2/ptp_boundary.log &'
 sleep 3
 
 # --- Client PTP ---
 echo "   > Avvio PTP su clientptp (Slave)..."
 kathara exec -d "$TOPOLOGY_DIR" clientptp -- bash -lc \
-  'ptp4l -f /etc/ptp/client_ptp.conf -m -i eth0 -S -s &> /analysis/raw_logs/T2/ptp_client.log &'
+  'ptp4l -f /etc/ptp/client_ptp.conf -m -i eth0 -S -s &> /tesi_sync_lab/analysis/raw_logs/T2/ptp_client.log &'
 sleep 25
 
 echo "[+] Attesa stabilizzazione PTP..."
