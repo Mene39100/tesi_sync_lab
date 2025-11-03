@@ -2,7 +2,6 @@ ip addr add 10.0.10.1/24 dev eth0
 ip link set eth0 up
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
-#10.0.10.2 boundary
 
 cat >> /etc/hosts <<'EOF'
 10.0.10.1 servergm
@@ -36,8 +35,3 @@ chronyd &
 # Configurazione PTP (Grandmaster)
 mkdir -p /etc/ptp
 cp /tesi_sync_lab/configs/ptp/server_ptp.conf /etc/ptp/server_gm.conf
-
-
-
-
-

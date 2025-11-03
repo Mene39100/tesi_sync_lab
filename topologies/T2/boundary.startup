@@ -4,7 +4,6 @@ ip link set eth0 up
 ip link set eth1 up
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
-#10.0.10.2 boundary
 
 cat >> /etc/hosts <<'EOF'
 10.0.10.1 servergm
@@ -30,17 +29,28 @@ deb http://deb.debian.org/debian-security bookworm-security main contrib non-fre
 EOF
 
 apt update -y
-apt install -y linuxptp
+apt install -y linuxptp ntpsec
+
 
 
 # se attivo, disattivo ptp sul resto per evitare conflitti di sinc sul clock del boundary slave-master, faccio giare solo ntp e niente ptp
-# apt install -y ntpsec
-# cat > /etc/ntpsec/ntp.conf << 'EOF'
-# server 10.0.10.1 iburst
-# restrict default kod nomodify notrap nopeer noquery limited
-# restrict 10.0.20.0 mask 255.255.255.0 nomodify notrap
-# EOF
-# service ntp restart
+# Configurazione NTPsec (bridge server-client)
+# Configurazione NTPsec (solo file, non avvio)
+cat > /etc/ntpsec/ntp.conf <<'EOF'
+server 10.0.10.4 iburst
+driftfile /var/lib/ntpsec/ntp.drift
+
+# Permetti interrogazioni solo da reti locali
+restrict default kod nomodify notrap nopeer limited
+restrict 10.0.10.0 mask 255.255.255.0 nomodify notrap
+restrict 10.0.20.0 mask 255.255.255.0 nomodify notrap
+restrict 127.0.0.1
+restrict ::1
+
+EOF
+
+pkill ntpd
+sleep 2
 
 
 

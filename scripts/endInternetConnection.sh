@@ -2,7 +2,7 @@
 source ./scripts/envT2.sh
 
 echo "[+] Disattivo eth1 in tutti i nodi (post-start)"
-for node in servergm clientchrony clientntp clientptp; do
+for node in servergm serverntp clientchrony clientntp clientptp; do
   if kathara exec -d "$TOPOLOGY_DIR" "$node" 'ip link set eth1 down' >/dev/null 2>&1; then
     echo "[+] eth1 disattivata in $node"
   else
