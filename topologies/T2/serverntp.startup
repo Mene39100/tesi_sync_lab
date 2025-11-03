@@ -4,10 +4,13 @@ echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
 # Hosts
 cat >> /etc/hosts <<'EOF'
+10.0.10.1 servergm
 10.0.10.4 serverntp
 10.0.10.2 boundary0
 10.0.20.1 boundary1
+10.0.10.3 clientchrony
 10.0.20.2 clientntp
+10.0.20.3 clientptp
 EOF
 
 # Installa NTPsec
@@ -15,20 +18,7 @@ apt update -y
 apt install -y ntpsec
 
 # Configurazione NTPsec (server principale)
-cat > /etc/ntpsec/ntp.conf <<'EOF'
-# Usa il clock locale come sorgente (master della rete)
-server 127.127.1.0
-fudge 127.127.1.0 stratum 8
-local stratum 8
-
-driftfile /var/lib/ntpsec/ntp.drift
-
-# Restrizioni
-restrict default kod nomodify notrap nopeer limited
-restrict 127.0.0.1
-restrict ::1
-restrict 10.0.10.0 mask 255.255.255.0 nomodify notrap
-EOF
+cp /tesi_sync_lab/configs/ntp/server_ntp.conf /etc/ntpsec/ntp.conf
 
 # Avvio del demone
 pkill ntpd 2>/dev/null

@@ -1,13 +1,13 @@
 Reference ID    : 0A000A01 (servergm)
 Stratum         : 9
-Ref time (UTC)  : Mon Nov 03 11:02:26 2025
-System time     : 0.000002652 seconds slow of NTP time
-Last offset     : -0.000002816 seconds
-RMS offset      : 0.000002816 seconds
-Frequency       : 80.230 ppm fast
+Ref time (UTC)  : Mon Nov 03 13:31:24 2025
+System time     : 0.000043314 seconds slow of NTP time
+Last offset     : -0.000049337 seconds
+RMS offset      : 0.000049337 seconds
+Frequency       : 86.422 ppm fast
 Residual freq   : -0.000 ppm
-Skew            : 14.945 ppm
-Root delay      : 0.000281184 seconds
-Root dispersion : 0.000224382 seconds
-Update interval : 64.9 seconds
+Skew            : 6.601 ppm
+Root delay      : 0.000770908 seconds
+Root dispersion : 0.000100749 seconds
+Update interval : 65.1 seconds
 Leap status     : Normal

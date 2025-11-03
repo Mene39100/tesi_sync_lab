@@ -4,21 +4,20 @@ echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
 # Hosts
 cat >> /etc/hosts <<'EOF'
+10.0.10.1 servergm
 10.0.10.4 serverntp
 10.0.10.2 boundary0
 10.0.20.1 boundary1
+10.0.10.3 clientchrony
 10.0.20.2 clientntp
+10.0.20.3 clientptp
 EOF
 
 apt update -y
 apt install -y ntpsec
 
 # Configurazione NTPsec (client)
-cat > /etc/ntpsec/ntp.conf <<'EOF'
-# Si sincronizza con il boundary sulla rete B
-server 10.0.20.1 iburst
-driftfile /var/lib/ntpsec/ntp.drift
-EOF
+cp /tesi_sync_lab/configs/ntp/client_ntp.conf /etc/ntpsec/ntp.conf
 
 pkill ntpd 2>/dev/null
 sleep 2

@@ -7,6 +7,7 @@ echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
 cat >> /etc/hosts <<'EOF'
 10.0.10.1 servergm
+10.0.10.4 serverntp
 10.0.10.2 boundary0
 10.0.20.1 boundary1
 10.0.10.3 clientchrony
@@ -36,21 +37,11 @@ apt install -y linuxptp ntpsec
 # se attivo, disattivo ptp sul resto per evitare conflitti di sinc sul clock del boundary slave-master, faccio giare solo ntp e niente ptp
 # Configurazione NTPsec (bridge server-client)
 # Configurazione NTPsec (solo file, non avvio)
-cat > /etc/ntpsec/ntp.conf <<'EOF'
-server 10.0.10.4 iburst
-driftfile /var/lib/ntpsec/ntp.drift
-
-# Permetti interrogazioni solo da reti locali
-restrict default kod nomodify notrap nopeer limited
-restrict 10.0.10.0 mask 255.255.255.0 nomodify notrap
-restrict 10.0.20.0 mask 255.255.255.0 nomodify notrap
-restrict 127.0.0.1
-restrict ::1
-
-EOF
+cp /tesi_sync_lab/configs/ntp/boundary_ntp.conf /etc/ntpsec/ntp.conf
 
 pkill ntpd
 sleep 2
+
 
 
 

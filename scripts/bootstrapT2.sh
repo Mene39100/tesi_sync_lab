@@ -66,24 +66,39 @@ kathara exec -d "$TOPOLOGY_DIR" clientchrony "chronyc rtcdata" > analysis/raw_lo
 kathara exec -d "$TOPOLOGY_DIR" clientchrony "chronyc activity" > analysis/raw_logs/T2/chrony_activity.txt
 
 
-# # sleep 15
+# sleep 15
 # echo "   > Avvio NTPsec su boundary..."
 # kathara exec -d "$TOPOLOGY_DIR" boundary -- bash -lc \
 #   'pkill ntpd 2>/dev/null; sleep 2; /usr/sbin/ntpd -g -c /etc/ntpsec/ntp.conf &'
 # sleep 15
 
+# kathara exec -d "$TOPOLOGY_DIR" clientntp -- bash -lc '
+#   nohup bash -c "
+#     while true; do
+#       echo \"--- \$(date +%T) ---\"
+#       ntpq -p
+#       sleep 30
+#     done
+#   " > /tesi_sync_lab/analysis/raw_logs/T2/ntp_client_live.log 2>&1 &
+# '
+# kathara exec -d "$TOPOLOGY_DIR" boundary -- bash -lc '
+#   nohup bash -c "
+#     while true; do
+#       echo \"--- \$(date +%T) ---\"
+#       ntpq -p
+#       sleep 30
+#     done
+#   " > /tesi_sync_lab/analysis/raw_logs/T2/ntp_boundary_live.log 2>&1 &
+# '
 
-# kathara exec -d "$TOPOLOGY_DIR" clientntp \
-#   "ntpq -p" > analysis/raw_logs/T2/ntp_client.txt || echo "[!] Log NTPsec non disponibile"
+# echo "[✓] Raccolta log completata."
 
-# kathara exec -d "$TOPOLOGY_DIR" clientptp \
-#   "cat /analysis/raw_logs/T2/ptp_client.log" > analysis/raw_logs/T2/ptp_client.txt || echo "[!] Log PTP non disponibile"
 
-# echo "[+] Tutti i log salvati in analysis/raw_logs/T2/"
+echo "[+] Tutti i log salvati in analysis/raw_logs/T2/"
 
 # echo "[+] Pulizia processi PTP dai container..."
 # for node in servergm boundary clientptp; do
 #   kathara exec -d "$TOPOLOGY_DIR" "$node" "pkill ptp4l || true"
 # done
 
-# echo "[✓] Test completato con successo."
+echo "[✓] Test completato con successo."
