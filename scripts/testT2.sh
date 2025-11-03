@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
-cd "$(dirname "$0")"
-bash ./bootstrapT2.sh
+bash ./scripts/bootstrapT2.sh
 
 echo "[+] Controllo offset Chrony..."
 grep -i "offset" ../analysis/raw_logs/T2/chrony_client.txt || echo "Chrony non sincronizzato"

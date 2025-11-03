@@ -1,0 +1,13 @@
+[+] Testing ping from client to server
+PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
+64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=0.635 ms
+64 bytes from 10.0.0.1: icmp_seq=2 ttl=64 time=1.54 ms
+64 bytes from 10.0.0.1: icmp_seq=3 ttl=64 time=1.38 ms
+64 bytes from 10.0.0.1: icmp_seq=4 ttl=64 time=1.42 ms
+64 bytes from 10.0.0.1: icmp_seq=5 ttl=64 time=1.36 ms
+
+--- 10.0.0.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4066ms
+rtt min/avg/max/mdev = 0.635/1.266/1.541/0.322 ms
+[+] ping tests completed (Mon Nov  3 08:46:46 AM UTC 2025)
+----------------------------------------------
