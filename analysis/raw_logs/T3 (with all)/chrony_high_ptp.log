@@ -1,0 +1,13 @@
+Reference ID    : 0A000A01 (servergm)
+Stratum         : 9
+Ref time (UTC)  : Tue Nov 18 12:04:28 2025
+System time     : 0.000162685 seconds slow of NTP time
+Last offset     : -0.000170988 seconds
+RMS offset      : 0.000170988 seconds
+Frequency       : 745.288 ppm slow
+Residual freq   : -0.001 ppm
+Skew            : 21.021 ppm
+Root delay      : 0.000975840 seconds
+Root dispersion : 0.000183031 seconds
+Update interval : 64.7 seconds
+Leap status     : Normal

@@ -1,0 +1,62 @@
+ptp4l[1265.958]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[1265.958]: port 2: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[1265.958]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[1270.406]: port 1: new foreign master 12d75b.fffe.b0ad11-1
+ptp4l[1272.050]: port 1: LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[1272.051]: selected local clock 0a7c35.fffe.d56f6a as best master
+ptp4l[1272.051]: port 1: assuming the grand master role
+ptp4l[1273.005]: port 2: LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[1273.005]: selected local clock 0a7c35.fffe.d56f6a as best master
+ptp4l[1273.005]: port 1: assuming the grand master role
+ptp4l[1273.005]: port 2: assuming the grand master role
+ptp4l[1274.026]: timed out while polling for tx timestamp
+ptp4l[1274.026]: increasing tx_timestamp_timeout may correct this issue, but it is likely caused by a driver bug
+ptp4l[1274.026]: port 2: send sync failed
+ptp4l[1274.026]: port 2: MASTER to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[1274.405]: selected best master clock 12d75b.fffe.b0ad11
+ptp4l[1274.405]: foreign master not using PTP timescale
+ptp4l[1274.405]: port 1: MASTER to UNCALIBRATED on RS_SLAVE
+ptp4l[1275.405]: master offset     -57902 s0 freq +616121 path delay    206227
+ptp4l[1276.406]: master offset     216429 s0 freq +616121 path delay    206227
+ptp4l[1277.407]: master offset     -21653 s0 freq +616121 path delay    281243
+ptp4l[1278.407]: master offset      78577 s0 freq +616121 path delay    281243
+ptp4l[1279.407]: master offset    -142828 s0 freq +616121 path delay    282534
+ptp4l[1280.407]: master offset    -179389 s0 freq +616121 path delay    282534
+ptp4l[1281.407]: master offset     -22777 s0 freq +616121 path delay    279952
+ptp4l[1282.407]: master offset     -77274 s0 freq +616121 path delay    243089
+ptp4l[1283.408]: master offset      38956 s0 freq +616121 path delay    207059
+ptp4l[1284.408]: master offset     -97512 s0 freq +616121 path delay    201448
+ptp4l[1285.409]: master offset      49543 s0 freq +616121 path delay    189185
+ptp4l[1286.409]: master offset     -82709 s0 freq +616121 path delay    189185
+ptp4l[1287.409]: master offset     110473 s0 freq +616121 path delay    168396
+ptp4l[1288.409]: master offset     -41869 s0 freq +616121 path delay    186572
+ptp4l[1289.410]: master offset      90466 s0 freq +616121 path delay    186572
+ptp4l[1290.027]: port 2: FAULTY to LISTENING on INIT_COMPLETE
+ptp4l[1290.409]: master offset     -93120 s0 freq +616121 path delay    192392
+ptp4l[1291.410]: master offset      16011 s2 freq +620736 path delay    186572
+ptp4l[1291.410]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED
+ptp4l[1292.410]: master offset      -2852 s2 freq +620448 path delay    186572
+ptp4l[1293.410]: master offset       1728 s2 freq +620908 path delay    186572
+ptp4l[1294.410]: master offset     -90880 s2 freq +611556 path delay    178118
+ptp4l[1295.410]: master offset      36210 s2 freq +624302 path delay    178118
+ptp4l[1296.410]: master offset     -29409 s2 freq +617710 path delay    186145
+ptp4l[1297.223]: port 2: LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[1297.223]: selected best master clock 12d75b.fffe.b0ad11
+ptp4l[1297.223]: foreign master not using PTP timescale
+ptp4l[1297.410]: master offset     -29534 s2 freq +617668 path delay    186145
+ptp4l[1298.244]: timed out while polling for tx timestamp
+ptp4l[1298.244]: increasing tx_timestamp_timeout may correct this issue, but it is likely caused by a driver bug
+ptp4l[1298.244]: port 2: send sync failed
+ptp4l[1298.244]: port 2: MASTER to FAULTY on FAULT_DETECTED (FT_UNSPECIFIED)
+ptp4l[1298.410]: master offset    -106153 s2 freq +609900 path delay    186145
+ptp4l[1299.411]: master offset      34836 s2 freq +624034 path delay    178118
+ptp4l[1300.411]: master offset    -101208 s2 freq +610328 path delay    178118
+ptp4l[1301.412]: master offset      57966 s2 freq +626304 path delay    172726
+ptp4l[1302.412]: master offset     155818 s2 freq +636245 path delay    172726
+ptp4l[1303.412]: master offset       3953 s2 freq +621062 path delay    172726
+ptp4l[1304.412]: master offset     -49020 s2 freq +615716 path delay    169820
+ptp4l[1305.413]: master offset      28141 s2 freq +623460 path delay    144961
+ptp4l[1306.413]: master offset     -62096 s2 freq +614374 path delay    144961
+ptp4l[1307.414]: master offset      89906 s2 freq +629664 path delay    121175
+ptp4l[1308.415]: master offset     449049 s2 freq +666028 path delay    121175
+ptp4l[1309.419]: master offset     340182 s2 freq +655481 path delay    198334

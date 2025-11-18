@@ -1,0 +1,52 @@
+--- 12:42:32 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002
+--- 12:43:22 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002
+--- 12:44:12 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002
+--- 12:45:02 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002
+--- 12:45:52 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002
+--- 12:46:42 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002
+--- 12:47:32 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002
+--- 12:48:22 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002
+--- 12:49:12 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002
+--- 12:50:02 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002
+--- 12:50:53 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002
+--- 12:51:43 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+ boundary1       10.0.10.4       10 u    1  128    1   5.8041  -2.0815   0.0000
+--- 12:52:33 ---
+     remote           refid      st t when poll reach   delay   offset   jitter
+===============================================================================
+*boundary1       10.0.10.4       10 u   41   64    1   4.6178  -2.0920   0.5611
