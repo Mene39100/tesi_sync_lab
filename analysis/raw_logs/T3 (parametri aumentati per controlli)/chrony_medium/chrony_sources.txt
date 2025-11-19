@@ -9,4 +9,4 @@
 ||                                 |    |           \
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
-^* servergm                      8   6    77     9    +32ms[  +33ms] +/-   34ms
+^* servergm                      8   6    17    50    -33us[  -60us] +/-  538us

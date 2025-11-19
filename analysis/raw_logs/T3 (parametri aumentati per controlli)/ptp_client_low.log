@@ -1,0 +1,23 @@
+ptp4l[4930.941]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[4930.941]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[4935.006]: port 1: new foreign master 7a612f.fffe.5f3daa-2
+ptp4l[4937.030]: selected local clock 763991.fffe.609b63 as best master
+ptp4l[4939.019]: selected best master clock 5e994f.fffe.28673e
+ptp4l[4939.019]: foreign master not using PTP timescale
+ptp4l[4939.019]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[4942.020]: rms 55302 max 57546 freq +279199 +/-   0 delay 481553 +/-   0
+ptp4l[4944.021]: rms 55381 max 78154 freq +279199 +/-   0 delay 597682 +/- 59562
+ptp4l[4946.024]: rms 581464 max 790499 freq +279199 +/-   0 delay 574717 +/- 26467
+ptp4l[4948.024]: rms 154541 max 206620 freq +279199 +/-   0 delay 660565 +/-   0
+ptp4l[4950.026]: rms 159739 max 200622 freq +279199 +/-   0 delay 631943 +/- 20458
+ptp4l[4952.029]: rms 155274 max 214534 freq +279199 +/-   0 delay 636103 +/-   0
+ptp4l[4954.028]: rms 467050 max 597324 freq +279199 +/-   0 delay 613604 +/- 22499
+ptp4l[4956.025]: rms 299355 max 316564 freq +279199 +/-   0 delay 612616 +/- 21510
+ptp4l[4958.032]: rms 2392869 max 3382176 freq +446602 +/- 170800 delay 582326 +/-   0
+ptp4l[4958.032]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED
+ptp4l[4960.033]: rms 590427 max 815391 freq +329851 +/- 31687 delay 582326 +/-   0
+ptp4l[4962.039]: rms 242868 max 249052 freq +304825 +/- 508 delay 583092 +/- 2126
+ptp4l[4964.038]: rms 349976 max 425229 freq +246274 +/- 8810 delay 585218 +/-   0
+ptp4l[4966.045]: rms 2925453 max 4126581 freq +473260 +/- 223214 delay 512620 +/- 5280
+ptp4l[4968.043]: rms 321901 max 415351 freq +253338 +/- 11658 delay 585218 +/-   0
+ptp4l[4970.042]: rms 257010 max 261383 freq +257134 +/- 572 delay 501446 +/- 1880
