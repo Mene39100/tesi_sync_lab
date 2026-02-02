@@ -72,29 +72,28 @@ La fase 3 utilizza la topologia **T2**, definita in `topologies/T2/lab.conf`.
 
 ```mermaid
 graph TD
-    subgraph Network_A [Rete A]
-        SGM[servergm]
-        SNTP[serverntp]
-        B0[boundary.0]
-        CC[clientchrony]
+    %% Dominio A
+    subgraph Dominio_A ["Dominio A"]
+        GM["servergm<br/>(Grandmaster PTP)"]
+        NTPA["serverntp<br/>(NTP Server)"]
+        CH["clientchrony<br/>(Chrony Client)"]
+        BOUND["boundary<br/>(Boundary Clock)"]
     end
 
-    subgraph Network_B [Rete B]
-        B1[boundary.1]
-        CNTP[clientntp]
-        CPTP[clientptp]
+    %% Dominio B
+    subgraph Dominio_B ["Dominio B"]
+        NTPB["clientntp<br/>(NTP Client)"]
+        PTPB["clientptp<br/>(PTP Client)"]
     end
 
-    %% Collegamenti Bridge
-    SGM --- Bridge((BRIDGE))
-    SNTP --- Bridge
-    B0 --- Bridge
-    B1 --- Bridge
-    CC --- Bridge
-    CNTP --- Bridge
-    CPTP --- Bridge
+    %% Sincronizzazione
+    GM -->|PTP| BOUND
+    BOUND -->|PTP| PTPB
 
-    style Bridge fill:#f96,stroke:#333,stroke-width:2px
+    NTPA -->|NTP| CH
+    NTPA -->|NTP| BOUND
+    BOUND -->|NTP| NTPB
+
 ```
 
 **Capability (cap_add)**
