@@ -1,4 +1,4 @@
-# Fase 3 — Scenari semi-realistici con disturbi (tc/netem + tbf) — Report tecnico
+# Fase 3 — Scenari semi-realistici con disturbi (tc/netem + tbf)
 
 ---
 
@@ -33,7 +33,7 @@ scripts/netem/
 
 ### Razionale progettuale
 - `scenarios/*.conf`: **parametri** separati dal codice → cambia lo scenario senza modificare lo script.
-- `bootstrapT3.sh`: “orchestratore” che avvia topologia, applica qdisc, raccoglie log.
+- `bootstrapT3.sh`: script che avvia topologia, applica qdisc, raccoglie log.
 - `apply_netem.sh`, `cleanup_netem.sh`: utilità modulari (debug/riuso), non necessariamente parte del flusso principale.
 - `scenario_matrix.md`: documento di tracciamento/descrizione degli scenari (matrice).
 
@@ -63,7 +63,7 @@ RATE="20Mbit"
 
 **Nota tecnica (formato)**
 - Le unità (`ms`, `%`, `Mbit`) sono parte del parsing di `tc` e devono essere coerenti con la sintassi attesa
-- Questi valori vengono importati nello script con `source`, quindi diventano variabili dispobibli nello shell coerente
+- Questi valori vengono importati nello script con `source`, quindi diventano variabili disponibili nello shell coerente
 
 ## 4. Topologia di riferimetno (T2)
 La fase 3 utilizza la topologia **T2**, definita in `topologies/T2/lab.conf`.
@@ -142,7 +142,7 @@ Lo script contiene **sezioni separate** per:
 - NTPsec
 - Chrony
 
-nota: a necessità il codice commentato per isolare altre porzioni di codice.
+nota: a necessità il codice è opportunamente commentato per isolare altre porzioni di codice.
 
 ### 6.2 Variabili globali e setup
 ```bash
@@ -167,18 +167,18 @@ mkdir -p "$RAWLOG"
   Directory base (host/progetto) dove vengono scritti i log della fase.
 - `NETNS="boundary"` e `IFACE="eth1"`
   Variabili "legacy" della parte PTP/NTPsec (dove il degrado era sul boundary lato rete B).
-  **Nel blocco Chrony attivo**, invece il degrado è stato spostato su `clientchrony:eth0`.
+  **Nel blocco Chrony**, invece il degrado è stato spostato su `clientchrony:eth0`.
 - `TOPOLOGY_DIR="topologies/T2"`
   Path della topologia Kathara da avviare/pulire.
 - `mkdir -p "$RAWLOG"`
   Crea la directory se non esiste. `-p` evita errore se già presente.
 
-### 6.3 Blocco PTP (commentato)
+### 6.3 Blocco PTP
 La prima parte dello script contiene un ciclo `for` con la logica PTP.
 
 Elementi chiave:
 1. `source "$SCNEARIO_DIR/$S.conf"`
-Importa `DELAY/JITTER/LOSS/REORDER/RATE` nello shell corrente
+importa `DELAY/JITTER/LOSS/REORDER/RATE` nello shell corrente
 2. `kathara lclean è kathara lstart --previleged`
 3. `./scripts/endInternetConnection`
 Disconnette Internet (tipicamente spegnendo eht2 o route verso l'esterno) per garantire che la sincronizzazione avvenga solo nel lab.
@@ -199,3 +199,71 @@ tc qdisc show dev $IFACE > .../netem_state_${S}_ptp.txt
 - `&>` redirige stdout+stderr su file nel volume montato
 7. Stabilizzazione `sleep 40`
 8. `kathara lclean` finale per chiudere topologia
+
+### 6.4 Blocchi NTPsec
+Sono presenti tre blocchi (low, medium, high).
+Sono stati impostati "a mano" (non in loop) per gestire il fatto che NTP può richiedere tempi non immediamente prevedibili per l'iniziazlizzazione/convergenza.
+
+- Applicazione netem+tbf su `boundary:eth1` (rete B).
+- Avvio `ntpd` sul boudary:
+  - `pkill ntpd ...; /usr/sbin/ntpd -g -c /etc/ntpsec/ntp.conf &`
+- Loop di logging (`ntpq -p`) su client e boundary con `nohoup` e redirect su file.
+- Nomi dei file "per scenario" (LOW/MEDIUM/HIGH) per distinguere output.
+
+I vari blocch rimangono nel file come "rami" per run separati.
+
+
+### 6.5 Blocco Chrony
+1. Iterazione scenari
+    - Il ciclo `for` implementa un *batch-run* che esegue lo stesso workflow per ciascuna configurazione.
+2. Import dei parametri (`source`)
+    - `source "$SCENARIO_DIR/$S.conf"`
+      - esegue il file `.conf` nello shell corrente.
+      - popola `DELAY/JITTER/LOSS/REORDER/RATE` come variabili Bash
+      - evita parsing manuale
+3. Reset e avvio topologia (isolamento speriamentale)
+  - `kathara lclean ... || true`
+    - pulisce le run precedenti
+    - `|| true` impedisce che un errore (es. topologia non avviata interrompa lo script)
+  - `sudo kathara lstart ... --privileged`:
+    - avvia l'intera topologia
+    - `--privileged e/o `cap_add` sono necessari per usare `tc`, discipline clock, ecc.
+4. Applicazione distrubi su `clientchrony:eth0`
+  - `CLIENT_IFACE="eth0"`:
+    - esplicita l'interfaccia su cui si applica la qdisc nel nodo `clientchrony`
+  - `tc qdisc replace ... root handle 1: netem ...`:
+    - imposta netem come qdisc root dell'interfaccia
+    - `handle 1`: assegna ID `1:` alla qdisc (necessario per agganciare un child).
+    - `delay $DELAY $JITTER` introducono ritardo + jitter
+    - `loss $LOSS` introduce perdita
+    - `reorder $REORDER` introduce riordino
+  - `tc qdisc add ... parent 1: handle 10: tbf ...`:
+    - aggiunge tbf come child della qdisc `1:`
+    - `handle 10:` assegna ID `10:` a tbf
+    - `rate $RATE` limita banda (shaping)
+    - `burst 32kbit` dimensiona il bucket (raffica consentita)
+    - `latency 400 ms` impone bound di latenza/queueing per tbf (parametro richiesto insieme a rate/burst)
+5. Dump configurazione qdisc (tracciabilità)
+  - `tc qdisc show dev eth0 > netem_state_$S.txt`
+    - salva lo stato "effettivo" della qdisc (utile per auditing/replicabilità)
+6. Attesa convergenza Chrony
+  - `sleep 35`
+    - consente a chronyd di effettuare più campionamenti.
+    - riduce il rischi di lof in fase di warm-up
+7. Raccolta dei log Chrony
+  - `chronyc tracking`:
+    - stato del servo (offset, freq, skew, delay/disperions, ecc.)
+  -  `chronyc sources -v`
+    - lista sorgenti e metdati di reach/poll, last sample, ecc.
+  - `chronyc sourcestats`:
+    - statistiche su offset/jitter della sorgente nel tempo
+  - `chronyc activity`:
+    - info su sorgenti attive/inattive
+  Tutti gli output sono rediretti in file nel path di scenario
+
+### 7 Note implementative (solo descrittive)
+- **Isolamento**: ogni scenario parte da un `lclean` e termina con `lclean`.
+  Non esiste carry-overi di qdisc o precessi tra scenari.
+- **Parametrizzazione**: i file `.conf` sono l'uninca fonte dei parametri di rete.
+- **Applicazione distrubi**: nel blocco Chrony il degrado è applicato sul **client** (`clientchrony:eth0`) e non sul server
+- **Privilegi**: l'uso di `tc` e discipline dei clock richiede privilegi/capacbility. La topologia li esplicita tramite `cap_add` e avvio privilegiato.
