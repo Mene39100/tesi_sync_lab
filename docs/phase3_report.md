@@ -267,3 +267,98 @@ I vari blocch rimangono nel file come "rami" per run separati.
 - **Parametrizzazione**: i file `.conf` sono l'uninca fonte dei parametri di rete.
 - **Applicazione distrubi**: nel blocco Chrony il degrado è applicato sul **client** (`clientchrony:eth0`) e non sul server
 - **Privilegi**: l'uso di `tc` e discipline dei clock richiede privilegi/capacbility. La topologia li esplicita tramite `cap_add` e avvio privilegiato.
+
+# Analisi comparativa (LOW/MEDIUM/HIGH)
+## PTP
+
+**1. Comportamento del Grandmaster (servergm)**
+In tutti e tre gli scenari il nodo `servergm` mostra un comporamento **stabile e coerente**:
+- Transizione regolare `INITIALIZING -> LISTENING -> MASTER`
+- Elezione come *Grandmaster* tramite BMCA senza contese.
+- Presenza di messaggi *"new goreign master"* successivi all'avvio, dovuti alla comparsa del Boundary Clock, ma **senza perdita del ruolo di GM**
+
+**Osservazione**:
+Il comportamento del GM è **invariante rispetto al degrado di rete** applicato downstram. Questo è atteso e corretto: il GM non subisce direttamente i disturbi (netem è applicato sul boundary/ramo B) e non esegue displina del clock in funzione di offset ricevuti.
+
+**2. Comportamento del Boundary Clock**
+Il Boundary Clock è il nodo **più sensibile** agli senari di degrado e quello che evidenzia meglio le differenze tra LOW, MEDIUM e HIGH.
+
+**Scenario LOW**
+- Transizione completa:
+  `LISTENING -> UNCALIBRATED -> SLAVE` (porta verso GM) e comportamento da MASTER sulla porta downstram.
+- Offset e path delay oscillano, ma **restano nell'ordine delle centinaia di microsecondi**
+- Servo PTP converge correttamente (`s0 -> s1 -> s2`).
+- **Nessun fault persistente** sulle porte
+
+Il comportamento risulta in accordo a quello atteso per un ambiente di degrado basso.
+
+**Scenario MEDIUM**
+- Presenza di **errori espliciti**:
+  - `timed out while polling for tx timestamp`
+  - `send sync failed`
+  - transizioni `MASTER -> FAULTY` sulla porta downstram (eth1).
+- Reset ripetuti dalla porta (`FAULTY -> LISTENING -> MASTER`).
+- Offset e path delay con **ampia variabilità** (fino a oltre 1 ms).
+- Servo che riesce comunque a tornare in stato `SLAVE`, ma con instabilità evidente.
+
+Il comportamento risulta in accordo a quello atteso per un ambiente di degrado medio.
+Il Boundary riesce ancora a sincronizzarsi, ma la qualità del canale inizia a compromettere la trasimssione regolare dei Sync/Follow_up.
+
+**Scenario HIGH**
+- Instabilità marcata:
+  - fault ripetuti sulle porte downstram.
+  - numerosi timeout di timestamp.
+  - path delay elevato e molto variabile (> 1 ms).
+  - offset con spike di diversi millesecondi.
+- Servo che entra in `SLAVE`, ma **non mantiene uno stato stabile**.
+- Reset frequenti delle porte (`FAULTY` ricorrente).
+
+Il comportamento risulta in accordo a quello atteso per un ambiente di degrado alto.
+Il Boundary riesce ancora a "vedere" il GM, non riuscendo però a rigenerare un flusso PTP addisabile verso il client.
+
+**3. Comportamento del Client PTP**
+Il client è il nodo che rende più evidente la **soglia di robustezza del protocollo**
+
+**Scnario LOW**
+- Transizione completa: `LISTENING -> UNCALIBRATED -> SLAVE`.
+- RMS offset dell'ordine di **decine/centinaia di microsecondi**, con spike occasionali.
+- Delay coerente con quanto osservato sul Boundary
+- Servo che converve e resta in tracking
+
+Allineato alle aspettative: il client riesce a sincronizzarsi nonstante il degrado lieve.
+
+**Scenario MEDIUM**
+- Il client:
+  - rileva il foreign master.
+  - entra temporaneamente in `UNCALIBRATED`
+  - **perde il master per timeout** (`ANNOUNCE_RECEPIT_TIMEOUT_EXPIRES`).
+  - torna in `LISTENING`
+- **Non raggiunge uno stato SLAVE stabile**
+
+A differenza del Boundary, il client **non riesce a tollerare** las tessa qualità di canale. Il degrado MEDIUM è già sufficiente a interrompere la continuità degli Annoncue/Sync ricevuti.
+
+**Scenario HIGH**
+- Il client:
+  - **non riconosce mai un master valido**
+  - resta bloccato nella sezione del clock locale
+  - non entra mai in `UNCALIBRATED` né in `SLAVE`
+
+Il comportamento è allineato con lo scenario indicato: con perdita, jitter e delay elevati, il flusso PTP downstram è troppo degradato per consentire anche sollo la fase di selezione del master.
+
+**Note tecniche rilevanti**:
+- Il Boundary Clock **estende la tolleranza** del dominio PTP rispetto al client finale.
+- Il client è il **primo punto di collasso** del protocollo in presenza di degrado severo.
+- Gli errori di tipo `tx timestamp timeout` sono coerenti con:
+  - timestamp software, 
+  - cotainer Docker,
+  - jitter e perdita indotti da netem.
+- Il fatto che Boundary riesca ancora a sincorinzzarsi in MEDIUM mentre il client no è *significativo*, ma non un'anomalia.
+
+
+**Sintesi**
+La fase 3 mostra che:
+- PTP **scala correttamente in presenza di degrado lieve**.
+- Il Boundary Clock svolge efficaemente il suo ruolo di filtro/rigeneratore solo fino a una certa soglia.
+- In condizioni MEDIUM/HIGH il protocollo **non degrada gradualmente sul client**, ma collassa per timeout e perdita di Annonuce.
+  
+
