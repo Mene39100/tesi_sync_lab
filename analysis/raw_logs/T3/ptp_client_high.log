@@ -1,0 +1,8 @@
+ptp4l[16187.390]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[16187.390]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[16191.507]: port 1: new foreign master 1639a6.fffe.7ca77c-2
+ptp4l[16194.217]: selected local clock 120ee8.fffe.912b55 as best master
+ptp4l[16201.410]: selected local clock 120ee8.fffe.912b55 as best master
+ptp4l[16207.822]: selected local clock 120ee8.fffe.912b55 as best master
+ptp4l[16215.082]: selected local clock 120ee8.fffe.912b55 as best master
+ptp4l[16221.776]: selected local clock 120ee8.fffe.912b55 as best master

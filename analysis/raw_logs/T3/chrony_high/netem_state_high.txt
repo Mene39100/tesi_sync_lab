@@ -1,0 +1,6 @@
+qdisc netem 1: root refcnt 2 limit 1000 delay 60ms  20ms loss 10% reorder 20% seed 14228792950266558990 gap 1
+ Sent 1746 bytes 21 pkt (dropped 0, overlimits 0 requeues 4) 
+ backlog 0b 0p requeues 4
+qdisc tbf 10: parent 1: rate 5Mbit burst 4Kb lat 400ms 
+ Sent 1434 bytes 17 pkt (dropped 0, overlimits 0 requeues 0) 
+ backlog 0b 0p requeues 0

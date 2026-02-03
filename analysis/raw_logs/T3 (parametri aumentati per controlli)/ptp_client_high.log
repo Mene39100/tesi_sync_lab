@@ -1,7 +1,0 @@
-ptp4l[5124.949]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
-ptp4l[5124.950]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
-ptp4l[5131.013]: selected local clock 9e0db6.fffe.9c7a9f as best master
-ptp4l[5138.552]: selected local clock 9e0db6.fffe.9c7a9f as best master
-ptp4l[5145.733]: selected local clock 9e0db6.fffe.9c7a9f as best master
-ptp4l[5152.154]: selected local clock 9e0db6.fffe.9c7a9f as best master
-ptp4l[5158.643]: selected local clock 9e0db6.fffe.9c7a9f as best master
