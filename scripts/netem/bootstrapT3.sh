@@ -394,5 +394,6 @@ for i in $(seq 1 $SAMPLES); do
   sleep "$INTERVAL"
 done
 
-
+## aggiunta questa
+kathara lclean -d "$TOPOLOGY_DIR"
 done
