@@ -74,7 +74,7 @@ La fase 3 utilizza la topologia **T2**, definita in `topologies/T2/lab.conf`.
 graph TD
     %% Dominio A
     subgraph Dominio_A ["Dominio A"]
-        GM["servergm<br/>(Grandmaster PTP)"]
+        GM["servergm<br/>(Grandmaster PTP + NTP)"]
         NTPA["serverntp<br/>(NTP Server)"]
         CH["clientchrony<br/>(Chrony Client)"]
         BOUND["boundary<br/>(Boundary Clock)"]
@@ -86,12 +86,13 @@ graph TD
         PTPB["clientptp<br/>(PTP Client)"]
     end
 
-    %% Sincronizzazione
+    %% Sincronizzazione PTP
     GM -->|PTP| BOUND
     BOUND -->|PTP| PTPB
 
-    NTPA -->|NTP| CH
-    NTPA -->|NTP| BOUND
+    %% Sincronizzazione NTP
+    GM -->|NTP| CH
+    GM -->|NTP| BOUND
     BOUND -->|NTP| NTPB
 
 ```
