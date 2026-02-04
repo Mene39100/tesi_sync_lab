@@ -86,15 +86,14 @@ graph TD
         PTPB["clientptp<br/>(PTP Client)"]
     end
 
-    %% Sincronizzazione PTP
+    %% PTP
     GM -->|PTP| BOUND
     BOUND -->|PTP| PTPB
 
-    %% Sincronizzazione NTP
+    %% NTP
     GM -->|NTP| CH
-    GM -->|NTP| BOUND
+    NTPA -->|NTP| BOUND
     BOUND -->|NTP| NTPB
-
 ```
 
 **Capability (cap_add)**
