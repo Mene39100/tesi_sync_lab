@@ -1,3 +1,0 @@
-Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
-==============================================================================
-servergm                    9   4    41     -4.781     28.128    -14us   197us

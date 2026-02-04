@@ -1,0 +1,80 @@
+===== SAMPLE 1/10 @ 2026-02-04T10:08:38+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 2/10 @ 2026-02-04T10:09:40+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 3/10 @ 2026-02-04T10:10:41+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 4/10 @ 2026-02-04T10:11:43+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 5/10 @ 2026-02-04T10:12:45+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 6/10 @ 2026-02-04T10:13:46+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 7/10 @ 2026-02-04T10:14:48+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 8/10 @ 2026-02-04T10:15:50+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 9/10 @ 2026-02-04T10:16:51+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 10/10 @ 2026-02-04T10:17:53+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+

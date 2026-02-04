@@ -1,0 +1,150 @@
+===== SAMPLE 1/10 @ 2026-02-04T09:42:27+00:00 =====
+Reference ID    : 0A000A01 (servergm)
+Stratum         : 9
+Ref time (UTC)  : Wed Feb 04 09:42:25 2026
+System time     : 0.000045102 seconds slow of NTP time
+Last offset     : -0.000062268 seconds
+RMS offset      : 0.000111263 seconds
+Frequency       : 96.317 ppm slow
+Residual freq   : -5.006 ppm
+Skew            : 13.239 ppm
+Root delay      : 0.000424827 seconds
+Root dispersion : 0.000086144 seconds
+Update interval : 4.1 seconds
+Leap status     : Normal
+
+===== SAMPLE 2/10 @ 2026-02-04T09:43:29+00:00 =====
+Reference ID    : 0A000A01 (servergm)
+Stratum         : 9
+Ref time (UTC)  : Wed Feb 04 09:43:26 2026
+System time     : 0.000015633 seconds slow of NTP time
+Last offset     : -0.000018592 seconds
+RMS offset      : 0.000057546 seconds
+Frequency       : 99.667 ppm slow
+Residual freq   : -0.108 ppm
+Skew            : 3.815 ppm
+Root delay      : 0.000328835 seconds
+Root dispersion : 0.000083751 seconds
+Update interval : 4.1 seconds
+Leap status     : Normal
+
+===== SAMPLE 3/10 @ 2026-02-04T09:44:30+00:00 =====
+Reference ID    : 0A000A01 (servergm)
+Stratum         : 9
+Ref time (UTC)  : Wed Feb 04 09:44:27 2026
+System time     : 0.000000277 seconds fast of NTP time
+Last offset     : -0.000205360 seconds
+RMS offset      : 0.000159381 seconds
+Frequency       : 148.197 ppm slow
+Residual freq   : -10.889 ppm
+Skew            : 40.061 ppm
+Root delay      : 0.001250749 seconds
+Root dispersion : 0.000284170 seconds
+Update interval : 4.0 seconds
+Leap status     : Normal
+
+===== SAMPLE 4/10 @ 2026-02-04T09:45:32+00:00 =====
+Reference ID    : 0A000A01 (servergm)
+Stratum         : 9
+Ref time (UTC)  : Wed Feb 04 09:45:28 2026
+System time     : 0.000016379 seconds slow of NTP time
+Last offset     : -0.000032360 seconds
+RMS offset      : 0.000109701 seconds
+Frequency       : 177.536 ppm slow
+Residual freq   : -0.164 ppm
+Skew            : 6.171 ppm
+Root delay      : 0.000467753 seconds
+Root dispersion : 0.000122141 seconds
+Update interval : 4.1 seconds
+Leap status     : Normal
+
+===== SAMPLE 5/10 @ 2026-02-04T09:46:33+00:00 =====
+Reference ID    : 0A000A01 (servergm)
+Stratum         : 9
+Ref time (UTC)  : Wed Feb 04 09:46:33 2026
+System time     : 0.000014206 seconds slow of NTP time
+Last offset     : -0.000005774 seconds
+RMS offset      : 0.000053323 seconds
+Frequency       : 179.457 ppm slow
+Residual freq   : -0.023 ppm
+Skew            : 1.548 ppm
+Root delay      : 0.000261822 seconds
+Root dispersion : 0.000055087 seconds
+Update interval : 4.0 seconds
+Leap status     : Normal
+
+===== SAMPLE 6/10 @ 2026-02-04T09:47:35+00:00 =====
+Reference ID    : 0A000A01 (servergm)
+Stratum         : 9
+Ref time (UTC)  : Wed Feb 04 09:47:34 2026
+System time     : 0.000000291 seconds slow of NTP time
+Last offset     : +0.000009094 seconds
+RMS offset      : 0.000115976 seconds
+Frequency       : 186.778 ppm slow
+Residual freq   : -0.203 ppm
+Skew            : 9.813 ppm
+Root delay      : 0.000787180 seconds
+Root dispersion : 0.000189261 seconds
+Update interval : 4.1 seconds
+Leap status     : Normal
+
+===== SAMPLE 7/10 @ 2026-02-04T09:48:37+00:00 =====
+Reference ID    : 0A000A01 (servergm)
+Stratum         : 9
+Ref time (UTC)  : Wed Feb 04 09:48:34 2026
+System time     : 0.000012658 seconds slow of NTP time
+Last offset     : +0.000001536 seconds
+RMS offset      : 0.000060291 seconds
+Frequency       : 186.807 ppm slow
+Residual freq   : -0.001 ppm
+Skew            : 4.000 ppm
+Root delay      : 0.000559017 seconds
+Root dispersion : 0.000133014 seconds
+Update interval : 4.0 seconds
+Leap status     : Normal
+
+===== SAMPLE 8/10 @ 2026-02-04T09:49:38+00:00 =====
+Reference ID    : 0A000A01 (servergm)
+Stratum         : 9
+Ref time (UTC)  : Wed Feb 04 09:49:35 2026
+System time     : 0.000021045 seconds slow of NTP time
+Last offset     : -0.000016201 seconds
+RMS offset      : 0.000068595 seconds
+Frequency       : 198.973 ppm slow
+Residual freq   : -0.060 ppm
+Skew            : 3.410 ppm
+Root delay      : 0.000424135 seconds
+Root dispersion : 0.000057840 seconds
+Update interval : 4.1 seconds
+Leap status     : Normal
+
+===== SAMPLE 9/10 @ 2026-02-04T09:50:40+00:00 =====
+Reference ID    : 0A000A01 (servergm)
+Stratum         : 9
+Ref time (UTC)  : Wed Feb 04 09:50:28 2026
+System time     : 0.000000016 seconds fast of NTP time
+Last offset     : -0.000021010 seconds
+RMS offset      : 0.000079719 seconds
+Frequency       : 207.233 ppm slow
+Residual freq   : -0.120 ppm
+Skew            : 4.052 ppm
+Root delay      : 0.000307543 seconds
+Root dispersion : 0.000105305 seconds
+Update interval : 4.1 seconds
+Leap status     : Normal
+
+===== SAMPLE 10/10 @ 2026-02-04T09:51:42+00:00 =====
+Reference ID    : 0A000A01 (servergm)
+Stratum         : 9
+Ref time (UTC)  : Wed Feb 04 09:51:40 2026
+System time     : 0.000070277 seconds slow of NTP time
+Last offset     : -0.000023101 seconds
+RMS offset      : 0.000080213 seconds
+Frequency       : 227.018 ppm slow
+Residual freq   : -0.125 ppm
+Skew            : 13.726 ppm
+Root delay      : 0.000730902 seconds
+Root dispersion : 0.000252397 seconds
+Update interval : 4.0 seconds
+Leap status     : Normal
+
