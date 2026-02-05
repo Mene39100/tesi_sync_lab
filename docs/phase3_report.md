@@ -595,3 +595,86 @@ Considerazioni personali:
 - **C’è una differenza sostanziale tra RUN A e RUN B in LOW**: in RUN B emergono spike in ms e maggiore incertezza (root dispersion / update interval) che non erano così evidenti in RUN A.
 - **Non c’è evidenza altrettanto forte e monotona in MEDIUM/HIGH** dentro queste finestre: l’effetto esiste (variabilità), ma non “scala” in modo pulito con lo scenario.
 
+# Analisi NTPsec – Boundary + Client per Scenario
+Configurazione: `tc netem + tbf` applicato **sul boundary**  
+Osservabili: `ntpq -p` (delay, offset, jitter, reach, selezione syspeer)
+
+---
+
+## Scenario LOW
+
+### Boundary
+- **Bootstrap**: fase `.INIT.` prolungata (poll=64s), aggancio regolare.
+- **Convergenza**: syspeer selezionato, reach → 377.
+- **Metriche a regime**:
+  - Delay: ~1.6–1.9 ms
+  - Offset: ~±0.7 ms
+  - Jitter: ~0.5 ms
+
+### Client
+- **Bootstrap**: dipendente dal boundary; `.INIT.` fino a sync del boundary.
+- **Convergenza**: syspeer selezionato, reach valido.
+- **Metriche a regime**:
+  - Delay: ~4.6–5.8 ms
+  - Offset: ~−2 ms
+  - Jitter: ~0.56 ms
+- **Stato**: stabile; degradazione coerente con 1 hop NTP aggiuntivo.
+
+**Sintesi LOW**: catena stabile; rumore contenuto e filtrato correttamente.
+
+---
+
+## Scenario MEDIUM
+
+### Boundary
+- **Bootstrap**: simile a LOW.
+- **Convergenza**: syspeer stabile; reach pieno.
+- **Metriche**:
+  - Delay tipico: ~0.35–1.6 ms
+  - Offset tipico: ~0.04–0.12 ms
+  - **Spike isolato**: delay ~6 ms, offset ~2.8 ms, jitter ~2.6 ms
+
+### Client
+- **Bootstrap**: più lungo rispetto a LOW.
+- **Convergenza**: syspeer stabile; reach → 377.
+- **Metriche a regime**:
+  - Delay: ~13–21 ms
+  - Offset: ~−6 ÷ −10 ms
+  - Jitter: ~1.4–4.6 ms
+- **Stato**: stabile ma precisione ridotta; amplificazione del rumore del boundary.
+
+**Delta vs LOW**:
+- Client: aumento sistematico di delay/offset/jitter (degradazione quantitativa).
+
+---
+
+## Scenario HIGH
+
+### Boundary
+- **Bootstrap**: coerente con scenari precedenti.
+- **Convergenza**: syspeer stabile; reach pieno.
+- **Metriche a regime**:
+  - Delay: ~0.5–1.3 ms
+  - Offset: ~±0.05 ms
+  - Jitter: ~0.15–0.35 ms
+
+### Client
+- **Bootstrap**: molto prolungato (variabilità elevata sul link).
+- **Convergenza**: syspeer selezionato; reach pieno.
+- **Metriche a regime**:
+  - Delay: ~45–80 ms
+  - Offset: ~−22 ÷ −40 ms
+  - Jitter: ~12–28 ms
+- **Stato**: sincronizzato ma con qualità temporale bassa; jitter strutturale.
+
+**Delta vs MEDIUM**:
+- Client: peggioramento netto e persistente di tutte le metriche.
+
+---
+
+## Conclusioni Tecniche
+- **Boundary**: Il degrado indotto da tc applicato sull’interfaccia downstream del boundary clock impatta esclusivamente i nodi client. Il boundary, sincronizzato tramite un’interfaccia non perturbata, mantiene metriche stabili indipendentemente dallo scenario di rete applicato al collegamento verso il client.
+- **Client**: accumula variabilità; la degradazione cresce con lo scenario.
+- **Transizioni LOW→MEDIUM→HIGH**: differenze **quantitative** (precisione), non **qualitative** (sincronizzazione mai persa).
+- **NTPsec**: mantiene la sincronizzazione anche sotto condizioni avverse; degrada la precisione in modo controllato.
+
