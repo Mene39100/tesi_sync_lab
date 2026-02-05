@@ -353,4 +353,245 @@ La fase 3 mostra che:
 - Il Boundary Clock svolge efficaemente il suo ruolo di filtro/rigeneratore solo fino a una certa soglia.
 - In condizioni HIGH il protocollo **non degrada gradualmente sul client**, ma collassa per timeout e perdita di Annonuce.
   
+---
+
+## Legenda dei parametri Chrony
+
+### `chronyc sources`
+- **Last sample (xxxx [yyyy] +/- zzzz)**  
+  - `xxxx`: offset **stimato e corretto** dal filtro di Chrony (valore usato dal servo).  
+  - `yyyy`: offset **misurato grezzo** rispetto alla sorgente.  
+  - `zzzz`: **errore stimato** (incertezza) sull’offset.
+- **Reach**  
+  Registro di raggiungibilità (ottale): indica se gli ultimi pacchetti sono stati ricevuti correttamente.
+- **Poll**  
+  Log₂ dell’intervallo di polling (es. 2 → 4 s).
+- **Stratum**  
+  Livello gerarchico della sorgente temporale.
+- **\***  
+  Sorgente attualmente selezionata come riferimento principale.
+
+---
+
+### `chronyc sourcestats`
+- **Frequency**  
+  Stima della differenza di frequenza tra clock locale e sorgente (ppm).
+- **Freq Skew**  
+  Incertezza sulla stima di frequenza (stabilità della sorgente).
+- **Offset**  
+  Offset medio stimato tra client e sorgente.
+- **Std Dev**  
+  Deviazione standard degli offset misurati (rumore/jitter).
+
+---
+
+### `chronyc tracking`
+- **Last offset**  
+  Ultimo offset stimato tra clock locale e riferimento.
+- **RMS offset**  
+  Valore RMS degli offset recenti (stabilità complessiva).
+- **Frequency**  
+  Correzione di frequenza applicata al clock locale (ppm).
+- **Residual freq**  
+  Errore residuo di frequenza dopo la correzione.
+- **Skew**  
+  Incertezza sulla stima di frequenza del clock locale.
+- **Root delay**  
+  Ritardo di andata e ritorno stimato verso la sorgente.
+- **Root dispersion**  
+  Errore temporale massimo stimato rispetto al riferimento.
+- **Update interval**  
+  Intervallo effettivo tra aggiornamenti del servo.
+- **Stratum**  
+  Strato temporale del clock locale dopo la sincronizzazione.
+
+---
+
+# Run A — Analisi Chrony con netem applicato su clientchrony
+
+## Inquadramento sperimentale
+- Degrado di rete (`tc netem + tbf`) applicato su **clientchrony**
+- Server di riferimento: `servergm`
+- Numero di campioni: **10**
+- Intervallo di campionamento: ~60 s
+- Metriche analizzate:
+  - `chronyc sources`
+  - `chronyc sourcestats`
+  - `chronyc tracking`
+
+La seguente analisi è condotta **esclusivamente** sui dati della Run A, senza confronto con altre esecuzioni.
+
+---
+
+## Scenario LOW
+
+### Sources
+- Offset istantanei compresi indicativamente tra **−650 µs e +60 µs**
+- Errore stimato (`+/-`) generalmente nell’intervallo **200–700 µs**
+- Reachability **costante (377)** → assenza di perdita percepita dei pacchetti
+- Nessuna sorgente marcata come instabile (`~`) o in errore (`x`)
+
+---
+
+### Sourcestats
+- Residual frequency generalmente compresa tra **−0.1 ppm e −0.01 ppm**
+- `Freq Skew` contenuto (tipicamente < 15 ppm, con rari spike)
+- Offset medio prossimo allo zero (ordine di **ns–decine di ns**)
+
+---
+
+### Tracking
+- RMS offset tipicamente nell’intervallo **50–110 µs**
+- Frequency in lenta crescita (**~96 → ~227 ppm slow**)
+- Skew sempre contenuto (< 15 ppm)
+- Update interval stabile (~4 s)
+
+**Conclusione scenario LOW**
+- Chrony converge rapidamente e mantiene uno stato stabile.  
+- Il comportamento osservato è pienamente **coerente con le aspettative**.
+---
+
+## Scenario MEDIUM
+
+### Sources
+- Offset istantanei più ampi, con valori fino a **~−600 µs**
+- Errore stimato che può arrivare a **~1 ms**
+- Reachability ancora elevata (377), senza perdita sistematica dei pacchetti
+
+---
+
+### Sourcestats
+- Residual frequency tipicamente tra **−0.05 e −0.6 ppm**, con spike occasionali
+- `Freq Skew` più elevato, fino a **20–30 ppm**
+- Aumento della deviazione standard rispetto allo scenario LOW
+
+**Interpretazione**  
+La qualità statistica della sorgente peggiora, ma resta sotto controllo.
+
+---
+
+### Tracking
+- RMS offset nell’intervallo **50–145 µs**
+- Frequency elevata e variabile (**~876 → ~413 ppm fast**)
+- Skew più alto, con picchi fino a ~60 ppm
+- Update interval variabile (≈2 s ↔ 8 s)
+
+**Conclusione scenario MEDIUM**  
+Il servo non collassa. Chrony risponde con:
+- adattamento della frequenza,
+- variazione dinamica del polling,
+- filtraggio dei campioni peggiori.
+
+Comportamento **atteso e corretto** in presenza di degrado medio.
+
+---
+
+## Scenario HIGH
+
+### Sources
+- Offset istantanei spesso superiori a **±300 µs**, con picchi fino a **~−525 µs**
+- Errore stimato che può superare **~1 ms**
+- Reachability non sempre piena (valori 167–377), indicando perdita parziale dei campioni
+
+---
+
+### Sourcestats
+- Residual frequency mediamente vicina allo zero
+- `Freq Skew` generalmente contenuto, con spike sporadici
+- Deviazione standard aumentata ma non divergente
+
+---
+
+### Tracking
+- RMS offset sorprendentemente contenuto in molti campioni (**~10–100 µs**)
+- Frequency in lento assestamento (**~270 → ~127 ppm fast**)
+- Skew nella maggior parte dei casi < 15 ppm
+- Update interval alterna ~4 s e ~8 s
+
+**Conclusione scenario HIGH**  
+Non si osserva un collasso netto del servo. Chrony:
+- scarta aggressivamente i campioni peggiori,
+- adatta il polling,
+- mantiene una stima robusta anche in condizioni degradate.
+
+Non è visibile una differenza netta con gli scenari precedenti
+
+---
+
+## Sintesi complessiva — Run A
+
+| Scenario | Stato del servo        | RMS offset       | Frequenza           | Collasso |
+|--------|------------------------|------------------|---------------------|----------|
+| LOW    | Stabile                | ~50–100 µs       | Moderata            | No       |
+| MEDIUM | Stabile, più reattivo  | ~50–150 µs       | Alta e variabile    | No       |
+| HIGH   | Stabile (filtrato)     | ~10–100 µs       | In assestamento     | No       |
+
+---
+
+## Conclusione finale
+Nella Run A non emergono differenze qualitative nette tra gli scenari MEDIUM e HIGH.  
+Chrony non presenta una soglia di collasso evidente, ma degrada **in modo continuo e adattivo**, coerentemente con il design del suo filtro e del meccanismo di polling dinamico.
+
+Considerazioni personali: 
+- essendo che Chrony è progettato per filtrare aggressivamente jitter e perdita moderata, adattando dinamicamente polling e peso dei campioni: con un’unica sorgente e carico limitato, le differenze tra scenari vengono in gran parte assorbite dal filtro statistico e dal servo di frequenza.
+- Il degrado introdotto resta sotto la soglia di collasso del protocollo NTP, per cui Chrony continua a convergere e mantenere la sincronizzazione; le variazioni si manifestano più come aumento di skew/dispersione che come cambiamenti qualitativi di stato.
+
+# RUN B (tc su servergm) — Analisi tecnica (LOW / MEDIUM / HIGH)
+
+## Osservazioni comuni (tutti gli scenari)
+- Le differenze tra scenari, in questa run, si vedono **più come “rumore/offset episodici”** che come trend monotono LOW→MEDIUM→HIGH.
+
+---
+
+## LOW (RUN B)
+**Evidenza principale:** compaiono **spike di offset a livello millisecondo** nel `sources`:
+- campioni con `Last sample` circa **+1.7ms / +2.0ms / +2.1ms** (`+1974us`, `+1996us`, `+2085us`) e in generale incertezza maggiore (`+/-` fino a ~2.8ms).
+- `tracking`:
+  - `RMS offset` ~ **0.215–0.243 ms** (ordine 10^-4 s)
+  - `Last offset` arriva fino a ~ **-0.457 ms**
+  - `Update interval` molto variabile e spesso **alto** (~40–150s).
+  - `Root dispersion` sale fino a ~ **1.8 ms**, coerente con un canale percepito come meno affidabile.
+
+**Interpretazione:** con `tc` sul server, si degrada il **path server→client** (risposte NTP). Se introduci asimmetria/varianza sul tratto di ritorno, l’algoritmo NTP (che stima offset usando il RTT assumendo simmetria) può produrre **bias e spike**.
+
+---
+
+## MEDIUM (RUN B)
+**Evidenza principale:** offset nel ordine di centinaia di microsecondi, senza pattern stabile.
+- `sources`: `Last sample` tipicamente tra **~ -0.7ms e +0.6ms**, con `+/-` fino a ~1.1ms.
+- `tracking`:
+  - `RMS offset` ~ **0.054–0.118 ms**
+  - `Last offset` in un range circa **-0.191 ms … +0.147 ms**
+  - `Root delay` fino a ~ **1.24 ms** in alcuni campioni (sensibile alla dinamica introdotta).
+  - `Update interval` instabile (da ~8s a ~179s) -> campionamento/qualità misure non uniforme.
+
+---
+
+## HIGH (RUN B)
+**Evidenza principale:** sorprendentemente **stabile** rispetto a LOW (RUN B), almeno lato `tracking`.
+- `sources`: ci sono campioni con `Last sample` fino a circa **-0.8ms** (`-829us`), ma spesso si torna a decine/centinaia di µs.
+- `tracking`:
+  - `RMS offset` scende progressivamente fino a **~0.030 ms** (≈ 30 µs) nei campioni finali.
+  - `Skew` e `Freq Skew` diventano piccoli (ordine < 1 ppm nel tracking).
+  - `Root delay` resta tipicamente sotto ~0.63ms.
+
+**Interpretazione:** qui **non emerge** un peggioramento netto rispetto a MEDIUM. Anzi, nella finestra misurata Chrony sembra essersi assestato meglio (probabile effetto di: campionamento, filtro, finestra temporale, e/o dinamica della simulazione non costante).
+
+---
+
+# Confronto RUN A vs RUN B
+## Differenze che si vedono davvero
+- **LOW:** sì, è la differenza più netta.
+  - RUN A (LOW) mostrava offset tipicamente **decine/centinaia di µs** e RMS spesso **~50–160 µs**.
+  - RUN B (LOW) introduce **spike millisecondo** e RMS **~220–240 µs**, con `root dispersion` che arriva a **~1.8ms** e `update interval` spesso molto più alto.
+  - Quindi: **tc su servergm** in LOW ha avuto un impatto più “aggressivo” rispetto a tc su clientchrony.
+
+- **MEDIUM / HIGH:** **non visibile una separazione pulita** tra A e B né un ordine LOW→MEDIUM→HIGH robusto.
+  - In entrambe le run, Chrony resta in tracking, ma la degradazione non produce un gradiente monotono chiarissimo sui soli indicatori mostrati (offset/dispersion nella finestra di 10 minuti circa).
+
+---
+
+# Conclusione operativa (secca)
+- **C’è una differenza sostanziale tra RUN A e RUN B in LOW**: in RUN B emergono spike in ms e maggiore incertezza (root dispersion / update interval) che non erano così evidenti in RUN A.
+- **Non c’è evidenza altrettanto forte e monotona in MEDIUM/HIGH** dentro queste finestre: l’effetto esiste (variabilità), ma non “scala” in modo pulito con lo scenario.
 
