@@ -591,7 +591,7 @@ Considerazioni personali:
 
 ---
 
-# Conclusione operativa (secca)
+# Conclusione operativa
 - **C’è una differenza sostanziale tra RUN A e RUN B in LOW**: in RUN B emergono spike in ms e maggiore incertezza (root dispersion / update interval) che non erano così evidenti in RUN A.
 - **Non c’è evidenza altrettanto forte e monotona in MEDIUM/HIGH** dentro queste finestre: l’effetto esiste (variabilità), ma non “scala” in modo pulito con lo scenario.
 
