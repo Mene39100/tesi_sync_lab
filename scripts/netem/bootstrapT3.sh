@@ -24,7 +24,7 @@ mkdir -p "$RAWLOG"
 #     sudo kathara lstart -d "$TOPOLOGY_DIR" --privileged
 #     sleep 25
 
-#     # disconnessione internet (tu l’hai già così)
+#     # disconnessione internet
 #     ./scripts/endInternetConnection.sh
 #     sleep 5
 
@@ -72,7 +72,7 @@ mkdir -p "$RAWLOG"
 #     echo "[+] Stabilizzazione PTP..."
 #     sleep 40
 
-#     # # Chrony (tranquillo, non interferisce col boundary)
+#     # # Chrony
 #     # kathara exec -d "$TOPOLOGY_DIR" clientchrony "chronyc tracking" \
 #     #     > "$RAWLOG/chrony_${S}_ptp.log"
 
@@ -124,7 +124,7 @@ mkdir -p "$RAWLOG"
 
 #     echo "[+] Avvio NTPsec SOLO quando serve (PTP spento)."
 
-#     # boundary: avvia NTPsec (ora sì)
+#     # boundary: avvia NTPsec
 #     kathara exec -d "$TOPOLOGY_DIR" boundary -- bash -lc \
 #       'pkill ntpd 2>/dev/null; sleep 2; /usr/sbin/ntpd -g -c /etc/ntpsec/ntp.conf &'
 #     sleep 15
@@ -185,7 +185,7 @@ mkdir -p "$RAWLOG"
 
     # echo "[+] Avvio NTPsec SOLO quando serve (PTP spento)."
 
-    # # boundary: avvia NTPsec (ora sì)
+    # # boundary: avvia NTPsec
     # kathara exec -d "$TOPOLOGY_DIR" boundary -- bash -lc \
     #   'pkill ntpd 2>/dev/null; sleep 2; /usr/sbin/ntpd -g -c /etc/ntpsec/ntp.conf &'
     # sleep 15
@@ -246,7 +246,7 @@ mkdir -p "$RAWLOG"
 
 #     echo "[+] Avvio NTPsec SOLO quando serve (PTP spento)."
 
-#     # boundary: avvia NTPsec (ora sì)
+#     # boundary: avvia NTPsec
 #     kathara exec -d "$TOPOLOGY_DIR" boundary -- bash -lc \
 #       'pkill ntpd 2>/dev/null; sleep 2; /usr/sbin/ntpd -g -c /etc/ntpsec/ntp.conf &'
 #     sleep 15
@@ -362,7 +362,7 @@ SOURCES_FILE="$RAWLOG/chrony_${S}/chrony_sources_series.txt"
 STATS_FILE="$RAWLOG/chrony_${S}/chrony_sourcestats_series.txt"
 ACT_FILE="$RAWLOG/chrony_${S}/chrony_activity_series.txt"
 
-# azzera una volta (così non mischi run diversi)
+
 : > "$TRACK_FILE"
 : > "$SOURCES_FILE"
 : > "$STATS_FILE"
@@ -388,12 +388,12 @@ for i in $(seq 1 $SAMPLES); do
     >> "$ACT_FILE" 2>&1
   echo "" >> "$ACT_FILE"
 
-  # opzionale: stato qdisc (una sola volta basterebbe, ma se vuoi trend)
+  # opzionale: stato qdisc
   # kathara exec -d "$TOPOLOGY_DIR" clientchrony -- bash -lc "tc -s qdisc show dev eth0" >> "$RAWLOG/chrony_${S}/qdisc_series.txt" 2>&1
 
   sleep "$INTERVAL"
 done
 
-## aggiunta questa
+
 kathara lclean -d "$TOPOLOGY_DIR"
 done
