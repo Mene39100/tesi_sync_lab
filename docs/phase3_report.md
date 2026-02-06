@@ -268,6 +268,9 @@ I vari blocch rimangono nel file come "rami" per run separati.
 - **Applicazione distrubi**: nel blocco Chrony il degrado è applicato sul **client** (`clientchrony:eth0`) e non sul server
 - **Privilegi**: l'uso di `tc` e discipline dei clock richiede privilegi/capacbility. La topologia li esplicita tramite `cap_add` e avvio privilegiato.
 
+<br />
+<br />
+
 # Analisi comparativa (LOW/MEDIUM/HIGH)
 ## PTP
 
@@ -355,6 +358,9 @@ La fase 3 mostra che:
   
 ---
 
+<br />
+<br />
+
 ## Legenda dei parametri Chrony
 
 ### `chronyc sources`
@@ -406,6 +412,9 @@ La fase 3 mostra che:
   Strato temporale del clock locale dopo la sincronizzazione.
 
 ---
+
+<br />
+<br />
 
 # Run A — Analisi Chrony con netem applicato su clientchrony
 
@@ -594,6 +603,9 @@ Considerazioni personali:
 # Conclusione operativa
 - **C’è una differenza sostanziale tra RUN A e RUN B in LOW**: in RUN B emergono spike in ms e maggiore incertezza (root dispersion / update interval) che non erano così evidenti in RUN A.
 - **Non c’è evidenza altrettanto forte e monotona in MEDIUM/HIGH** dentro queste finestre: l’effetto esiste (variabilità), ma non “scala” in modo pulito con lo scenario.
+
+<br />
+<br />
 
 # Analisi NTPsec – Boundary + Client per Scenario
 Configurazione: `tc netem + tbf` applicato **sul boundary**  
