@@ -10,7 +10,7 @@ Il degrado è ottenuto tramite **Linux Traffic Control (tc)** con:
 - **netem**: emulazione di ritardo, jitter, perdita, riordino (impatti temporali/probabilistici).
 - **tbf**: limitazione di banda (rate shaping) tramite Token Bucket Filter.
 
-Gli scenari sono definiti come triplette/quadruple “Low/Medium/High” e applicati in modo sistematico in test separati, con log salvati per scenario.
+Gli scenari sono definiti come triplette “Low/Medium/High” e applicati in modo sistematico in test separati, con log salvati per scenario.
 
 ---
 
@@ -54,11 +54,11 @@ Ogni file `.conf` definisce un insime coerente di parametri netem + tbf
 **Esempio scenario low.conf:*
 
 ```conf
-DELAY="15ms"
-JITTER="15ms"
-LOSS="12.5%"
-REORDER="15%"
-RATE="20Mbit"
+DELAY="5ms"
+JITTER="1ms"
+LOSS="0.1%"
+REORDER="1%"
+RATE="50Mbit"
 ```
 
 **Nota tecnica (formato)**
@@ -167,7 +167,7 @@ mkdir -p "$RAWLOG"
   Directory base (host/progetto) dove vengono scritti i log della fase.
 - `NETNS="boundary"` e `IFACE="eth1"`
   Variabili "legacy" della parte PTP/NTPsec (dove il degrado era sul boundary lato rete B).
-  **Nel blocco Chrony**, invece il degrado è stato spostato su `clientchrony:eth0`.
+  **Nel blocco Chrony**, invece il degrado è stato spostato su `clientchrony:eth0` e `servergm:eth0` (nelle due diverse RUN).
 - `TOPOLOGY_DIR="topologies/T2"`
   Path della topologia Kathara da avviare/pulire.
 - `mkdir -p "$RAWLOG"`
@@ -265,7 +265,7 @@ I vari blocch rimangono nel file come "rami" per run separati.
 - **Isolamento**: ogni scenario parte da un `lclean` e termina con `lclean`.
   Non esiste carry-overi di qdisc o precessi tra scenari.
 - **Parametrizzazione**: i file `.conf` sono l'uninca fonte dei parametri di rete.
-- **Applicazione distrubi**: nel blocco Chrony il degrado è applicato sul **client** (`clientchrony:eth0`) e non sul server
+- **Applicazione distrubi**: nel blocco Chrony il degrado è applicato sul **client** (`clientchrony:eth0`) e sul **server** (`servergm:eth0`) in due run separate
 - **Privilegi**: l'uso di `tc` e discipline dei clock richiede privilegi/capacbility. La topologia li esplicita tramite `cap_add` e avvio privilegiato.
 
 <br />
@@ -350,7 +350,6 @@ Il comportamento è allineato con lo scenario indicato: con perdita, jitter e de
   - timestamp software, 
   - cotainer Docker,
   - jitter e perdita indotti da netem.
-- Il fatto che Boundary riesca ancora a sincorinzzarsi in MEDIUM mentre il client no è *significativo*, ma non un'anomalia.
 
 **Sintesi**
 La fase 3 mostra che:
@@ -564,7 +563,7 @@ Considerazioni personali:
   - `Update interval` molto variabile e spesso **alto** (~40–150s).
   - `Root dispersion` sale fino a ~ **1.8 ms**, coerente con un canale percepito come meno affidabile.
 
-**Interpretazione:** con `tc` sul server, si degrada il **path server→client** (risposte NTP). Se introduci asimmetria/varianza sul tratto di ritorno, l’algoritmo NTP (che stima offset usando il RTT assumendo simmetria) può produrre **bias e spike**.
+**Interpretazione:** con `tc` sul server, si degrada il **path server→client** (risposte NTP). Introducendo asimmetria/varianza sul tratto di ritorno, l’algoritmo NTP (che stima offset usando il RTT assumendo simmetria) può produrre **bias e spike**.
 
 ---
 
@@ -587,23 +586,23 @@ Considerazioni personali:
   - `Skew` e `Freq Skew` diventano piccoli (ordine < 1 ppm nel tracking).
   - `Root delay` resta tipicamente sotto ~0.63ms.
 
-**Interpretazione:** qui **non emerge** un peggioramento netto rispetto a MEDIUM. Anzi, nella finestra misurata Chrony sembra essersi assestato meglio (probabile effetto di: campionamento, filtro, finestra temporale, e/o dinamica della simulazione non costante).
+**Interpretazione:** **non emerge** un peggioramento netto rispetto a MEDIUM. Anzi, nella finestra misurata Chrony sembra essersi assestato meglio (probabile effetto di: campionamento, filtro, finestra temporale, e/o dinamica della simulazione non costante).
 
 ---
 
 # Confronto RUN A vs RUN B
-## Differenze che si vedono davvero
-- **LOW:** sì, è la differenza più netta.
-  - RUN A (LOW) mostrava offset tipicamente **decine/centinaia di µs** e RMS spesso **~50–160 µs**.
+## Differenze
+- **LOW:** la differenza è più marcata.
+  - RUN A (LOW) mostrava offset nell'ordine di **decine/centinaia di µs** e RMS frequenti **~50–160 µs**.
   - RUN B (LOW) introduce **spike millisecondo** e RMS **~220–240 µs**, con `root dispersion` che arriva a **~1.8ms** e `update interval` spesso molto più alto.
-  - Quindi: **tc su servergm** in LOW ha avuto un impatto più “aggressivo” rispetto a tc su clientchrony.
+  - **tc su servergm** in LOW ha avuto un impatto più “marcato” rispetto a tc su clientchrony.
 
 - **MEDIUM / HIGH:** **non visibile una separazione pulita** tra A e B né un ordine LOW→MEDIUM→HIGH robusto.
   - In entrambe le run, Chrony resta in tracking, ma la degradazione non produce un gradiente monotono chiarissimo sui soli indicatori mostrati (offset/dispersion nella finestra di 10 minuti circa).
 
 ---
 
-# Conclusione operativa
+# Conclusione
 - **C’è una differenza sostanziale tra RUN A e RUN B in LOW**: in RUN B emergono spike in ms e maggiore incertezza (root dispersion / update interval) che non erano così evidenti in RUN A.
 - **Non c’è evidenza altrettanto forte e monotona in MEDIUM/HIGH** dentro queste finestre: l’effetto esiste (variabilità), ma non “scala” in modo pulito con lo scenario.
 

@@ -3,7 +3,7 @@
 SCENARIOS=("low" "medium" "high")
 #SCENARIOS=("low")
 SCENARIO_DIR="$(dirname "$0")/scenarios"
-RAWLOG="analysis/raw_logs/T3 Chrony(test tc on servergm)"
+RAWLOG="analysis/raw_logs/T3"
 NETNS="boundary"
 IFACE="eth1"   # boundary lato rete B
 TOPOLOGY_DIR="topologies/T2"
