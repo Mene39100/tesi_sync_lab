@@ -153,7 +153,7 @@ mkdir -p "$RAWLOG"
     # ########################################
     # # S C E N A R I O   N T P S E C  M E D I U M
     # ########################################
-    # echo "=========== SCENARIO low— NTPsec ==========="
+    # echo "=========== SCENARIO medium- NTPsec ==========="
 
     # source "$SCENARIO_DIR/medium.conf"
     # echo "[DEBUG] delay=$DELAY jitter=$JITTER loss=$LOSS reorder=$REORDER"
@@ -214,7 +214,7 @@ mkdir -p "$RAWLOG"
 # #     # # S C E N A R I O   N T P S E C  H I G H
 # #     # ########################################
 
-# echo "=========== SCENARIO low— NTPsec ==========="
+# echo "=========== SCENARIO high— NTPsec ==========="
 
 #     source "$SCENARIO_DIR/high.conf"
 #     echo "[DEBUG] delay=$DELAY jitter=$JITTER loss=$LOSS reorder=$REORDER"
