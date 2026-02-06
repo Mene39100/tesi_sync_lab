@@ -357,9 +357,8 @@ La fase 3 mostra che:
 - In condizioni HIGH il protocollo **non degrada gradualmente sul client**, ma collassa per timeout e perdita di Annonuce.
   
 ---
-
-<br />
-<br />
+---
+---
 
 ## Legenda dei parametri Chrony
 
@@ -412,9 +411,8 @@ La fase 3 mostra che:
   Strato temporale del clock locale dopo la sincronizzazione.
 
 ---
-
-<br />
-<br />
+---
+---
 
 # Run A — Analisi Chrony con netem applicato su clientchrony
 
@@ -604,8 +602,9 @@ Considerazioni personali:
 - **C’è una differenza sostanziale tra RUN A e RUN B in LOW**: in RUN B emergono spike in ms e maggiore incertezza (root dispersion / update interval) che non erano così evidenti in RUN A.
 - **Non c’è evidenza altrettanto forte e monotona in MEDIUM/HIGH** dentro queste finestre: l’effetto esiste (variabilità), ma non “scala” in modo pulito con lo scenario.
 
-<br />
-<br />
+---
+---
+---
 
 # Analisi NTPsec – Boundary + Client per Scenario
 Configurazione: `tc netem + tbf` applicato **sul boundary**  
