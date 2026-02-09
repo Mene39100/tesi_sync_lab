@@ -1,0 +1,17 @@
+t_s,hhmmss,type,detail,raw,t_rel_s
+48756.0,13:32:36,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,0.0
+48816.0,13:33:36,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,60.0
+48876.0,13:34:36,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,120.0
+48936.0,13:35:36,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,180.0
+48996.0,13:36:36,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,240.0
+49056.0,13:37:36,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,300.0
+49296.0,13:41:36,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   33   64   17   1.3172   0.0826   0.2271,540.0
+49356.0,13:42:36,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   27   64   37   0.3629   0.0453   0.2280,600.0
+49416.0,13:43:36,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   23   64   77   5.9957   2.7994   2.5995,660.0
+49476.0,13:44:36,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   18   64  177   1.3159   0.1265   1.0998,720.0
+49536.0,13:45:36,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   11   64  377   1.3907   0.1081   1.0262,780.0
+49596.0,13:46:36,selected_peer,serverntp,*serverntp       127.127.1.0      9 u    4   64  377   1.4467   0.1197   1.0208,840.0
+49656.0,13:47:36,selected_peer,serverntp,*serverntp       127.127.1.0      9 u    -   64  377   0.3629   0.0453   1.0481,900.0
+49717.0,13:48:37,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   60   64  377   0.3629   0.0453   1.0481,961.0
+49777.0,13:49:37,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   53   64  377   0.3512   0.0358   1.0465,1021.0
+49837.0,13:50:37,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   48   64  377   0.3512   0.0358   1.0467,1081.0
