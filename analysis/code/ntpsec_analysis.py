@@ -39,7 +39,6 @@ import matplotlib.pyplot as plt
 RE_SNAPSHOT_TS = re.compile(r"^---\s+(?P<h>\d{2}):(?P<m>\d{2}):(?P<s>\d{2})\s+---\s*$")
 
 # Peer line: may start with a selection character (*, +, -, x, o, etc.) or whitespace.
-# The first token can be "*boundary1" or "boundary1".
 RE_PEER_LINE = re.compile(
     r"^(?P<remote_tok>\S+)\s+"
     r"(?P<refid>\S+)\s+"
