@@ -76,11 +76,6 @@ Sono utilizzati per identificare il tempo di convergenza, analizzare la robustez
 - Rappresenta l’errore effettivo del nodo (metrica primaria per accuratezza).
 - Unità: **microsecondi (µs)**.
 
-## chrony_<scenario>_tracking_last_offset_us.png (se abilitato)
-- Serie temporale dell’**ultima stima di offset** del filtro di Chrony, derivata da `tracking -> Last offset`.
-- Rappresenta una misura interna/istantanea (utile per diagnostica).
-- Unità: **microsecondi (µs)**.
-
 ## chrony_<scenario>_sourcestats_stddev_us.png
 - Serie temporale della **deviazione standard** delle misure verso la sorgente, derivata da `sourcestats -> Std Dev`.
 - Proxy della “rumorosità”/instabilità delle misure (metrica primaria per stabilità).
@@ -91,6 +86,4 @@ Sono utilizzati per identificare il tempo di convergenza, analizzare la robustez
 - Metrica di diagnostica sulla sorgente (non è l’errore finale del clock locale).
 - Unità: **microsecondi (µs)**.
 
-## Nota sulle metriche Chrony
-- Nel formato `sourcestats` mostrato **non è presente un campo “delay”**; i plot Chrony non includono delay perché non è osservabile da quei file.
 
