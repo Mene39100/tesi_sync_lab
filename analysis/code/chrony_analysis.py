@@ -14,7 +14,6 @@ Notes:
 - tracking: extracts both "System time" (signed, seconds slow/fast) and "Last offset" (seconds).
   Default plot metric is "system_time" because it represents the effective clock error of the node.
 - sourcestats: the provided format has NO delay. Extracts Offset and Std Dev (per source).
-  Std Dev is the most meaningful "noise" metric available in this file.
 
 Units:
 - tracking offsets are in seconds; exported also as microseconds.
@@ -200,7 +199,7 @@ def parse_sourcestats_series(path: Path) -> SourceStatsSeries:
         if not in_table:
             continue
 
-        # parse first data row only (single source scenario in your logs)
+        # parse first data row only
         m = RE_SOURCESTATS_ROW.match(ls)
         if m:
             name = m.group("name")
@@ -212,7 +211,7 @@ def parse_sourcestats_series(path: Path) -> SourceStatsSeries:
             offsets.append(off_s)
             stddevs.append(sd_s)
 
-            # one row per sample is sufficient (if multiple sources appear, extend later)
+            # one row per sample is sufficient
             continue
 
     return SourceStatsSeries(times, sources, offsets, stddevs)

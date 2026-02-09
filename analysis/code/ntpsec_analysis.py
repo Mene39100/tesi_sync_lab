@@ -12,7 +12,7 @@ Outputs (under --outdir, default analysis/):
 - parser_ntpsec/: CSV with parsed samples + events + summaries
 - plots_ntpsec/:  PNG time-series: offset_ms, jitter_ms, delay_ms
 
-Assumptions:
+Notes:
 - delay/offset/jitter are expressed in milliseconds (ms) as in typical ntpq output.
 - Each input file contains a single run for one role+scenario.
 - If multiple peers are present, the parser extracts:

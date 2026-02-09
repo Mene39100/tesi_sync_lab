@@ -11,7 +11,7 @@ PTP (linuxptp/ptp4l) log parser + analysis.
   - per-scenario summary tables (CSV)
   - event tables (CSV) for state transitions and faults
 
-Assumptions:
+Notes:
 - Each input file is a single run for one role+scenario.
 - The timestamp inside square brackets (e.g., ptp4l[1538.162]) is used as time (s).
 - Units:
@@ -250,8 +250,7 @@ def compute_convergence_time_boundary(events: pd.DataFrame) -> Optional[float]:
     """
     Boundary convergence: first transition to SLAVE (UNCALIBRATED -> SLAVE) on any port.
 
-    The analyst may later restrict to a specific port if needed; this implementation
-    takes the earliest SLAVE transition as "convergence".
+    This implementation takes the earliest SLAVE transition as "convergence".
     """
     def pred(df: pd.DataFrame) -> pd.Series:
         return (df["type"] == "state") & (df["to"] == "SLAVE")
@@ -366,9 +365,6 @@ def summarize_client(run: ParsedRun) -> pd.DataFrame:
 def _plot_series(df: pd.DataFrame, x: str, y: str, title: str, ylabel: str, outpath: Path) -> None:
     """
     Plots a single time series.
-
-    The author avoids styling/color hardcoding to keep plots consistent with defaults
-    and to allow later theming if needed.
     """
     if df.empty or y not in df.columns:
         return
