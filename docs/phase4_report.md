@@ -39,3 +39,58 @@ Sono utilizzati per la generazione dei grafici time-series e per il calcolo dell
 ### Events
 Gli `events` rappresentano eventi discreti del protocollo (transizioni di stato, fault, reselezione del master).  
 Sono utilizzati per identificare il tempo di convergenza, analizzare la robustezza del protocollo e fornire tracciabilità temporale degli stati, ma non sono impiegati direttamente nei plot principali.
+
+# NTPsec — Plot (ntpsec_analysis)
+
+## ntpsec_boundary_<scenario>_offset_ms.png
+- Serie temporale dell’**offset** stimato verso la sorgente selezionata (`*` in tabella `ntpq -p`).
+- Rappresenta l’errore di sincronizzazione del nodo boundary rispetto al riferimento NTP.
+- Unità: **millisecondi (ms)**.
+
+## ntpsec_boundary_<scenario>_delay_ms.png
+- Serie temporale del **delay** (ritardo di rete stimato) verso la sorgente selezionata.
+- Rappresenta una stima del path/RTT nel modello NTP.
+- Unità: **millisecondi (ms)**.
+
+## ntpsec_boundary_<scenario>_jitter_ms.png
+- Serie temporale del **jitter** stimato verso la sorgente selezionata.
+- Rappresenta la variabilità delle misure (instabilità temporale del campionamento).
+- Unità: **millisecondi (ms)**.
+
+## ntpsec_client_<scenario>_offset_ms.png
+- Come sopra, ma sul nodo client (errore di sincronizzazione del client rispetto al boundary/server selezionato).
+- Unità: **millisecondi (ms)**.
+
+## ntpsec_client_<scenario>_delay_ms.png
+- Come sopra, ma sul nodo client (delay stimato verso la sorgente selezionata).
+- Unità: **millisecondi (ms)**.
+
+## ntpsec_client_<scenario>_jitter_ms.png
+- Come sopra, ma sul nodo client (jitter stimato verso la sorgente selezionata).
+- Unità: **millisecondi (ms)**.
+
+# Chrony — Plot (chrony_analysis)
+
+## chrony_<scenario>_tracking_system_time_offset_us.png
+- Serie temporale dell’**offset del clock locale** rispetto al tempo NTP selezionato, derivato da `tracking -> System time`.
+- Rappresenta l’errore effettivo del nodo (metrica primaria per accuratezza).
+- Unità: **microsecondi (µs)**.
+
+## chrony_<scenario>_tracking_last_offset_us.png (se abilitato)
+- Serie temporale dell’**ultima stima di offset** del filtro di Chrony, derivata da `tracking -> Last offset`.
+- Rappresenta una misura interna/istantanea (utile per diagnostica).
+- Unità: **microsecondi (µs)**.
+
+## chrony_<scenario>_sourcestats_stddev_us.png
+- Serie temporale della **deviazione standard** delle misure verso la sorgente, derivata da `sourcestats -> Std Dev`.
+- Proxy della “rumorosità”/instabilità delle misure (metrica primaria per stabilità).
+- Unità: **microsecondi (µs)**.
+
+## chrony_<scenario>_sourcestats_offset_us.png
+- Serie temporale dell’**offset stimato verso la sorgente**, derivato da `sourcestats -> Offset`.
+- Metrica di diagnostica sulla sorgente (non è l’errore finale del clock locale).
+- Unità: **microsecondi (µs)**.
+
+## Nota sulle metriche Chrony
+- Nel formato `sourcestats` mostrato **non è presente un campo “delay”**; i plot Chrony non includono delay perché non è osservabile da quei file.
+
