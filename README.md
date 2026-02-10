@@ -1,10 +1,10 @@
 # Progetto Tesi
 
 ## Descrizione
-Questo progetto rappresenta la parte sperimentale della tesi. 
-L’obiettivo principale è sviluppare un prototipo per analizzare l’impatto della sincronizzazione temporale (**NTP/PTP**).
+- Questo progetto rappresenta la parte sperimentale della tesi.
+- L’obiettivo principale è sviluppare un prototipo per analizzare l’impatto della sincronizzazione temporale (**NTP/PTP**).
 
-L’analisi è condotta in ambiente "containers Docker" privo di accesso al clock hardware; pertanto, i protocolli non disciplinano il tempo di sistema ma operano come stimatori logici di offset e delay. Le metriche analizzate riflettono la qualità della sincronizzazione stimata e la robustezza del protocollo, non la correzione fisica del clock.
+- L’analisi è condotta in ambiente "containers Docker" privo di accesso al clock hardware; pertanto, i protocolli non disciplinano il tempo di sistema ma operano come stimatori logici di offset e delay. Le metriche analizzate riflettono la qualità della sincronizzazione stimata e la robustezza del protocollo, non la correzione fisica del clock.
 ---
 
 ## Struttura del progetto
