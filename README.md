@@ -39,9 +39,6 @@
 
 ### Implementato nella Phase 3
 - Demo client-server in **Bash** con eventi timestamp.
-- Modalità:
-  - **Sync-ON** (NTP/PTP attivi)
-  - **Sync-OFF** (clock disallineati)
 - Metriche: miss rate su deadline (5–20 ms), errori di ordinamento eventi, drift percepito.  
 
 ---
