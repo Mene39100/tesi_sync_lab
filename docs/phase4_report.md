@@ -87,3 +87,8 @@ Sono utilizzati per identificare il tempo di convergenza, analizzare la robustez
 - Unità: **microsecondi (µs)**.
 
 
+### Nota
+- L’analisi è condotta in ambiente "containers Docker" privo di accesso al clock hardware; pertanto, i protocolli non disciplinano il tempo di sistema ma operano come stimatori logici di offset e delay. Le metriche analizzate riflettono la qualità della sincronizzazione stimata e la robustezza del protocollo, non la correzione fisica del clock.
+
+- I file presenti in `/analysis/code` si dividono in `*_analysis.py` e `*_analyisis_v2.py`, i primi rispetto ai secondi non tengono conto di una scala comune sulla y-axis. Il codice, al di fuori di questo dettaglio, è pressoche identico. Rispettivametne vale il discorso analogo per i file `parser/plots_*_old` e `parser/plots_*`
+

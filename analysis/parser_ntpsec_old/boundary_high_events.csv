@@ -1,0 +1,22 @@
+t_s,hhmmss,type,detail,raw,t_rel_s
+50753.0,14:05:53,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,0.0
+50813.0,14:06:53,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,60.0
+50873.0,14:07:53,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,120.0
+50933.0,14:08:53,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,180.0
+50993.0,14:09:53,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,240.0
+51053.0,14:10:53,init,refid=.INIT.,serverntp       .INIT.          16 u    -   64    0   0.0000   0.0000   0.0002,300.0
+51293.0,14:14:53,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   33   64   17   1.0648   0.0123   0.5413,540.0
+51353.0,14:15:53,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   27   64   37   0.9315   0.0238   0.4607,600.0
+51413.0,14:16:53,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   23   64   77   1.0603   0.0469   0.3981,660.0
+51474.0,14:17:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   18   64  177   1.0856  -0.0565   0.4279,721.0
+51534.0,14:18:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   11   64  377   0.5063   0.0555   0.3349,781.0
+51594.0,14:19:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u    4   64  377   1.3608   0.3552   0.3586,841.0
+51654.0,14:20:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u    -   64  377   0.5063   0.0555   0.3478,901.0
+51714.0,14:21:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   60   64  377   0.5063   0.0555   0.3478,961.0
+51774.0,14:22:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   54   64  377   0.5063   0.0555   0.1548,1021.0
+51834.0,14:23:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   49   64  377   0.5063   0.0555   0.1543,1081.0
+51894.0,14:24:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   45   64  377   0.5063   0.0555   0.1686,1141.0
+51954.0,14:25:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   40   64  377   0.5063   0.0555   0.1702,1201.0
+52014.0,14:26:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   36   64  377   0.5063   0.0555   0.2863,1261.0
+52074.0,14:27:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   30   64  377   0.5756   0.0861   0.2959,1321.0
+52134.0,14:28:54,selected_peer,serverntp,*serverntp       127.127.1.0      9 u   25   64  377   0.5446   0.0487   0.2678,1381.0

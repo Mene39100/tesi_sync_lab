@@ -1,0 +1,4 @@
+role,scenario,source_file,locked,convergence_time_s,best_master_reselection_count,rms_mean_ns_post,rms_std_ns_post,rms_p95_ns_post,rms_max_ns_post,max_mean_ns_post,max_max_ns_post,path_delay_mean_ns_post,path_delay_std_ns_post
+client,high,analysis/raw_logs/T3/ptp_client_high.log,False,,0,,,,,,,,
+client,low,analysis/raw_logs/T3/ptp_client_low.log,True,27.082000000000335,1,250284.0,,250284.0,250284.0,268141.0,268141.0,588727.0,
+client,medium,analysis/raw_logs/T3/ptp_client_medium.log,True,26.79200000000128,1,250783.5,266195.2975251441,420189.14999999997,439012.0,347045.0,611722.0,230735.5,31287.353747161167
