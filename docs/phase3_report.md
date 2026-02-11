@@ -196,7 +196,7 @@ tc qdisc show dev $IFACE > .../netem_state_${S}_ptp.txt
     - `-c` esegue il comando
 - `&` mette il processo in background nel container
 - `&>` redirige stdout+stderr su file nel volume montato
-7. Stabilizzazione `sleep 40`
+7. Stabilizzazione `sleep 240`
 8. `kathara lclean` finale per chiudere topologia
 
 ### 6.4 Blocchi NTPsec
@@ -298,25 +298,21 @@ Il comportamento del GM è **invariante rispetto al degrado di rete** applicato 
 Il comportamento risulta in accordo a quello atteso per un ambiente di degrado basso.
 
 **Scenario MEDIUM**
-- non compaiono errori `tx timestamp timeout`/`send sync failed` nella porzione osservata; il BC effettua:
-  - aggancio al GM (`LISTENING -> UNCALIBRATED -> SLAVE` sulla porta verso GM),
-  - mantenendo la porta downstream operativa senza fault evidenti.
-  - Offset e path delay mostrano **variabilità** e spike (fino a ~ms), coerenti con delay/jitter/reorder, ma con convergenza comunque raggiunta.
+- Il BC inizialmente effettua la normale procedura BMCA con transizione `LISTENING → UNCALIBRATED → SLAVE` sulla porta verso GM.
+- Sono però presenti eventi sporadici di `tx timestamp timeout` e `send sync failed` sulla **porta downstream**, con transizioni temporanee in stato `FAULTY`.
+- Le porte rientrano successivamente in `LISTENING` e il BC mantiene comunque la sincronizzazione con il GM.
+- Offset e path delay mostrano elevata variabilità e spike anche significativi, con fluttuazioni nell’ordine dei ms e oltre, coerenti con condizioni di degrado medio ma instabile.
+- Non si osserva una perdita permanente di sincronizzazione, bensì instabilità transitoria della porta verso i client.
 
-Il comportamento risulta in accordo a quello atteso per un ambiente di degrado medio.
+Il comportamento è quindi coerente con uno scenario MEDIUM al limite superiore, in cui la sincronizzazione viene raggiunta e mantenuta, ma con fault intermittenti e forte varianza nelle stime.
 Il comportamento risulta in linea con uno scenario MEDIUM: sincronizzazione raggiunta, ma con qualità del canale che induce maggiore varianza nelle stime (offset/delay). Nei run precedenti (configurazione media più aggressiva) erano presenti fault sulla porta downstream; nel run aggiornato tale instabilità non è evidente -> va quindi riportato come **dipendente dal run** (transitori/condizioni iniziali).
 
 **Scenario HIGH**
-- Instabilità marcata:
-  - fault ripetuti sulle porte downstram.
-  - numerosi timeout di timestamp.
-  - path delay elevato e molto variabile (> 1 ms).
-  - offset con spike di diversi millesecondi.
-- Servo che entra in `SLAVE`, ma **non mantiene uno stato stabile**.
-- Reset frequenti delle porte (`FAULTY` ricorrente).
+- ricorrono ciclicamente `tx timestamp timeout` -> `send sync failed` con transizioni `MASTER`-> `FAULTY`, seguite da reset `FAULTY` -> `LISTENING` e nuovo tentativo di operatività.
+- Il BC vede il GM e completa l’aggancio sulla porta upstream (port 1) (`MASTER` → `UNCALIBRATED` → `SLAVE`), quindi la sincronizzazione upstream viene comunque ristabilita.
+- Le stime risultano degradate: path delay molto elevato e altamente variabile (tipicamente ~0.4–1.8 ms, con spike maggiori) e offset con spike nell’ordine dei ms, coerenti con un canale in forte degrado.
 
-Il comportamento risulta in accordo a quello atteso per un ambiente di degrado alto.
-Il Boundary riesce ancora a "vedere" il GM, non riuscendo però a rigenerare un flusso PTP addisabile verso il client.
+il Boundary mantiene la relazione con il GM, ma non riesce a mantenere un flusso PTP affidabile verso il downstream a causa dei fault ripetuti legati al timestamping/trasmissione sulla porta verso i client.
 
 **3. Comportamento del Client PTP**
 Il client è il nodo che rende più evidente la **soglia di robustezza del protocollo**
@@ -330,18 +326,17 @@ Il client è il nodo che rende più evidente la **soglia di robustezza del proto
 Allineato alle aspettative: il client riesce a sincronizzarsi nonstante il degrado lieve.
 
 **Scenario MEDIUM**
-- Nel run precedente il client non raggiungeva uno stato `SLAVE` stabile e ricadeva in `LISTENING` per timeout Announce.
-- Nel **run aggiornato**, invece, il client raggiunge `SLAVE` e produce statistiche (rms/delay), pur con maggiore instabilità e variabilità rispetto a LOW.
+- Il client aggancia il master passando `LISTENING → UNCALIBRATED → SLAVE` e produce statistiche `rms/max/delay`, quindi la sincronizzazione viene raggiunta.
+- Tuttavia la stabilità è intermittente: si osservano più transizioni `SLAVE → LISTENING` dovute a `ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES`, seguite da nuovo aggancio e ritorno a `SLAVE`.
+- Le metriche mostrano variabilità elevata: delay nell’ordine di ~0.6–1.3 ms con spike molto maggiori in alcune finestre (fino a ~2.7 ms) e `rms/max` che possono crescere fino a valori molto elevati (anche multi-ms), coerenti con jitter/reorder sul downstream.
 
-A differenza del Boundary, il client è generalmente più fragile perché dipende dalla **continuità** dei messaggi sulla tratta downstream. Tuttavia, l'esito (stabile vs timeout) può dipendere da transitori e condizioni iniziali: nel run aggiornato la stabilizzazione è avvenuta, mentre in run precedenti no.
+A differenza del Boundary, il client è generalmente più fragile perché dipende dalla **continuità** dei messaggi sulla tratta downstream. Tuttavia, l'esito (stabile vs timeout) può dipendere da transitori e condizioni iniziali.
 
 **Scenario HIGH**
-- Il client:
-  - **non riconosce mai un master valido**
-  - resta bloccato nella sezione del clock locale
-  - non entra mai in `UNCALIBRATED` né in `SLAVE`
+- Il client rimane per quasi tutto il run in condizione di auto-selezione del clock locale (`selected local clock ... as best master`), segno che non riceve Announce in modo sufficientemente continuo da mantenere un master esterno valido.
+- Solo tardivamente “vede” un master (`selected best master clock ...`) e transita `LISTENING`-> `UNCALIBRATED`, ma non completa l’aggancio a `SLAVE`: dopo pochi secondi ricade in `LISTENING` per `ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES`.
 
-Il comportamento è allineato con lo scenario indicato: con perdita, jitter e delay elevati, il flusso PTP downstram è troppo degradato per consentire anche sollo la fase di selezione del master.
+Nello scenario HIGH il downstream è talmente degradato che il client non mantiene la reachability del master; l’eventuale rilevamento del master è transitorio e non porta a sincronizzazione stabile.
 
 **Note tecniche rilevanti**:
 - Il Boundary Clock **estende la tolleranza** del dominio PTP rispetto al client finale.
@@ -354,8 +349,9 @@ Il comportamento è allineato con lo scenario indicato: con perdita, jitter e de
 **Sintesi**
 La fase 3 mostra che:
 - PTP **scala correttamente in presenza di degrado lieve**.
-- Il Boundary Clock svolge efficaemente il suo ruolo di filtro/rigeneratore solo fino a una certa soglia.
-- In condizioni HIGH il protocollo **non degrada gradualmente sul client**, ma collassa per timeout e perdita di Annonuce.
+- In condizioni **MEDIUM** la sincronizzazione è ancora raggiungibile, ma compaiono instabilità transitorie (timeout Announce e fault downstream sul BC), con forte aumento della varianza di offset e delay.
+- Il Boundary Clock riesce a mantenere l’aggancio al GM anche in HIGH, ma **non riesce a garantire un flusso PTP affidabile verso il downstream**, a causa di fault ripetuti di timestamp/trasmissione.
+- In condizioni HIGH il client **non degrada progressivamente**, ma perde la continuità degli Announce, ricade in auto-selezione del clock locale e non mantiene uno stato `SLAVE` stabile.
   
 ---
 
