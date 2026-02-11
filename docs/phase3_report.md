@@ -617,19 +617,19 @@ Osservabili: `ntpq -p` (delay, offset, jitter, reach, selezione syspeer)
 
 ### Boundary
 - **Bootstrap**: fase `.INIT.` prolungata (poll=64s), aggancio regolare.
-- **Convergenza**: syspeer selezionato, reach → 377.
+- **Convergenza**: regolare, senza perdita di reach.
 - **Metriche a regime**:
-  - Delay: ~1.6–1.9 ms
-  - Offset: ~±0.7 ms
-  - Jitter: ~0.5 ms
+  - Delay: ~1.1–1.4 ms
+  - Offset: ~0.1-0.4 ms
+  - Jitter: ~0.3-0.7 ms
 
 ### Client
 - **Bootstrap**: dipendente dal boundary; `.INIT.` fino a sync del boundary.
-- **Convergenza**: syspeer selezionato, reach valido.
+- **Convergenza**: successiva selezione stabile di `boundary1` come syspeer (`reach -> 377`).
 - **Metriche a regime**:
-  - Delay: ~4.6–5.8 ms
-  - Offset: ~−2 ms
-  - Jitter: ~0.56 ms
+  - Delay: ~6.3–7.9 ms
+  - Offset: ~−2/-3.2 ms
+  - Jitter: ~0.45-0.7 ms
 - **Stato**: stabile; degradazione coerente con 1 hop NTP aggiuntivo.
 
 **Sintesi LOW**: catena stabile; rumore contenuto e filtrato correttamente.
@@ -639,20 +639,21 @@ Osservabili: `ntpq -p` (delay, offset, jitter, reach, selezione syspeer)
 ## Scenario MEDIUM
 
 ### Boundary
-- **Bootstrap**: simile a LOW.
-- **Convergenza**: syspeer stabile; reach pieno.
+- **Bootstrap**: `.INIT.` iniziale, poi selezione stabile di serverntp come syspeer (`reach -> 377`).
+- **Convergenza**: regolare, senza perdita di reach.
 - **Metriche**:
-  - Delay tipico: ~0.35–1.6 ms
-  - Offset tipico: ~0.04–0.12 ms
-  - **Spike isolato**: delay ~6 ms, offset ~2.8 ms, jitter ~2.6 ms
+  - Delay tipico: ~1.1–1.8 ms
+  - Offset tipico: ~0.28–0.65 ms
+  - Jitter: ~0.17–0.44 ms
+  - **Spike isolato**: delay 2.5 ms, offset ~0.92 ms, jitter ~0.53 ms
 
 ### Client
 - **Bootstrap**: più lungo rispetto a LOW.
-- **Convergenza**: syspeer stabile; reach → 377.
+- **Convergenza**: syspeer stabile; reach -> 377.
 - **Metriche a regime**:
-  - Delay: ~13–21 ms
-  - Offset: ~−6 ÷ −10 ms
-  - Jitter: ~1.4–4.6 ms
+  - Delay: ~12.8–20.7 ms
+  - Offset: ~−5.7- −9.4 ms
+  - Jitter: ~1.1–2.3 ms
 - **Stato**: stabile ma precisione ridotta; amplificazione del rumore del boundary.
 
 **Delta vs LOW**:
