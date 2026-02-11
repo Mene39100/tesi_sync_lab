@@ -1,7 +1,6 @@
 #!/bin/bash
 
 SCENARIOS=("low" "medium" "high")
-#SCENARIOS=("low")
 SCENARIO_DIR="$(dirname "$0")/scenarios"
 RAWLOG="analysis/raw_logs/T3"
 NETNS="boundary"

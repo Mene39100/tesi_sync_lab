@@ -117,7 +117,7 @@ Caratteristiche:
     - se la qdisc root esiste, viene sosttuita;
     - se non esiste, viene creata
 - supporta modalità isolate (`delay`, `loss`, `reorder`, ecc.)
-- pensato come **strumento di supporto** o debugging
+- pensato come **strumento di supporto** o **debugging**
 
 Non viene utilizzato nel flusso principale della Fase 3, poichè gli scenari reali richiedono l'applicazione simultanea di più parametri.
 ### 5.2 `cleanup_netem.sh`
@@ -147,7 +147,6 @@ nota: a necessità il codice è opportunamente commentato per isolare altre porz
 ### 6.2 Variabili globali e setup
 ```bash
 SCENARIOS=("low" "medium" "high")
-#SCENARIOS=("low")
 SCENARIO_DIR="$(dirname "$0")/scenarios"
 RAWLOG="analysis/raw_logs/T3"
 NETNS="boundary"
@@ -181,7 +180,7 @@ Elementi chiave:
 importa `DELAY/JITTER/LOSS/REORDER/RATE` nello shell corrente
 2. `kathara lclean è kathara lstart --previleged`
 3. `./scripts/endInternetConnection`
-Disconnette Internet (tipicamente spegnendo eht2 o route verso l'esterno) per garantire che la sincronizzazione avvenga solo nel lab.
+Disconnette Internet (tipicamente spegnendo (eht1 or eth2) o route verso l'esterno) per garantire che la sincronizzazione avvenga solo nel lab.
 4. Applicazione netem+tbf sul `boundary:eth1`:
 ```bash
 tc qdisc replace dev $IFACE root handle 1: netem ...
@@ -279,14 +278,15 @@ I vari blocch rimangono nel file come "rami" per run separati.
 **1. Comportamento del Grandmaster (servergm)**
 In tutti e tre gli scenari il nodo `servergm` mostra un comporamento **stabile e coerente**:
 - Transizione regolare `INITIALIZING -> LISTENING -> MASTER`
-- Elezione come *Grandmaster* tramite BMCA senza contese.
+- Elezione come *Grandmaster* tramite BMCA senza contese (forzato in fase di configurazione).
 - Presenza di messaggi *"new foreign master"* dopo l'avvio, dovuti alla comparsa del Boundary Clock (il GM osserva Announce “esterni”), **senza perdita del ruolo di GM**
 
 **Osservazione**:
 Il comportamento del GM è **invariante rispetto al degrado di rete** applicato downstream. Questo è atteso: il degrado è applicato sul ramo B (boundary->client), mentre il GM non è disciplinato da clock esterni (opera come riferimento del dominio).
 
 **2. Comportamento del Boundary Clock**
-Il Boundary Clock è il nodo **più sensibile** agli senari di degrado e quello che evidenzia meglio le differenze tra LOW, MEDIUM e HIGH.
+- Nello scenario high il boundary entra in instabilità perché la degradazione estrema del link (delay/loss/reorder + shaping) provoca timeout sugli Announce e fallimenti nel TX timestamping PTP, causando rielezione BMCA e transizioni della porta in stato FAULTY.
+- Degradando solo il downstream, la degradazione del link impedisce al boundary di trasmettere e timestampare correttamente i messaggi PTP verso i client, causando timeout, send sync failed e transizioni della porta in stato FAULTY, con conseguente instabilità del protocollo
 
 **Scenario LOW**
 - Transizione completa:
@@ -534,8 +534,8 @@ Non è visibile una differenza netta con gli scenari precedenti
 | Scenario | Stato del servo        | RMS offset       | Frequenza           | Collasso |
 |--------|------------------------|------------------|---------------------|----------|
 | LOW    | Stabile                | ~50–100 µs       | Moderata            | No       |
-| MEDIUM | Stabile, più reattivo  | ~50–150 µs       | Alta e variabile    | No       |
-| HIGH   | Stabile (filtrato)     | ~10–100 µs       | In assestamento     | No       |
+| MEDIUM | Stabile                | ~50–150 µs       | Alta e variabile    | No       |
+| HIGH   | Stabile                | ~10–100 µs       | In assestamento     | No       |
 
 ---
 

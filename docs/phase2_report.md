@@ -6,7 +6,7 @@ L’obiettivo è stato realizzare un sistema in cui coesistono e vengono confron
 - **PTP (Precision Time Protocol)** con struttura gerarchica Grandmaster–Boundary–Slave,
 - **NTPsec** e **Chrony** come protocolli NTP, eseguiti su rami separati della rete,
 - un’infrastruttura di **automazione completa** per avvio, configurazione e raccolta log all’interno di container Kathará.
-- Per motivi di configurazione è stato deciso a tempo di configurazione di dividere il dominio principlae (server), in due separati, il primo (*servergm*) dedicato interamente a chrony e linuxptp e il secondo (*serverntp*) solamente a ntpsec. (le motivazioni si riconducono a conflitti di installazione e permessi tra chronu e ntpsec sullo stesso container)
+- Per motivi di configurazione è stato deciso a tempo di configurazione di dividere il dominio principlae (server), in due separati, il primo (*servergm*) dedicato interamente a chrony e linuxptp e il secondo (*serverntp*) solamente a ntpsec. (le motivazioni si riconducono a conflitti di installazione e permessi tra chrony e ntpsec sullo stesso container)
 
 ---
 
@@ -21,7 +21,7 @@ Il **Boundary Clock** rappresenta il punto di interconnessione tra le due reti e
 - e, opzionalmente, come bridge NTP quando vengono attivati i test misti (non contemporaneamente a PTP per evitare problematiche di sincornizzazione e diritti sul clock).
 
 Tutti i nodi condividono un volume locale per l’accesso ai file di configurazione e ai log.  
-I tutti i container (per convenienza) sono avviati con le capability `SYS_TIME`, `NET_RAW`, `NET_ADMIN` per poter modificare il clock di sistema e catturare i timestamp di rete.
+I tutti i container (per convenienza) sono avviati con le capability `SYS_TIME`, `NET_RAW`, `NET_ADMIN` per poter catturare i timestamp di rete e altre funzionalità dedicate.
 
 ---
 
@@ -60,7 +60,7 @@ Tutti i test vengono eseguiti tramite uno script Bash (`bootstrapT2.sh`) che:
 Il comportamento del dominio PTP rispecchia pienamente la gerarchia prevista:
 - Il **Grandmaster** viene eletto come miglior clock e resta costantemente in stato *MASTER*.  
 - Il **Boundary Clock** passa da *LISTENING* a *SLAVE*, calcola offset e ritardo medio, e successivamente rigenera i pacchetti come *MASTER* sulla rete B.  
-- Il **Client PTP** riconosce correttamente il boundary come sorgente, raggiunge lo stato *SLAVE* e inizia a registrare cicli regolari di correzione del clock.
+- Il **Client PTP** riconosce correttamente il boundary come sorgente, raggiunge lo stato *SLAVE* e inizia a registrare cicli regolari di misurazione.
 
 I log mostrano una prima fase di oscillazioni ampie (offset fino a centinaia di microsecondi) seguita da una progressiva riduzione delle deviazioni e un percorso stabile di sincronizzazione.  
 Il Boundary presenta cicli di compensazione evidenti (offset, freq, path delay) mentre il Client, pur ricevendo correttamente i messaggi Sync/Follow_Up e DelayReq/Resp, tende a loggare in modo meno verboso, tipico degli slave software.
