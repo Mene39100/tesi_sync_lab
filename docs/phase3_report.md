@@ -305,14 +305,13 @@ Il comportamento risulta in accordo a quello atteso per un ambiente di degrado b
 - Non si osserva una perdita permanente di sincronizzazione, bensì instabilità transitoria della porta verso i client.
 
 Il comportamento è quindi coerente con uno scenario MEDIUM al limite superiore, in cui la sincronizzazione viene raggiunta e mantenuta, ma con fault intermittenti e forte varianza nelle stime.
-Il comportamento risulta in linea con uno scenario MEDIUM: sincronizzazione raggiunta, ma con qualità del canale che induce maggiore varianza nelle stime (offset/delay). Nei run precedenti (configurazione media più aggressiva) erano presenti fault sulla porta downstream; nel run aggiornato tale instabilità non è evidente -> va quindi riportato come **dipendente dal run** (transitori/condizioni iniziali).
+Il comportamento risulta in linea con uno scenario MEDIUM: sincronizzazione raggiunta, ma con qualità del canale che induce maggiore varianza nelle stime (offset/delay). Nei run precedenti (configurazione media più aggressiva) erano presenti fault sulla porta downstream; in run differenti tale instabilità non è evidente -> va quindi riportato come **dipendente dal run** (transitori/condizioni iniziali).
 
 **Scenario HIGH**
 - ricorrono ciclicamente `tx timestamp timeout` -> `send sync failed` con transizioni `MASTER`-> `FAULTY`, seguite da reset `FAULTY` -> `LISTENING` e nuovo tentativo di operatività.
 - Il BC vede il GM e completa l’aggancio sulla porta upstream (port 1) (`MASTER` → `UNCALIBRATED` → `SLAVE`), quindi la sincronizzazione upstream viene comunque ristabilita.
-- Le stime risultano degradate: path delay molto elevato e altamente variabile (tipicamente ~0.4–1.8 ms, con spike maggiori) e offset con spike nell’ordine dei ms, coerenti con un canale in forte degrado.
 
-il Boundary mantiene la relazione con il GM, ma non riesce a mantenere un flusso PTP affidabile verso il downstream a causa dei fault ripetuti legati al timestamping/trasmissione sulla porta verso i client.
+Il Boundary mantiene la relazione con il GM, ma non riesce a mantenere un flusso PTP affidabile verso il downstream a causa dei fault ripetuti legati al timestamping/trasmissione sulla porta verso i client.
 
 **3. Comportamento del Client PTP**
 Il client è il nodo che rende più evidente la **soglia di robustezza del protocollo**
