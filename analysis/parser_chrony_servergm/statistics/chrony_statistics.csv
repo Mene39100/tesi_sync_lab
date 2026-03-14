@@ -1,0 +1,10 @@
+scenario,parameter,source_file,source_type,n_total_rows,n_filtered_rows,first_valid_t_rel_s,n_valid_metric,mean,std,min,q1,median,q3,max,range,iqr,cv
+low,offset_us,chrony_low_sourcestats.csv,sourcestats,10,10,0.0,10,1.5964,4.106159,-3.395,-0.28875,1.0005,2.43975,12.0,15.395,2.7285,2.572137
+low,stddev_us,chrony_low_sourcestats.csv,sourcestats,10,10,0.0,10,214.9,27.229273,170.0,204.0,217.5,236.0,252.0,82.0,32.0,0.126707
+low,system_time_us,chrony_low_tracking.csv,tracking,10,10,0.0,10,71.7357,135.362708,-67.582,-6.2765,33.3505,110.1185,403.865,471.447,116.395,1.886964
+medium,offset_us,chrony_medium_sourcestats.csv,sourcestats,10,10,0.0,10,-2.0867,5.54004,-11.0,-3.98075,-1.4,1.15775,5.819,16.819,5.1385,-2.654929
+medium,stddev_us,chrony_medium_sourcestats.csv,sourcestats,10,10,0.0,10,120.5,9.75534,106.0,112.25,123.5,128.0,130.0,24.0,15.75,0.080957
+medium,system_time_us,chrony_medium_tracking.csv,tracking,10,10,0.0,10,-42.8227,66.532961,-175.907,-60.65875,-29.7855,0.00175,50.504,226.411,60.6605,-1.553684
+high,offset_us,chrony_high_sourcestats.csv,sourcestats,10,10,0.0,10,-0.2794,0.302346,-0.95,-0.2055,-0.1395,-0.1165,-0.082,0.868,0.089,-1.082128
+high,stddev_us,chrony_high_sourcestats.csv,sourcestats,10,10,0.0,10,118.7,20.319941,94.0,103.0,115.0,131.0,159.0,65.0,28.0,0.171187
+high,system_time_us,chrony_high_tracking.csv,tracking,10,10,0.0,10,-13.4635,14.123298,-46.044,-18.07075,-9.183,-4.14825,0.007,46.051,13.9225,-1.049006
