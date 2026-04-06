@@ -1,0 +1,6 @@
+ptp4l[13322.529]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[13322.530]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[13330.252]: port 1: LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[13330.252]: selected local clock 5695eb.fffe.62a32e as best master
+ptp4l[13330.252]: port 1: assuming the grand master role
+ptp4l[13333.624]: port 1: new foreign master 769c46.fffe.700bf1-1

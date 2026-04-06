@@ -1,0 +1,160 @@
+===== SAMPLE 1/20 @ 2026-04-05T19:09:11+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 2/20 @ 2026-04-05T19:10:12+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 3/20 @ 2026-04-05T19:11:15+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 4/20 @ 2026-04-05T19:12:16+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 5/20 @ 2026-04-05T19:13:18+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 6/20 @ 2026-04-05T19:14:19+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 7/20 @ 2026-04-05T19:15:21+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 8/20 @ 2026-04-05T19:16:22+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 9/20 @ 2026-04-05T19:17:24+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 10/20 @ 2026-04-05T19:18:26+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 11/20 @ 2026-04-05T19:19:29+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 12/20 @ 2026-04-05T19:20:31+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 13/20 @ 2026-04-05T19:21:32+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 14/20 @ 2026-04-05T19:22:34+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 15/20 @ 2026-04-05T19:23:35+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 16/20 @ 2026-04-05T19:24:37+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 17/20 @ 2026-04-05T19:25:39+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 18/20 @ 2026-04-05T19:26:40+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 19/20 @ 2026-04-05T19:27:42+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+
+===== SAMPLE 20/20 @ 2026-04-05T19:28:43+00:00 =====
+200 OK
+1 sources online
+0 sources offline
+0 sources doing burst (return to online)
+0 sources doing burst (return to offline)
+0 sources with unknown address
+

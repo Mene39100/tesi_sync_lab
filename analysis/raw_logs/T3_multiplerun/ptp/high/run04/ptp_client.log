@@ -1,0 +1,45 @@
+ptp4l[15149.001]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[15149.001]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[15155.476]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15162.462]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15169.926]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15176.464]: port 1: new foreign master 0ecb4c.fffe.1c8e2b-2
+ptp4l[15177.694]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15184.394]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15190.854]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15197.716]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15204.550]: selected best master clock fed13e.fffe.f4affe
+ptp4l[15204.550]: foreign master not using PTP timescale
+ptp4l[15204.550]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[15211.834]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[15211.834]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15217.918]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15225.809]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15232.775]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15239.715]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15246.739]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15254.055]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15260.841]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15268.259]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15276.122]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15283.398]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15291.280]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15298.211]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15302.066]: selected best master clock fed13e.fffe.f4affe
+ptp4l[15302.067]: foreign master not using PTP timescale
+ptp4l[15302.067]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[15308.932]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[15308.932]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15315.179]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15321.389]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15327.888]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15334.510]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15341.744]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15349.082]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15356.183]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15363.500]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15370.729]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15376.795]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15383.049]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15389.301]: selected local clock 06850b.fffe.b4187b as best master
+ptp4l[15396.682]: selected local clock 06850b.fffe.b4187b as best master

@@ -1,0 +1,4 @@
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
+15445.999,state,1,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[15445.999]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,high,run05,client
+15445.999,state,0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[15445.999]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,high,run05,client
+15449.36,new_foreign_master,1,,,720e3e.fffe.65eb21-2,ptp4l[15449.360]: port 1: new foreign master 720e3e.fffe.65eb21-2,3.361000000000786,3,high,run05,client

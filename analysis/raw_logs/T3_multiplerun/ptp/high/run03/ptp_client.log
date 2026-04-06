@@ -1,0 +1,42 @@
+ptp4l[14821.917]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[14821.918]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[14824.792]: port 1: new foreign master 0ef3b4.fffe.359730-2
+ptp4l[14828.467]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14835.406]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14842.315]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14849.947]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14850.958]: selected best master clock 865d50.fffe.7fbd62
+ptp4l[14850.958]: foreign master not using PTP timescale
+ptp4l[14850.959]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[14858.329]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[14858.329]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14865.944]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14873.338]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14881.007]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14888.468]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14894.985]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14901.847]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14909.636]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14917.549]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14923.928]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14931.169]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14938.050]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14945.222]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14952.570]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14959.109]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14966.121]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14974.020]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14981.992]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14988.613]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[14995.453]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[15002.337]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[15008.583]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[15016.189]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[15022.437]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[15028.451]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[15035.963]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[15043.125]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[15049.456]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[15055.837]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[15063.589]: selected local clock 2a1d0a.fffe.c031a8 as best master
+ptp4l[15071.246]: selected local clock 2a1d0a.fffe.c031a8 as best master

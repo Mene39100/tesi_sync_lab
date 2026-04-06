@@ -1,0 +1,50 @@
+===== SAMPLE 1/10 @ 2026-04-05T13:25:04+00:00 =====
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
+==============================================================================
+servergm                   23  11    71     -0.232      6.016    -19us   137us
+
+===== SAMPLE 2/10 @ 2026-04-05T13:26:06+00:00 =====
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
+==============================================================================
+servergm                   23  11    71     -0.232      6.016    -34us   137us
+
+===== SAMPLE 3/10 @ 2026-04-05T13:27:07+00:00 =====
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
+==============================================================================
+servergm                   23  11    71     -0.232      6.016    -48us   137us
+
+===== SAMPLE 4/10 @ 2026-04-05T13:28:08+00:00 =====
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
+==============================================================================
+servergm                   26  15   335     -0.024      1.851    -98ns   136us
+
+===== SAMPLE 5/10 @ 2026-04-05T13:29:10+00:00 =====
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
+==============================================================================
+servergm                   29  17   372     -0.004      0.647   -125ns   126us
+
+===== SAMPLE 6/10 @ 2026-04-05T13:30:11+00:00 =====
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
+==============================================================================
+servergm                   31  17   457     -0.024      0.620   -128ns   135us
+
+===== SAMPLE 7/10 @ 2026-04-05T13:31:13+00:00 =====
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
+==============================================================================
+servergm                   32  17   489     -0.015      0.575   -501ns   135us
+
+===== SAMPLE 8/10 @ 2026-04-05T13:32:15+00:00 =====
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
+==============================================================================
+servergm                   33  18   546     -0.001      0.505    -55ns   133us
+
+===== SAMPLE 9/10 @ 2026-04-05T13:33:16+00:00 =====
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
+==============================================================================
+servergm                   33  18   546     -0.001      0.505   -142ns   133us
+
+===== SAMPLE 10/10 @ 2026-04-05T13:34:17+00:00 =====
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
+==============================================================================
+servergm                   33  18   546     -0.001      0.505   -228ns   133us
+

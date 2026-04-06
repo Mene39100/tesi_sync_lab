@@ -1,0 +1,8 @@
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
+14821.917,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[14821.917]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,high,run03,client
+14821.918,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[14821.918]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0010000000002037268,0,high,run03,client
+14824.792,new_foreign_master,1.0,,,0ef3b4.fffe.359730-2,ptp4l[14824.792]: port 1: new foreign master 0ef3b4.fffe.359730-2,2.875,3,high,run03,client
+14850.958,best_master,,,,865d50.fffe.7fbd62,ptp4l[14850.958]: selected best master clock 865d50.fffe.7fbd62,29.041000000001077,29,high,run03,client
+14850.958,ptp_timescale_mismatch,,,,,ptp4l[14850.958]: foreign master not using PTP timescale,29.041000000001077,29,high,run03,client
+14850.959,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[14850.959]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,29.04200000000128,29,high,run03,client
+14858.329,state,1.0,UNCALIBRATED,LISTENING,ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,ptp4l[14858.329]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,36.41200000000026,36,high,run03,client

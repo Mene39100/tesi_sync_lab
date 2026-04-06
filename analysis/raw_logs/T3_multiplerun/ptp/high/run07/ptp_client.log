@@ -1,0 +1,45 @@
+ptp4l[16040.274]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[16040.274]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[16044.579]: port 1: new foreign master 92ee9e.fffe.457ac3-2
+ptp4l[16047.067]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16054.363]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16060.439]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16067.447]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16073.958]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16081.206]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16087.626]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16092.698]: selected best master clock f63f7f.fffe.3909cf
+ptp4l[16092.698]: foreign master not using PTP timescale
+ptp4l[16092.698]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[16099.218]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[16099.218]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16107.068]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16114.057]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16117.839]: selected best master clock f63f7f.fffe.3909cf
+ptp4l[16117.839]: foreign master not using PTP timescale
+ptp4l[16117.840]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[16123.977]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[16123.978]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16131.834]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16138.025]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16145.105]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16151.537]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16159.024]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16166.176]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16173.614]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16181.611]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16188.009]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16195.866]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16203.220]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16210.137]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16217.177]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16223.366]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16230.682]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16237.246]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16243.853]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16251.021]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16258.240]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16264.473]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16271.487]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16277.692]: selected local clock ca9aab.fffe.2bc73e as best master
+ptp4l[16283.869]: selected local clock ca9aab.fffe.2bc73e as best master

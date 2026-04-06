@@ -1,0 +1,41 @@
+ptp4l[14524.962]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[14524.963]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[14529.554]: port 1: new foreign master eabbde.fffe.ba555f-2
+ptp4l[14531.045]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14537.624]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14544.069]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14551.947]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14558.241]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14564.526]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14571.394]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14577.974]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14585.934]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14593.680]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14601.490]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14608.294]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14615.421]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14622.082]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14629.801]: selected best master clock b22e5b.fffe.e90213
+ptp4l[14629.801]: foreign master not using PTP timescale
+ptp4l[14629.801]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[14637.115]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[14637.116]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14644.686]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14652.591]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14659.908]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14667.184]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14675.168]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14682.075]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14689.880]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14696.445]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14703.795]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14711.478]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14718.337]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14725.970]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14732.522]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14739.960]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14747.552]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14753.850]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14761.098]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14767.493]: selected local clock ae7b4c.fffe.525efe as best master
+ptp4l[14774.919]: selected local clock ae7b4c.fffe.525efe as best master

@@ -1,0 +1,45 @@
+ptp4l[17280.881]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[17280.881]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[17284.044]: port 1: new foreign master 3274c1.fffe.0e6c74-2
+ptp4l[17287.081]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17294.818]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17302.691]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17310.633]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17317.159]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17323.677]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17330.086]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17336.174]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17343.663]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17349.781]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17356.649]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17360.177]: selected best master clock d238e3.fffe.51f01a
+ptp4l[17360.178]: foreign master not using PTP timescale
+ptp4l[17360.178]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[17366.203]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[17366.204]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17373.339]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17380.610]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17386.097]: selected best master clock d238e3.fffe.51f01a
+ptp4l[17386.097]: foreign master not using PTP timescale
+ptp4l[17386.097]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[17393.626]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[17393.626]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17399.853]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17407.435]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17415.007]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17421.756]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17427.854]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17435.833]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17442.669]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17450.256]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17456.351]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17464.057]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17471.859]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17477.977]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17485.600]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17493.024]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17499.869]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17506.189]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17512.677]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17519.679]: selected local clock ea1314.fffe.0d696f as best master
+ptp4l[17527.135]: selected local clock ea1314.fffe.0d696f as best master

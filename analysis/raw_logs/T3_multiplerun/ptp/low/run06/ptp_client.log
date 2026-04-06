@@ -1,0 +1,123 @@
+ptp4l[6702.583]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[6702.583]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[6706.184]: port 1: new foreign master 6e4a38.fffe.a49403-2
+ptp4l[6708.878]: selected local clock 5e00c4.fffe.63ad3d as best master
+ptp4l[6710.179]: selected best master clock c2b817.fffe.e20dca
+ptp4l[6710.179]: foreign master not using PTP timescale
+ptp4l[6710.179]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[6712.190]: rms 2020201 max 2589365 freq -486904 +/-   0 delay 358904 +/-   0
+ptp4l[6714.196]: rms 1078269 max 1513747 freq -486904 +/-   0 delay 724217 +/-   0
+ptp4l[6716.202]: rms 276820 max 317092 freq -486904 +/-   0 delay 491614 +/- 15497
+ptp4l[6718.200]: rms 479117 max 573654 freq -486904 +/-   0 delay 477122 +/- 6394
+ptp4l[6720.209]: rms 230863 max 235531 freq -486904 +/-   0 delay 428114 +/- 18555
+ptp4l[6722.212]: rms 1352448 max 1763984 freq -486904 +/-   0 delay 382128 +/- 6571
+ptp4l[6724.212]: rms 409534 max 565317 freq -486904 +/-   0 delay 381980 +/- 9084
+ptp4l[6726.217]: rms 69053 max 94660 freq -486904 +/-   0 delay 394827 +/-   0
+ptp4l[6728.220]: rms 62603 max 67194 freq -655531 +/- 3393
+ptp4l[6728.221]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED
+ptp4l[6730.224]: rms 351395 max 393213 freq -647497 +/- 35006 delay 420372 +/-   0
+ptp4l[6732.224]: rms 603974 max 815021 freq -597644 +/- 27845 delay 420372 +/-   0
+ptp4l[6734.229]: rms 1319453 max 1854930 freq -546199 +/- 82503 delay 578036 +/- 73660
+ptp4l[6736.229]: rms 310687 max 433235 freq -674599 +/- 18218 delay 621757 +/- 37860
+ptp4l[6738.233]: rms 196147 max 277018 freq -664219 +/- 13268 delay 513352 +/- 34771
+ptp4l[6740.234]: rms 171463 max 189829 freq -651677 +/- 17130 delay 555918 +/- 18708
+ptp4l[6742.241]: rms 137937 max 169399 freq -653445 +/- 13391 delay 529467 +/-   0
+ptp4l[6744.243]: rms 93002 max 131188 freq -656042 +/- 7095 delay 491929 +/- 10171
+ptp4l[6746.246]: rms 31860 max 40997 freq -648901 +/- 3005 delay 496032 +/- 28567
+ptp4l[6748.248]: rms 234899 max 331424 freq -667888 +/- 15604 delay 496502 +/- 16964
+ptp4l[6750.250]: rms 125320 max 146957 freq -662824 +/- 2468 delay 478033 +/- 1065
+ptp4l[6752.254]: rms 98334 max 128205 freq -646869 +/- 9168 delay 418166 +/- 11928
+ptp4l[6754.258]: rms 290462 max 371658 freq -640675 +/- 27516 delay 406238 +/-   0
+ptp4l[6756.261]: rms 226617 max 318034 freq -636103 +/- 17899 delay 409774 +/-   0
+ptp4l[6758.264]: rms 225071 max 306710 freq -638702 +/- 19633 delay 409774 +/-   0
+ptp4l[6760.270]: rms 17388 max 24244 freq -648391 +/- 1019 delay 584718 +/- 65424
+ptp4l[6762.274]: rms 206505 max 292031 freq -664677 +/- 14617 delay 630980 +/-   0
+ptp4l[6764.276]: rms 643070 max 891694 freq -613643 +/- 53613 delay 663722 +/- 32742
+ptp4l[6766.282]: rms 195848 max 272249 freq -665724 +/- 11202 delay 668516 +/-   0
+ptp4l[6768.280]: rms 394677 max 536900 freq -630024 +/- 34550 delay 603032 +/-   0
+ptp4l[6770.287]: rms 132105 max 154185 freq -646782 +/- 13037 delay 570920 +/- 29794
+ptp4l[6772.290]: rms 80051 max 85705 freq -649824 +/- 8026 delay 544809 +/- 31099
+ptp4l[6774.291]: rms 309185 max 399259 freq -619915 +/- 10960 delay 739549 +/-   0
+ptp4l[6776.296]: rms 305776 max 333380 freq -679614 +/- 2760 delay 651470 +/- 21126
+ptp4l[6778.302]: rms 661494 max 934521 freq -599942 +/- 45060 delay 638001 +/- 33656
+ptp4l[6780.301]: rms 136120 max 186508 freq -660184 +/- 7035 delay 670201 +/-   0
+ptp4l[6782.305]: rms 191363 max 241604 freq -666988 +/- 6104 delay 641659 +/- 20182
+ptp4l[6784.306]: rms 125825 max 172653 freq -642302 +/- 10807 delay 553780 +/- 37338
+ptp4l[6786.309]: rms 247955 max 324015 freq -625507 +/- 9430 delay 476617 +/-   0
+ptp4l[6788.309]: rms 377442 max 405193 freq -610132 +/- 2712 delay 476617 +/-   0
+ptp4l[6790.313]: rms 691466 max 961999 freq -607962 +/- 57357 delay 501736 +/-   0
+ptp4l[6792.315]: rms 402547 max 569112 freq -618493 +/- 29168 delay 613851 +/-   0
+ptp4l[6794.321]: rms 91058 max 128182 freq -652094 +/- 7090 delay 683864 +/- 52086
+ptp4l[6796.327]: rms 442076 max 618536 freq -619770 +/- 35785 delay 735950 +/-   0
+ptp4l[6798.327]: rms 185852 max 243447 freq -663257 +/- 7169 delay 812869 +/-   0
+ptp4l[6800.336]: rms 129277 max 179164 freq -653372 +/- 10868 delay 804514 +/-   0
+ptp4l[6802.339]: rms 189974 max 263136 freq -657006 +/- 15895 delay 682113 +/- 23922
+ptp4l[6809.918]: port 1: SLAVE to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[6809.919]: selected local clock 5e00c4.fffe.63ad3d as best master
+ptp4l[6816.306]: selected local clock 5e00c4.fffe.63ad3d as best master
+ptp4l[6823.901]: selected local clock 5e00c4.fffe.63ad3d as best master
+ptp4l[6829.052]: selected best master clock c2b817.fffe.e20dca
+ptp4l[6829.053]: foreign master not using PTP timescale
+ptp4l[6829.053]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[6831.053]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED
+ptp4l[6832.054]: rms 199207 max 223731 freq -649297 +/- 19832 delay 635747 +/- 50619
+ptp4l[6834.060]: rms 440133 max 596890 freq -625058 +/- 38758 delay 677526 +/-   0
+ptp4l[6836.062]: rms 168725 max 193811 freq -663078 +/- 2661 delay 709607 +/- 89388
+ptp4l[6838.065]: rms 785272 max 1103655 freq -597061 +/- 61909 delay 571185 +/- 3067
+ptp4l[6840.068]: rms 1239884 max 1395480 freq -520731 +/- 16157 delay 574252 +/-   0
+ptp4l[6842.071]: rms 73072 max 96943 freq -649781 +/- 3106 delay 642194 +/- 16305
+ptp4l[6844.074]: rms 829347 max 1064345 freq -564313 +/- 29112 delay 625247 +/- 39499
+ptp4l[6846.076]: rms 483673 max 672607 freq -682222 +/- 27347 delay 828044 +/- 96608
+ptp4l[6848.082]: rms 428438 max 594345 freq -678693 +/- 23769 delay 922284 +/- 154869
+ptp4l[6850.085]: rms 64613 max 91339 freq -647623 +/- 4745 delay 682566 +/-   0
+ptp4l[6852.090]: rms 116686 max 161896 freq -653039 +/- 6578 delay 833676 +/-   0
+ptp4l[6854.104]: rms 409935 max 529085 freq -682379 +/- 14486 delay 833676 +/-   0
+ptp4l[6856.103]: rms 801796 max 1057511 freq -611658 +/- 73863 delay 736390 +/- 12448
+ptp4l[6858.105]: rms 849487 max 1193546 freq -576296 +/- 53436 delay 681698 +/-   0
+ptp4l[6860.108]: rms 912236 max 1274282 freq -587396 +/- 73884 delay 681698 +/-   0
+ptp4l[6862.112]: rms 635110 max 831544 freq -615879 +/- 58722 delay 798848 +/- 63542
+ptp4l[6864.116]: rms 474183 max 483731 freq -639434 +/- 47641 delay 872916 +/- 25082
+ptp4l[6866.119]: rms 405880 max 470077 freq -647570 +/- 40209 delay 867517 +/- 17305
+ptp4l[6868.123]: rms 1033781 max 1372629 freq -597121 +/- 94482 delay 884822 +/-   0
+ptp4l[6870.122]: rms 542055 max 731605 freq -614151 +/- 48140 delay 986782 +/-   0
+ptp4l[6872.124]: rms 336241 max 458227 freq -656060 +/- 29494 delay 906863 +/-   0
+ptp4l[6874.125]: rms 553311 max 743362 freq -689983 +/- 24827 delay 906863 +/-   0
+ptp4l[6876.125]: rms 227758 max 320909 freq -623102 +/- 14823 delay 877446 +/- 41602
+ptp4l[6878.125]: rms 221288 max 311041 freq -657837 +/- 13982 delay 818612 +/-   0
+ptp4l[6880.129]: rms 304206 max 327651 freq -671505 +/- 2303 delay 737066 +/- 5032
+ptp4l[6882.131]: rms 72457 max 102036 freq -647001 +/- 4626 delay 704906 +/-   0
+ptp4l[6884.132]: rms 861870 max 1111396 freq -559480 +/- 30298 delay 695872 +/- 9034
+ptp4l[6886.141]: rms 105561 max 110893 freq -650524 +/- 497 delay 716771 +/- 8669
+ptp4l[6888.137]: rms 96833 max 117026 freq -649569 +/- 2354 delay 667823 +/-   0
+ptp4l[6890.140]: rms 73979 max 80820 freq -639454 +/- 7396 delay 739404 +/- 25573
+ptp4l[6892.142]: rms 195581 max 236697 freq -635361 +/- 19062 delay 734098 +/- 4186
+ptp4l[6894.146]: rms 415099 max 544937 freq -623345 +/- 38271 delay 782122 +/- 37499
+ptp4l[6896.149]: rms 416471 max 564817 freq -677024 +/- 19809 delay 816279 +/-   0
+ptp4l[6898.146]: rms 404073 max 492580 freq -680167 +/- 10391 delay 800175 +/-   0
+ptp4l[6900.150]: rms 315088 max 375351 freq -634285 +/- 30895 delay 804041 +/- 3866
+ptp4l[6902.151]: rms 491162 max 624276 freq -688383 +/- 15833 delay 837168 +/-   0
+ptp4l[6904.154]: rms 542024 max 599665 freq -696789 +/- 5871 delay 776264 +/-   0
+ptp4l[6906.153]: rms 369437 max 518555 freq -672838 +/- 22707 delay 696004 +/- 61682
+ptp4l[6908.157]: rms 347530 max 448512 freq -610730 +/- 12276 delay 751802 +/-   0
+ptp4l[6910.156]: rms 223679 max 283300 freq -664659 +/- 7058 delay 569084 +/- 81208
+ptp4l[6912.157]: rms 567335 max 800886 freq -600250 +/- 37612 delay 463473 +/- 14636
+ptp4l[6914.161]: rms 90643 max 119279 freq -638967 +/- 8335 delay 524633 +/-   0
+ptp4l[6916.161]: rms 124372 max 175598 freq -651051 +/- 9291 delay 473822 +/-   0
+ptp4l[6918.163]: rms 58475 max 70879 freq -644235 +/- 5695 delay 506046 +/-   0
+ptp4l[6920.161]: rms 408976 max 524403 freq -603875 +/- 14284 delay 540779 +/-   0
+ptp4l[6922.164]: rms 256444 max 362118 freq -624762 +/- 19284 delay 568139 +/-   0
+ptp4l[6924.165]: rms 511722 max 719207 freq -609069 +/- 40019 delay 568139 +/-   0
+ptp4l[6926.166]: rms 96106 max 128476 freq -632301 +/- 4271 delay 540915 +/-   0
+ptp4l[6928.168]: rms 137311 max 193555 freq -631797 +/- 10468 delay 584288 +/- 35280
+ptp4l[6930.170]: rms 71561 max 73122 freq -640896 +/- 7189 delay 589000 +/- 44246
+ptp4l[6932.170]: rms 127176 max 135107 freq -639808 +/- 12751 delay 530940 +/-   0
+ptp4l[6934.173]: rms 575287 max 637335 freq -582646 +/- 6330 delay 567852 +/- 59071
+ptp4l[6936.170]: rms 965265 max 1311838 freq -591707 +/- 84659 delay 707904 +/- 39368
+ptp4l[6938.172]: rms 269644 max 374808 freq -616099 +/- 15415 delay 651956 +/- 7965
+ptp4l[6940.175]: rms 143987 max 203125 freq -649152 +/- 9542 delay 747273 +/-   0
+ptp4l[6942.174]: rms 317758 max 420116 freq -667863 +/- 12951 delay 747273 +/-   0
+ptp4l[6944.178]: rms 755198 max 1068003 freq -585232 +/- 54135 delay 709129 +/- 30886
+ptp4l[6946.178]: rms 191161 max 208516 freq -657221 +/- 1737 delay 623058 +/-   0
+ptp4l[6948.178]: rms 180238 max 254857 freq -625503 +/- 12966 delay 623058 +/-   0
+ptp4l[6950.180]: rms 474821 max 665304 freq -599502 +/- 28670 delay 671626 +/-   0
+ptp4l[6952.180]: rms 205936 max 290709 freq -651212 +/- 15421 delay 660870 +/- 11312

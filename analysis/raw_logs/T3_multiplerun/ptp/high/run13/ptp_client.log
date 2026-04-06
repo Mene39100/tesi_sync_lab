@@ -1,0 +1,41 @@
+ptp4l[17874.443]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[17874.443]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[17877.169]: port 1: new foreign master 065f2f.fffe.7750f0-2
+ptp4l[17880.694]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17888.432]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17894.683]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17902.486]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17908.605]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17916.489]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17924.079]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17931.557]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17938.310]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17944.861]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17952.163]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17960.107]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17967.361]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17974.317]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17981.469]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17987.697]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[17994.913]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18002.554]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18010.230]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18017.922]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18025.595]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18031.755]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18038.734]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18045.693]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18052.591]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18059.299]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18066.357]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18073.277]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18079.718]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18087.024]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18093.565]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18096.617]: selected best master clock ba8fd9.fffe.84af97
+ptp4l[18096.618]: foreign master not using PTP timescale
+ptp4l[18096.618]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[18103.662]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[18103.662]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18111.029]: selected local clock 8a6fd5.fffe.fe7bad as best master
+ptp4l[18118.736]: selected local clock 8a6fd5.fffe.fe7bad as best master

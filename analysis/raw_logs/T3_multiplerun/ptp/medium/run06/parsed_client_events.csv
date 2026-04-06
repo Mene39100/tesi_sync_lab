@@ -1,0 +1,8 @@
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
+11248.071,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[11248.071]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,medium,run06,client
+11248.071,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[11248.071]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,medium,run06,client
+11251.615,new_foreign_master,1.0,,,56e550.fffe.195759-2,ptp4l[11251.615]: port 1: new foreign master 56e550.fffe.195759-2,3.543999999999869,4,medium,run06,client
+11255.646,best_master,,,,228e09.fffe.0a2aed,ptp4l[11255.646]: selected best master clock 228e09.fffe.0a2aed,7.575000000000728,8,medium,run06,client
+11255.646,ptp_timescale_mismatch,,,,,ptp4l[11255.646]: foreign master not using PTP timescale,7.575000000000728,8,medium,run06,client
+11255.646,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[11255.646]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,7.575000000000728,8,medium,run06,client
+11274.635,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[11274.635]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,26.564000000000306,27,medium,run06,client

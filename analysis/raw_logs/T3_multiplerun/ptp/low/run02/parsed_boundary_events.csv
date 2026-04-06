@@ -1,0 +1,13 @@
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
+5508.822,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[5508.822]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,low,run02,boundary
+5508.822,state,2.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[5508.822]: port 2: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,low,run02,boundary
+5508.822,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[5508.822]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,low,run02,boundary
+5511.992,new_foreign_master,1.0,,,1a7d0a.fffe.178750-1,ptp4l[5511.992]: port 1: new foreign master 1a7d0a.fffe.178750-1,3.1700000000000728,3,low,run02,boundary
+5514.963,state,1.0,LISTENING,MASTER,ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,ptp4l[5514.963]: port 1: LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,6.140999999999622,6,low,run02,boundary
+5515.994,best_master,,,,1a7d0a.fffe.178750,ptp4l[5515.994]: selected best master clock 1a7d0a.fffe.178750,7.171999999999571,7,low,run02,boundary
+5515.995,ptp_timescale_mismatch,,,,,ptp4l[5515.995]: foreign master not using PTP timescale,7.1729999999997744,7,low,run02,boundary
+5515.995,state,1.0,MASTER,UNCALIBRATED,RS_SLAVE,ptp4l[5515.995]: port 1: MASTER to UNCALIBRATED on RS_SLAVE,7.1729999999997744,7,low,run02,boundary
+5516.704,state,2.0,LISTENING,MASTER,ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,ptp4l[5516.704]: port 2: LISTENING to MASTER on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,7.881999999999607,8,low,run02,boundary
+5516.704,best_master,,,,1a7d0a.fffe.178750,ptp4l[5516.704]: selected best master clock 1a7d0a.fffe.178750,7.881999999999607,8,low,run02,boundary
+5516.704,ptp_timescale_mismatch,,,,,ptp4l[5516.704]: foreign master not using PTP timescale,7.881999999999607,8,low,run02,boundary
+5535.008,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[5535.008]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,26.185999999999694,26,low,run02,boundary

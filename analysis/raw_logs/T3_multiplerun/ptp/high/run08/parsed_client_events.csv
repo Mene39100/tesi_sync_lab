@@ -1,0 +1,4 @@
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
+16367.202,state,1,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[16367.202]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,high,run08,client
+16367.202,state,0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[16367.202]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,high,run08,client
+16370.642,new_foreign_master,1,,,faa356.fffe.e0c866-2,ptp4l[16370.642]: port 1: new foreign master faa356.fffe.e0c866-2,3.4400000000005093,3,high,run08,client

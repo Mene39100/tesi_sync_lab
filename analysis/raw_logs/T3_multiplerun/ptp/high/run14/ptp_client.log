@@ -1,0 +1,46 @@
+ptp4l[18171.386]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[18171.386]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE
+ptp4l[18174.200]: port 1: new foreign master be4ae2.fffe.25a8b3-2
+ptp4l[18178.268]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18185.211]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18191.280]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18198.429]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18200.981]: selected best master clock 2232d9.fffe.d23fa0
+ptp4l[18200.981]: foreign master not using PTP timescale
+ptp4l[18200.981]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[18207.098]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[18207.098]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18213.254]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18220.617]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18228.498]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18235.216]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18242.338]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18248.826]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18255.472]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18262.588]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18269.930]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18276.463]: selected best master clock 2232d9.fffe.d23fa0
+ptp4l[18276.463]: foreign master not using PTP timescale
+ptp4l[18276.463]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE
+ptp4l[18282.497]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES
+ptp4l[18282.497]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18289.450]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18295.864]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18302.115]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18309.490]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18316.827]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18323.613]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18329.819]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18336.419]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18343.406]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18349.928]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18357.282]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18363.708]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18369.806]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18377.312]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18385.099]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18393.076]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18399.298]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18406.206]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18412.665]: selected local clock eeb370.fffe.5b6735 as best master
+ptp4l[18419.530]: selected local clock eeb370.fffe.5b6735 as best master
