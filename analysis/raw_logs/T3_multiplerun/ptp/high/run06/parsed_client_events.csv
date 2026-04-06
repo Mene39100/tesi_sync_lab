@@ -1,8 +1,8 @@
-t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
-15743.019,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[15743.019]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,high,run06,client
-15743.019,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[15743.019]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,high,run06,client
-15746.519,new_foreign_master,1.0,,,12772f.fffe.d88983-2,ptp4l[15746.519]: port 1: new foreign master 12772f.fffe.d88983-2,3.5,4,high,run06,client
-15773.885,best_master,,,,bafdcf.fffe.cf0d4b,ptp4l[15773.885]: selected best master clock bafdcf.fffe.cf0d4b,30.865999999999985,31,high,run06,client
-15773.885,ptp_timescale_mismatch,,,,,ptp4l[15773.885]: foreign master not using PTP timescale,30.865999999999985,31,high,run06,client
-15773.885,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[15773.885]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,30.865999999999985,31,high,run06,client
-15781.194,state,1.0,UNCALIBRATED,LISTENING,ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,ptp4l[15781.194]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,38.17499999999927,38,high,run06,client
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,sample_idx,scenario,run_id,role
+15743.019,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[15743.019]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,0,high,run06,client
+15743.019,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[15743.019]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,1,high,run06,client
+15746.519,new_foreign_master,1.0,,,12772f.fffe.d88983-2,ptp4l[15746.519]: port 1: new foreign master 12772f.fffe.d88983-2,3.5,4,2,high,run06,client
+15773.885,best_master,,,,bafdcf.fffe.cf0d4b,ptp4l[15773.885]: selected best master clock bafdcf.fffe.cf0d4b,30.865999999999985,31,3,high,run06,client
+15773.885,ptp_timescale_mismatch,,,,,ptp4l[15773.885]: foreign master not using PTP timescale,30.865999999999985,31,4,high,run06,client
+15773.885,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[15773.885]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,30.865999999999985,31,5,high,run06,client
+15781.194,state,1.0,UNCALIBRATED,LISTENING,ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,ptp4l[15781.194]: port 1: UNCALIBRATED to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,38.17499999999927,38,6,high,run06,client

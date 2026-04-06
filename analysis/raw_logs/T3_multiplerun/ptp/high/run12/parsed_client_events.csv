@@ -1,4 +1,4 @@
-t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
-17577.398,state,1,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[17577.398]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,high,run12,client
-17577.398,state,0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[17577.398]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,high,run12,client
-17580.416,new_foreign_master,1,,,961bf6.fffe.f32f78-2,ptp4l[17580.416]: port 1: new foreign master 961bf6.fffe.f32f78-2,3.018000000000029,3,high,run12,client
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,sample_idx,scenario,run_id,role
+17577.398,state,1,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[17577.398]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,0,high,run12,client
+17577.398,state,0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[17577.398]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,1,high,run12,client
+17580.416,new_foreign_master,1,,,961bf6.fffe.f32f78-2,ptp4l[17580.416]: port 1: new foreign master 961bf6.fffe.f32f78-2,3.018000000000029,3,2,high,run12,client

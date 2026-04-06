@@ -1,8 +1,8 @@
-t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
-8194.032,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[8194.032]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,low,run11,client
-8194.032,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[8194.032]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,low,run11,client
-8198.414,new_foreign_master,1.0,,,8a77f5.fffe.b90b13-2,ptp4l[8198.414]: port 1: new foreign master 8a77f5.fffe.b90b13-2,4.382000000001426,4,low,run11,client
-8202.415,best_master,,,,6625ab.fffe.601193,ptp4l[8202.415]: selected best master clock 6625ab.fffe.601193,8.38300000000163,8,low,run11,client
-8202.416,ptp_timescale_mismatch,,,,,ptp4l[8202.416]: foreign master not using PTP timescale,8.384000000000015,8,low,run11,client
-8202.416,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[8202.416]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,8.384000000000015,8,low,run11,client
-8221.435,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[8221.435]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,27.403000000000247,27,low,run11,client
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,sample_idx,scenario,run_id,role
+8194.032,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[8194.032]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,0,low,run11,client
+8194.032,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[8194.032]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,1,low,run11,client
+8198.414,new_foreign_master,1.0,,,8a77f5.fffe.b90b13-2,ptp4l[8198.414]: port 1: new foreign master 8a77f5.fffe.b90b13-2,4.382000000001426,4,2,low,run11,client
+8202.415,best_master,,,,6625ab.fffe.601193,ptp4l[8202.415]: selected best master clock 6625ab.fffe.601193,8.38300000000163,8,3,low,run11,client
+8202.416,ptp_timescale_mismatch,,,,,ptp4l[8202.416]: foreign master not using PTP timescale,8.384000000000015,8,4,low,run11,client
+8202.416,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[8202.416]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,8.384000000000015,8,5,low,run11,client
+8221.435,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[8221.435]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,27.403000000000247,27,6,low,run11,client

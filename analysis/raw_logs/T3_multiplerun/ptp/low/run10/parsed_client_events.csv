@@ -1,8 +1,8 @@
-t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
-7897.037,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[7897.037]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,low,run10,client
-7897.038,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[7897.038]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0009999999992942321,0,low,run10,client
-7900.91,new_foreign_master,1.0,,,ce8a86.fffe.bc0acd-2,ptp4l[7900.910]: port 1: new foreign master ce8a86.fffe.bc0acd-2,3.8729999999995925,4,low,run10,client
-7904.913,best_master,,,,f2936b.fffe.7440c4,ptp4l[7904.913]: selected best master clock f2936b.fffe.7440c4,7.875999999999294,8,low,run10,client
-7904.913,ptp_timescale_mismatch,,,,,ptp4l[7904.913]: foreign master not using PTP timescale,7.875999999999294,8,low,run10,client
-7904.913,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[7904.913]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,7.875999999999294,8,low,run10,client
-7923.937,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[7923.937]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,26.899999999999636,27,low,run10,client
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,sample_idx,scenario,run_id,role
+7897.037,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[7897.037]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,0,low,run10,client
+7897.038,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[7897.038]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0009999999992942321,0,1,low,run10,client
+7900.91,new_foreign_master,1.0,,,ce8a86.fffe.bc0acd-2,ptp4l[7900.910]: port 1: new foreign master ce8a86.fffe.bc0acd-2,3.8729999999995925,4,2,low,run10,client
+7904.913,best_master,,,,f2936b.fffe.7440c4,ptp4l[7904.913]: selected best master clock f2936b.fffe.7440c4,7.875999999999294,8,3,low,run10,client
+7904.913,ptp_timescale_mismatch,,,,,ptp4l[7904.913]: foreign master not using PTP timescale,7.875999999999294,8,4,low,run10,client
+7904.913,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[7904.913]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,7.875999999999294,8,5,low,run10,client
+7923.937,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[7923.937]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,26.899999999999636,27,6,low,run10,client

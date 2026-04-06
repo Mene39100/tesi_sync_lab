@@ -1,13 +1,13 @@
-t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
-5809.755,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[5809.755]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,low,run03,client
-5809.755,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[5809.755]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,low,run03,client
-5813.878,new_foreign_master,1.0,,,860687.fffe.7cc155-2,ptp4l[5813.878]: port 1: new foreign master 860687.fffe.7cc155-2,4.1229999999995925,4,low,run03,client
-5817.888,best_master,,,,a6176b.fffe.a1d06d,ptp4l[5817.888]: selected best master clock a6176b.fffe.a1d06d,8.13299999999981,8,low,run03,client
-5817.888,ptp_timescale_mismatch,,,,,ptp4l[5817.888]: foreign master not using PTP timescale,8.13299999999981,8,low,run03,client
-5817.888,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[5817.888]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,8.13299999999981,8,low,run03,client
-5836.901,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[5836.901]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,27.14599999999973,27,low,run03,client
-5925.263,state,1.0,SLAVE,LISTENING,ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,ptp4l[5925.263]: port 1: SLAVE to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,115.50799999999981,116,low,run03,client
-5943.112,best_master,,,,a6176b.fffe.a1d06d,ptp4l[5943.112]: selected best master clock a6176b.fffe.a1d06d,133.35699999999997,133,low,run03,client
-5943.112,ptp_timescale_mismatch,,,,,ptp4l[5943.112]: foreign master not using PTP timescale,133.35699999999997,133,low,run03,client
-5943.112,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[5943.112]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,133.35699999999997,133,low,run03,client
-5946.122,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[5946.122]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,136.3670000000002,136,low,run03,client
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,sample_idx,scenario,run_id,role
+5809.755,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[5809.755]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,0,low,run03,client
+5809.755,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[5809.755]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,1,low,run03,client
+5813.878,new_foreign_master,1.0,,,860687.fffe.7cc155-2,ptp4l[5813.878]: port 1: new foreign master 860687.fffe.7cc155-2,4.1229999999995925,4,2,low,run03,client
+5817.888,best_master,,,,a6176b.fffe.a1d06d,ptp4l[5817.888]: selected best master clock a6176b.fffe.a1d06d,8.13299999999981,8,3,low,run03,client
+5817.888,ptp_timescale_mismatch,,,,,ptp4l[5817.888]: foreign master not using PTP timescale,8.13299999999981,8,4,low,run03,client
+5817.888,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[5817.888]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,8.13299999999981,8,5,low,run03,client
+5836.901,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[5836.901]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,27.14599999999973,27,6,low,run03,client
+5925.263,state,1.0,SLAVE,LISTENING,ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,ptp4l[5925.263]: port 1: SLAVE to LISTENING on ANNOUNCE_RECEIPT_TIMEOUT_EXPIRES,115.50799999999981,116,7,low,run03,client
+5943.112,best_master,,,,a6176b.fffe.a1d06d,ptp4l[5943.112]: selected best master clock a6176b.fffe.a1d06d,133.35699999999997,133,8,low,run03,client
+5943.112,ptp_timescale_mismatch,,,,,ptp4l[5943.112]: foreign master not using PTP timescale,133.35699999999997,133,9,low,run03,client
+5943.112,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[5943.112]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,133.35699999999997,133,10,low,run03,client
+5946.122,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[5946.122]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,136.3670000000002,136,11,low,run03,client

@@ -1,8 +1,8 @@
-t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
-6106.886,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[6106.886]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,low,run04,client
-6106.886,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[6106.886]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,low,run04,client
-6109.956,new_foreign_master,1.0,,,ee4a4f.fffe.3f8dfb-2,ptp4l[6109.956]: port 1: new foreign master ee4a4f.fffe.3f8dfb-2,3.069999999999709,3,low,run04,client
-6113.959,best_master,,,,daadba.fffe.4c4b6f,ptp4l[6113.959]: selected best master clock daadba.fffe.4c4b6f,7.072999999999411,7,low,run04,client
-6113.96,ptp_timescale_mismatch,,,,,ptp4l[6113.960]: foreign master not using PTP timescale,7.073999999999614,7,low,run04,client
-6113.96,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[6113.960]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,7.073999999999614,7,low,run04,client
-6131.98,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[6131.980]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,25.09399999999914,25,low,run04,client
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,sample_idx,scenario,run_id,role
+6106.886,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[6106.886]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,0,low,run04,client
+6106.886,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[6106.886]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,1,low,run04,client
+6109.956,new_foreign_master,1.0,,,ee4a4f.fffe.3f8dfb-2,ptp4l[6109.956]: port 1: new foreign master ee4a4f.fffe.3f8dfb-2,3.069999999999709,3,2,low,run04,client
+6113.959,best_master,,,,daadba.fffe.4c4b6f,ptp4l[6113.959]: selected best master clock daadba.fffe.4c4b6f,7.072999999999411,7,3,low,run04,client
+6113.96,ptp_timescale_mismatch,,,,,ptp4l[6113.960]: foreign master not using PTP timescale,7.073999999999614,7,4,low,run04,client
+6113.96,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[6113.960]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,7.073999999999614,7,5,low,run04,client
+6131.98,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[6131.980]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,25.09399999999914,25,6,low,run04,client

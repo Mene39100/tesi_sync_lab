@@ -1,8 +1,8 @@
-t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,scenario,run_id,role
-13923.7,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[13923.700]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,medium,run15,client
-13923.7,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[13923.700]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,medium,run15,client
-13926.467,new_foreign_master,1.0,,,be9060.fffe.3d2c15-2,ptp4l[13926.467]: port 1: new foreign master be9060.fffe.3d2c15-2,2.7669999999998254,3,medium,run15,client
-13930.486,best_master,,,,ae97c9.fffe.4d569a,ptp4l[13930.486]: selected best master clock ae97c9.fffe.4d569a,6.786000000000058,7,medium,run15,client
-13930.486,ptp_timescale_mismatch,,,,,ptp4l[13930.486]: foreign master not using PTP timescale,6.786000000000058,7,medium,run15,client
-13930.486,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[13930.486]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,6.786000000000058,7,medium,run15,client
-13949.529,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[13949.529]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,25.828999999999724,26,medium,run15,client
+t,type,port,from,to,reason,raw,t_rel_s,t_bin_s,sample_idx,scenario,run_id,role
+13923.7,state,1.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[13923.700]: port 1: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,0,medium,run15,client
+13923.7,state,0.0,INITIALIZING,LISTENING,INIT_COMPLETE,ptp4l[13923.700]: port 0: INITIALIZING to LISTENING on INIT_COMPLETE,0.0,0,1,medium,run15,client
+13926.467,new_foreign_master,1.0,,,be9060.fffe.3d2c15-2,ptp4l[13926.467]: port 1: new foreign master be9060.fffe.3d2c15-2,2.7669999999998254,3,2,medium,run15,client
+13930.486,best_master,,,,ae97c9.fffe.4d569a,ptp4l[13930.486]: selected best master clock ae97c9.fffe.4d569a,6.786000000000058,7,3,medium,run15,client
+13930.486,ptp_timescale_mismatch,,,,,ptp4l[13930.486]: foreign master not using PTP timescale,6.786000000000058,7,4,medium,run15,client
+13930.486,state,1.0,LISTENING,UNCALIBRATED,RS_SLAVE,ptp4l[13930.486]: port 1: LISTENING to UNCALIBRATED on RS_SLAVE,6.786000000000058,7,5,medium,run15,client
+13949.529,state,1.0,UNCALIBRATED,SLAVE,MASTER_CLOCK_SELECTED,ptp4l[13949.529]: port 1: UNCALIBRATED to SLAVE on MASTER_CLOCK_SELECTED,25.828999999999724,26,6,medium,run15,client

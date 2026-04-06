@@ -1,39 +1,8 @@
 #!/usr/bin/env python3
-"""
-Chrony multi-run parser + aggregation + plotting.
-
-Struttura attesa:
-root/
-  low/
-    run01/
-      chrony_tracking_series.txt
-      chrony_sourcestats_series.txt
-    run02/
-      ...
-  medium/
-    ...
-  high/
-    ...
-
-Output:
-- per ogni run, nella stessa cartella:
-    parsed_tracking.csv
-    parsed_sourcestats.csv
-
-- aggregati sotto:
-    root/_aggregated/
-      tracking/
-      sourcestats/
-
-Per ogni metrica aggregata vengono prodotti:
-- mean + 95% CI
-- mean + IQR + p10/p90
-"""
 
 from __future__ import annotations
 
 import argparse
-import csv
 import math
 import re
 from dataclasses import dataclass
@@ -217,16 +186,6 @@ def parse_sourcestats_series(path: Path) -> SourceStatsSeries:
     return SourceStatsSeries(times, sources, offsets, stddevs)
 
 
-def _normalize_time(df: pd.DataFrame, t_col: str = "t_s") -> pd.DataFrame:
-    if df.empty:
-        return df
-    out = df.copy()
-    t0 = float(out[t_col].min())
-    out["t_rel_s"] = out[t_col] - t0
-    out["t_bin_s"] = out["t_rel_s"].round().astype(int)
-    return out
-
-
 def build_tracking_df(ts: TrackingSeries, scenario: str, run_id: str) -> pd.DataFrame:
     if not ts.t:
         return pd.DataFrame()
@@ -235,6 +194,7 @@ def build_tracking_df(ts: TrackingSeries, scenario: str, run_id: str) -> pd.Data
     rows = []
     for i in range(len(ts.t)):
         rows.append({
+            "sample_idx": i,
             "iso_ts": ts.t[i].isoformat(),
             "t_s": ts.t[i].timestamp(),
             "t_rel_s": rel[i],
@@ -257,6 +217,7 @@ def build_sourcestats_df(ss: SourceStatsSeries, scenario: str, run_id: str) -> p
     rows = []
     for i in range(len(ss.t)):
         rows.append({
+            "sample_idx": i,
             "iso_ts": ss.t[i].isoformat(),
             "t_s": ss.t[i].timestamp(),
             "t_rel_s": rel[i],
@@ -289,12 +250,21 @@ def _t_critical_95(n: int) -> float:
     return 1.96
 
 
-def aggregate_metric(df_all: pd.DataFrame, scenario: str, metric: str) -> pd.DataFrame:
+def aggregate_metric(df_all: pd.DataFrame, scenario: str, metric: str, source: Optional[str] = None) -> pd.DataFrame:
     if df_all.empty or metric not in df_all.columns:
         return pd.DataFrame()
 
-    df = df_all[df_all["scenario"] == scenario][["t_bin_s", metric, "run_id"]].copy()
+    df = df_all[df_all["scenario"] == scenario].copy()
+
+    if source is not None and "source" in df.columns:
+        df = df[df["source"] == source].copy()
+
+    if df.empty:
+        return pd.DataFrame()
+
+    df = df[["sample_idx", metric, "run_id"]].copy()
     df = df.dropna(subset=[metric])
+
     if df.empty:
         return pd.DataFrame()
 
@@ -325,7 +295,7 @@ def aggregate_metric(df_all: pd.DataFrame, scenario: str, metric: str) -> pd.Dat
             "max": vals.max(),
         })
 
-    out = df.groupby("t_bin_s", as_index=False).apply(agg_fn)
+    out = df.groupby("sample_idx", as_index=False).apply(agg_fn)
     if isinstance(out.index, pd.MultiIndex):
         out = out.reset_index()
     if "level_0" in out.columns:
@@ -375,9 +345,9 @@ def plot_mean_ci(
     if df.empty:
         return
     plt.figure()
-    plt.plot(df["t_bin_s"], df["mean"], label="mean")
-    plt.fill_between(df["t_bin_s"], df["ci95_low"], df["ci95_high"], alpha=0.25, label="95% CI")
-    plt.xlabel("time (s, relative, binned)")
+    plt.plot(df["sample_idx"], df["mean"], label="mean")
+    plt.fill_between(df["sample_idx"], df["ci95_low"], df["ci95_high"], alpha=0.25, label="95% CI")
+    plt.xlabel("sample index")
     plt.ylabel(ylabel)
     plt.title(title)
     if ylim is not None:
@@ -398,10 +368,10 @@ def plot_mean_iqr_p10p90(
     if df.empty:
         return
     plt.figure()
-    plt.plot(df["t_bin_s"], df["mean"], label="mean")
-    plt.fill_between(df["t_bin_s"], df["q10"], df["q90"], alpha=0.15, label="p10-p90")
-    plt.fill_between(df["t_bin_s"], df["q25"], df["q75"], alpha=0.30, label="IQR")
-    plt.xlabel("time (s, relative, binned)")
+    plt.plot(df["sample_idx"], df["mean"], label="mean")
+    plt.fill_between(df["sample_idx"], df["q10"], df["q90"], alpha=0.15, label="p10-p90")
+    plt.fill_between(df["sample_idx"], df["q25"], df["q75"], alpha=0.30, label="IQR")
+    plt.xlabel("sample index")
     plt.ylabel(ylabel)
     plt.title(title)
     if ylim is not None:
@@ -469,7 +439,6 @@ def main() -> None:
     tracking_summaries: List[pd.DataFrame] = []
     sourcestats_summaries: List[pd.DataFrame] = []
 
-    # parse per-run
     for scenario in scenarios:
         scenario_dir = root / scenario
         if not scenario_dir.exists():
@@ -538,18 +507,29 @@ def main() -> None:
         "last_offset_us": ("last offset (us)", True),
     }
 
+    # per sourcestats conviene aggregare per metrica e per source
     sourcestats_metrics = {
         "offset_us": ("source offset (us)", True),
         "stddev_us": ("std dev (us)", False),
     }
 
     tracking_tables: Dict[Tuple[str, str], pd.DataFrame] = {}
-    sourcestats_tables: Dict[Tuple[str, str], pd.DataFrame] = {}
+    sourcestats_tables: Dict[Tuple[str, str, str], pd.DataFrame] = {}
 
     tracking_ci_tables = {m: [] for m in tracking_metrics}
     tracking_iqr_tables = {m: [] for m in tracking_metrics}
-    sourcestats_ci_tables = {m: [] for m in sourcestats_metrics}
-    sourcestats_iqr_tables = {m: [] for m in sourcestats_metrics}
+
+    sourcestats_ci_tables: Dict[Tuple[str, str], List[pd.DataFrame]] = {}
+    sourcestats_iqr_tables: Dict[Tuple[str, str], List[pd.DataFrame]] = {}
+
+    available_sources = []
+    if not sourcestats_all.empty and "source" in sourcestats_all.columns:
+        available_sources = sorted(sourcestats_all["source"].dropna().unique().tolist())
+
+    for metric in sourcestats_metrics:
+        for source in available_sources:
+            sourcestats_ci_tables[(metric, source)] = []
+            sourcestats_iqr_tables[(metric, source)] = []
 
     for scenario in scenarios:
         for metric in tracking_metrics:
@@ -560,11 +540,12 @@ def main() -> None:
                 tracking_iqr_tables[metric].append(df)
 
         for metric in sourcestats_metrics:
-            df = aggregate_metric(sourcestats_all, scenario=scenario, metric=metric)
-            sourcestats_tables[(scenario, metric)] = df
-            if not df.empty:
-                sourcestats_ci_tables[metric].append(df)
-                sourcestats_iqr_tables[metric].append(df)
+            for source in available_sources:
+                df = aggregate_metric(sourcestats_all, scenario=scenario, metric=metric, source=source)
+                sourcestats_tables[(scenario, metric, source)] = df
+                if not df.empty:
+                    sourcestats_ci_tables[(metric, source)].append(df)
+                    sourcestats_iqr_tables[(metric, source)].append(df)
 
     tracking_ylims_ci = {
         metric: _compute_global_ylim(tbls, "ci95_low", "ci95_high", symmetric=sym)
@@ -578,14 +559,16 @@ def main() -> None:
     }
 
     sourcestats_ylims_ci = {
-        metric: _compute_global_ylim(tbls, "ci95_low", "ci95_high", symmetric=sym)
+        (metric, source): _compute_global_ylim(tbls, "ci95_low", "ci95_high", symmetric=sym)
         for metric, (_, sym) in sourcestats_metrics.items()
-        for tbls in [sourcestats_ci_tables[metric]]
+        for source in available_sources
+        for tbls in [sourcestats_ci_tables[(metric, source)]]
     }
     sourcestats_ylims_iqr = {
-        metric: _compute_global_ylim(tbls, "q10", "q90", symmetric=sym)
+        (metric, source): _compute_global_ylim(tbls, "q10", "q90", symmetric=sym)
         for metric, (_, sym) in sourcestats_metrics.items()
-        for tbls in [sourcestats_iqr_tables[metric]]
+        for source in available_sources
+        for tbls in [sourcestats_iqr_tables[(metric, source)]]
     }
 
     for scenario in scenarios:
@@ -618,27 +601,32 @@ def main() -> None:
             )
 
         for metric, (ylabel, _) in sourcestats_metrics.items():
-            df = sourcestats_tables.get((scenario, metric), pd.DataFrame())
-            if df.empty:
-                continue
+            for source in available_sources:
+                df = sourcestats_tables.get((scenario, metric, source), pd.DataFrame())
+                if df.empty:
+                    continue
 
-            df.to_csv(scenario_sourcestats_dir / f"{metric}_aggregated.csv", index=False)
+                safe_source = re.sub(r"[^A-Za-z0-9_.-]+", "_", str(source))
+                source_dir = scenario_sourcestats_dir / safe_source
+                source_dir.mkdir(parents=True, exist_ok=True)
 
-            plot_mean_ci(
-                df=df,
-                title=f"sourcestats - {scenario} - {metric} - mean + 95% CI",
-                ylabel=ylabel,
-                outpath=scenario_sourcestats_dir / f"{metric}_mean_ci95.png",
-                ylim=sourcestats_ylims_ci[metric],
-            )
+                df.to_csv(source_dir / f"{metric}_aggregated.csv", index=False)
 
-            plot_mean_iqr_p10p90(
-                df=df,
-                title=f"sourcestats - {scenario} - {metric} - mean + IQR + p10/p90",
-                ylabel=ylabel,
-                outpath=scenario_sourcestats_dir / f"{metric}_mean_iqr_p10_p90.png",
-                ylim=sourcestats_ylims_iqr[metric],
-            )
+                plot_mean_ci(
+                    df=df,
+                    title=f"sourcestats - {scenario} - {safe_source} - {metric} - mean + 95% CI",
+                    ylabel=ylabel,
+                    outpath=source_dir / f"{metric}_mean_ci95.png",
+                    ylim=sourcestats_ylims_ci[(metric, source)],
+                )
+
+                plot_mean_iqr_p10p90(
+                    df=df,
+                    title=f"sourcestats - {scenario} - {safe_source} - {metric} - mean + IQR + p10/p90",
+                    ylabel=ylabel,
+                    outpath=source_dir / f"{metric}_mean_iqr_p10_p90.png",
+                    ylim=sourcestats_ylims_iqr[(metric, source)],
+                )
 
     print(f"[OK] Parsing per-run completato e aggregazione salvata in: {agg_root}")
 

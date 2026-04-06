@@ -68,6 +68,11 @@ def _normalize_time(df: pd.DataFrame, t_col: str = "t_s") -> pd.DataFrame:
     t0 = float(out[t_col].min())
     out["t_rel_s"] = out[t_col] - t0
     out["t_bin_s"] = out["t_rel_s"].round().astype(int)
+
+    # allineamento per indice del campione
+    out = out.reset_index(drop=True)
+    out["sample_idx"] = out.index.astype(int)
+
     return out
 
 
@@ -134,7 +139,6 @@ def parse_ntpq_snapshots(path: Path, role: str, scenario: str, run_id: str) -> P
     current_hhmmss: Optional[str] = None
     snapshot_peers: List[Dict] = []
 
-    # per gestire il rollover di mezzanotte
     day_offset = 0
     last_clock_s: Optional[int] = None
 
@@ -204,7 +208,6 @@ def parse_ntpq_snapshots(path: Path, role: str, scenario: str, run_id: str) -> P
 
             clock_s = _hhmmss_to_seconds(h, m, s)
 
-            # rollover di mezzanotte
             if last_clock_s is not None and clock_s < last_clock_s:
                 day_offset += 86400
 
@@ -354,7 +357,7 @@ def aggregate_metric(runs: List[ParsedRun], role: str, scenario: str, metric: st
         if metric not in run.samples.columns:
             continue
 
-        df = run.samples[["t_bin_s", metric, "run_id"]].copy()
+        df = run.samples[["sample_idx", metric, "run_id"]].copy()
         df = df.dropna(subset=[metric])
         pieces.append(df)
 
@@ -390,7 +393,7 @@ def aggregate_metric(runs: List[ParsedRun], role: str, scenario: str, metric: st
             "max": vals.max(),
         })
 
-    out = long_df.groupby("t_bin_s", as_index=False).apply(agg_fn)
+    out = long_df.groupby("sample_idx", as_index=False).apply(agg_fn)
     if isinstance(out.index, pd.MultiIndex):
         out = out.reset_index()
     if "level_0" in out.columns:
@@ -415,9 +418,9 @@ def plot_mean_ci(
         return
 
     plt.figure()
-    plt.plot(df["t_bin_s"], df["mean"], label="mean")
-    plt.fill_between(df["t_bin_s"], df["ci95_low"], df["ci95_high"], alpha=0.25, label="95% CI")
-    plt.xlabel("time (s, relative, binned)")
+    plt.plot(df["sample_idx"], df["mean"], label="mean")
+    plt.fill_between(df["sample_idx"], df["ci95_low"], df["ci95_high"], alpha=0.25, label="95% CI")
+    plt.xlabel("sample index")
     plt.ylabel(ylabel)
     plt.title(f"{role} - {scenario} - {metric} - mean + 95% CI")
     if ylim is not None:
@@ -441,10 +444,10 @@ def plot_mean_iqr_p10p90(
         return
 
     plt.figure()
-    plt.plot(df["t_bin_s"], df["mean"], label="mean")
-    plt.fill_between(df["t_bin_s"], df["q10"], df["q90"], alpha=0.15, label="p10-p90")
-    plt.fill_between(df["t_bin_s"], df["q25"], df["q75"], alpha=0.30, label="IQR")
-    plt.xlabel("time (s, relative, binned)")
+    plt.plot(df["sample_idx"], df["mean"], label="mean")
+    plt.fill_between(df["sample_idx"], df["q10"], df["q90"], alpha=0.15, label="p10-p90")
+    plt.fill_between(df["sample_idx"], df["q25"], df["q75"], alpha=0.30, label="IQR")
+    plt.xlabel("sample index")
     plt.ylabel(ylabel)
     plt.title(f"{role} - {scenario} - {metric} - mean + IQR + p10/p90")
     if ylim is not None:
