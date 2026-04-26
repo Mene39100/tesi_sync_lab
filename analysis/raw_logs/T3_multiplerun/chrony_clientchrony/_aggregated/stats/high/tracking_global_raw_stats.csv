@@ -1,0 +1,3 @@
+scenario,section,metric,source,n_runs_total,n_total_rows,n_valid,mean,std,min,q10,q25,median,q75,q90,max,range,iqr,cv
+high,tracking,system_time_us,all_raw_samples_across_runs,15,300,300,-34.573207,50.788617,-444.737,-93.9311,-48.64175,-19.111,0.001,0.1917,53.377,498.114,48.64275,-1.469017
+high,tracking,last_offset_us,all_raw_samples_across_runs,15,300,300,-61.311737,82.832951,-524.337,-160.5693,-89.53875,-31.1075,-10.79775,3.1095,55.704,580.041,78.741,-1.351013

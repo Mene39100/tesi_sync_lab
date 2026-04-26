@@ -1,0 +1,3 @@
+scenario,section,source_name,metric,source,n_runs_total,n_total_rows,n_valid,mean,std,min,q10,q25,median,q75,q90,max,range,iqr,cv
+medium,sourcestats,servergm,offset_us,all_raw_samples_across_runs,15,300,300,-2.64176,9.136414,-76.0,-7.4738,-1.075,-0.0725,-0.004,0.0172,15.0,91.0,1.071,-3.458457
+medium,sourcestats,servergm,stddev_us,all_raw_samples_across_runs,15,300,300,140.89876,77.338055,8.628,43.0,64.75,141.0,191.25,238.0,510.0,501.372,126.5,0.548891
