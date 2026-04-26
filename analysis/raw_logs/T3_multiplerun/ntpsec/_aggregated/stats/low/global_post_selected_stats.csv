@@ -1,0 +1,7 @@
+scenario,role,metric,source,n_runs_total,n_total_rows,n_valid,mean,std,min,q10,q25,median,q75,q90,max,range,iqr,cv
+low,client,offset_ms,post_selected_samples_across_runs,15,941,941,-2.552589,0.91402,-5.8876,-3.363,-2.9827,-2.5513,-2.255,-2.0287,1.6615,7.5491,0.7277,-0.358076
+low,client,jitter_ms,post_selected_samples_across_runs,15,941,941,1.054996,0.775379,0.1733,0.4405,0.5638,0.7728,1.2537,2.1615,4.0164,3.8431,0.6899,0.734959
+low,client,delay_ms,post_selected_samples_across_runs,15,941,941,7.000147,1.862944,2.4596,5.2476,5.962,6.8225,7.9146,8.878,16.2822,13.8226,1.9526,0.266129
+low,boundary,offset_ms,post_selected_samples_across_runs,15,991,991,0.20413,0.352032,-0.3812,0.0076,0.0513,0.1294,0.3028,0.4428,3.4453,3.8265,0.2515,1.724549
+low,boundary,jitter_ms,post_selected_samples_across_runs,15,991,991,0.446429,0.445371,0.0367,0.1346,0.2234,0.3006,0.4498,1.1731,3.3561,3.3194,0.2264,0.99763
+low,boundary,delay_ms,post_selected_samples_across_runs,15,991,991,1.080399,0.814383,0.2942,0.3943,0.6445,0.8479,1.3803,1.7854,7.6007,7.3065,0.7358,0.75378

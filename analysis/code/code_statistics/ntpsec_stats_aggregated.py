@@ -118,7 +118,36 @@ def load_run_files(root: Path, scenario: str, role: str) -> pd.DataFrame:
     return pd.concat(rows, ignore_index=True)
 
 
-def build_global_raw_stats(df_all: pd.DataFrame, scenario: str, role: str) -> pd.DataFrame:
+def filter_post_selected_per_run(df_all: pd.DataFrame) -> pd.DataFrame:
+    """
+    Per ogni run mantiene solo i campioni dal primo selected == True in poi.
+    Se una run non ha selected oppure non ha mai selected == True, viene scartata.
+    """
+    if df_all.empty or "run_id" not in df_all.columns or "selected" not in df_all.columns:
+        return pd.DataFrame()
+
+    parts: List[pd.DataFrame] = []
+
+    for run_id, g in df_all.groupby("run_id", sort=True):
+        g = g.copy()
+
+        sel = g["selected"].astype(bool)
+        if not sel.any():
+            continue
+
+        first_sel_idx = g.loc[sel, "sample_idx"].min()
+        g_post = g[g["sample_idx"] >= first_sel_idx].copy()
+
+        if not g_post.empty:
+            parts.append(g_post)
+
+    if not parts:
+        return pd.DataFrame()
+
+    return pd.concat(parts, ignore_index=True)
+
+
+def build_global_raw_stats(df_all: pd.DataFrame, scenario: str, role: str, source_label: str) -> pd.DataFrame:
     rows = []
 
     if df_all.empty:
@@ -136,7 +165,7 @@ def build_global_raw_stats(df_all: pd.DataFrame, scenario: str, role: str) -> pd
             "scenario": scenario,
             "role": role,
             "metric": metric,
-            "source": "all_raw_samples_across_runs",
+            "source": source_label,
             "n_runs_total": int(n_runs) if not pd.isna(n_runs) else np.nan,
             "n_total_rows": int(len(df_all)),
             **stats,
@@ -170,13 +199,11 @@ def build_aggregated_curve_stats(
         mean_stats = compute_stats(df["mean"]) if "mean" in df.columns else compute_stats(pd.Series(dtype=float))
         std_stats = compute_stats(df["std"]) if "std" in df.columns else compute_stats(pd.Series(dtype=float))
 
-        iqr_width = None
         if "q75" in df.columns and "q25" in df.columns:
             iqr_width = pd.to_numeric(df["q75"], errors="coerce") - pd.to_numeric(df["q25"], errors="coerce")
         else:
             iqr_width = pd.Series(dtype=float)
 
-        p10p90_width = None
         if "q90" in df.columns and "q10" in df.columns:
             p10p90_width = pd.to_numeric(df["q90"], errors="coerce") - pd.to_numeric(df["q10"], errors="coerce")
         else:
@@ -227,7 +254,7 @@ def build_aggregated_curve_stats(
     return pd.DataFrame(rows)
 
 
-def build_per_run_summary(df_all: pd.DataFrame, scenario: str, role: str) -> pd.DataFrame:
+def build_per_run_summary(df_all: pd.DataFrame, scenario: str, role: str, summary_source: str) -> pd.DataFrame:
     rows = []
 
     if df_all.empty or "run_id" not in df_all.columns:
@@ -238,11 +265,14 @@ def build_per_run_summary(df_all: pd.DataFrame, scenario: str, role: str) -> pd.
             "scenario": scenario,
             "role": role,
             "run_id": run_id,
+            "summary_source": summary_source,
             "n_rows": int(len(g)),
         }
 
         if "sample_idx" in g.columns:
-            row["max_sample_idx"] = int(pd.to_numeric(g["sample_idx"], errors="coerce").dropna().max()) if not pd.to_numeric(g["sample_idx"], errors="coerce").dropna().empty else np.nan
+            sidx = pd.to_numeric(g["sample_idx"], errors="coerce").dropna()
+            row["min_sample_idx"] = int(sidx.min()) if not sidx.empty else np.nan
+            row["max_sample_idx"] = int(sidx.max()) if not sidx.empty else np.nan
 
         if "t_rel_s" in g.columns:
             tvals = pd.to_numeric(g["t_rel_s"], errors="coerce").dropna()
@@ -256,11 +286,12 @@ def build_per_run_summary(df_all: pd.DataFrame, scenario: str, role: str) -> pd.
 
         for metric in METRICS:
             if metric in g.columns:
+                metric_vals = pd.to_numeric(g[metric], errors="coerce").dropna()
                 stats = compute_stats(g[metric])
                 row[f"{metric}_mean"] = stats["mean"]
                 row[f"{metric}_std"] = stats["std"]
                 row[f"{metric}_median"] = stats["median"]
-                row[f"{metric}_p95"] = float(pd.to_numeric(g[metric], errors="coerce").dropna().quantile(0.95)) if not pd.to_numeric(g[metric], errors="coerce").dropna().empty else np.nan
+                row[f"{metric}_p95"] = float(metric_vals.quantile(0.95)) if not metric_vals.empty else np.nan
                 row[f"{metric}_max"] = stats["max"]
 
         rows.append(row)
@@ -298,40 +329,83 @@ def main() -> None:
     stats_dirs = ensure_stats_dirs(root)
 
     for scenario in SCENARIOS:
-        scenario_frames_global = []
+        scenario_frames_global_raw = []
+        scenario_frames_global_post = []
         scenario_frames_curve = []
-        scenario_frames_per_run = []
+        scenario_frames_per_run_raw = []
+        scenario_frames_per_run_post = []
 
         for role in ROLES:
             df_all = load_run_files(root, scenario, role)
+            df_post = filter_post_selected_per_run(df_all)
 
-            global_raw = build_global_raw_stats(df_all, scenario, role)
+            global_raw = build_global_raw_stats(
+                df_all=df_all,
+                scenario=scenario,
+                role=role,
+                source_label="all_raw_samples_across_runs",
+            )
+
+            global_post = build_global_raw_stats(
+                df_all=df_post,
+                scenario=scenario,
+                role=role,
+                source_label="post_selected_samples_across_runs",
+            )
+
             curve_stats = build_aggregated_curve_stats(root, scenario, role)
-            per_run = build_per_run_summary(df_all, scenario, role)
+
+            per_run_raw = build_per_run_summary(
+                df_all=df_all,
+                scenario=scenario,
+                role=role,
+                summary_source="raw",
+            )
+
+            per_run_post = build_per_run_summary(
+                df_all=df_post,
+                scenario=scenario,
+                role=role,
+                summary_source="post_selected",
+            )
 
             if not global_raw.empty:
-                scenario_frames_global.append(global_raw)
+                scenario_frames_global_raw.append(global_raw)
+            if not global_post.empty:
+                scenario_frames_global_post.append(global_post)
             if not curve_stats.empty:
                 scenario_frames_curve.append(curve_stats)
-            if not per_run.empty:
-                scenario_frames_per_run.append(per_run)
+            if not per_run_raw.empty:
+                scenario_frames_per_run_raw.append(per_run_raw)
+            if not per_run_post.empty:
+                scenario_frames_per_run_post.append(per_run_post)
 
         outdir = stats_dirs[scenario]
 
-        if scenario_frames_global:
-            global_df = pd.concat(scenario_frames_global, ignore_index=True)
-            global_df = round_numeric_columns(global_df)
-            global_df.to_csv(outdir / "global_raw_stats.csv", index=False)
+        if scenario_frames_global_raw:
+            global_raw_df = pd.concat(scenario_frames_global_raw, ignore_index=True)
+            global_raw_df = round_numeric_columns(global_raw_df)
+            global_raw_df.to_csv(outdir / "global_raw_stats.csv", index=False)
+
+        if scenario_frames_global_post:
+            global_post_df = pd.concat(scenario_frames_global_post, ignore_index=True)
+            global_post_df = round_numeric_columns(global_post_df)
+            global_post_df.to_csv(outdir / "global_post_selected_stats.csv", index=False)
 
         if scenario_frames_curve:
             curve_df = pd.concat(scenario_frames_curve, ignore_index=True)
             curve_df = round_numeric_columns(curve_df)
             curve_df.to_csv(outdir / "aggregated_curve_stats.csv", index=False)
 
-        if scenario_frames_per_run:
-            per_run_df = pd.concat(scenario_frames_per_run, ignore_index=True)
-            per_run_df = round_numeric_columns(per_run_df)
-            per_run_df.to_csv(outdir / "per_run_summary.csv", index=False)
+        if scenario_frames_per_run_raw:
+            per_run_raw_df = pd.concat(scenario_frames_per_run_raw, ignore_index=True)
+            per_run_raw_df = round_numeric_columns(per_run_raw_df)
+            per_run_raw_df.to_csv(outdir / "per_run_summary.csv", index=False)
+
+        if scenario_frames_per_run_post:
+            per_run_post_df = pd.concat(scenario_frames_per_run_post, ignore_index=True)
+            per_run_post_df = round_numeric_columns(per_run_post_df)
+            per_run_post_df.to_csv(outdir / "per_run_post_selected_summary.csv", index=False)
 
     print(f"[OK] NTPsec aggregated statistics saved in: {root / '_aggregated' / 'stats'}")
 
