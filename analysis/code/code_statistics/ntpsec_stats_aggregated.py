@@ -128,15 +128,15 @@ def filter_post_selected_per_run(df_all: pd.DataFrame) -> pd.DataFrame:
 
     parts: List[pd.DataFrame] = []
 
-    for run_id, g in df_all.groupby("run_id", sort=True):
+    for _, g in df_all.groupby("run_id", sort=True):
         g = g.copy()
-
         sel = g["selected"].astype(bool)
+
         if not sel.any():
             continue
 
-        first_sel_idx = g.loc[sel, "sample_idx"].min()
-        g_post = g[g["sample_idx"] >= first_sel_idx].copy()
+        first_sel_sample_idx = g.loc[sel, "sample_idx"].min()
+        g_post = g[g["sample_idx"] >= first_sel_sample_idx].copy()
 
         if not g_post.empty:
             parts.append(g_post)
@@ -184,72 +184,217 @@ def load_aggregated_curve_csv(root: Path, scenario: str, role: str, metric: str)
     return df
 
 
+def rebuild_post_selected_curve(df_all: pd.DataFrame, metric: str) -> pd.DataFrame:
+    """
+    Ricostruisce la curva aggregata post-selected a partire dai parsed per-run:
+    per ogni run tiene solo i campioni dal primo selected=True in poi,
+    poi reindicizza sample_idx da 0 all'interno della porzione post-selected
+    e riaggrega tra run.
+    """
+    if df_all.empty or metric not in df_all.columns:
+        return pd.DataFrame()
+
+    if "selected" not in df_all.columns or "run_id" not in df_all.columns:
+        return pd.DataFrame()
+
+    pieces = []
+
+    for _, g in df_all.groupby("run_id", sort=True):
+        g = g.copy()
+        sel = g["selected"].astype(bool)
+
+        if not sel.any():
+            continue
+
+        first_sel_sample_idx = g.loc[sel, "sample_idx"].min()
+        g_post = g[g["sample_idx"] >= first_sel_sample_idx].copy()
+
+        if g_post.empty:
+            continue
+
+        g_post = g_post.reset_index(drop=True)
+        g_post["sample_idx"] = g_post.index.astype(int)
+
+        tmp = g_post[["sample_idx", metric, "run_id"]].copy()
+        tmp = tmp.dropna(subset=[metric])
+        if not tmp.empty:
+            pieces.append(tmp)
+
+    if not pieces:
+        return pd.DataFrame()
+
+    long_df = pd.concat(pieces, ignore_index=True)
+
+    def agg_fn(g: pd.DataFrame) -> pd.Series:
+        vals = pd.to_numeric(g[metric], errors="coerce").dropna()
+        n = len(vals)
+
+        if n == 0:
+            return pd.Series(dtype=float)
+
+        mean = vals.mean()
+        std = vals.std(ddof=1) if n > 1 else 0.0
+        se = std / np.sqrt(n) if n > 1 else 0.0
+        ci_half = 1.96 * se if n > 1 else 0.0
+
+        return pd.Series({
+            "n_runs": int(n),
+            "mean": float(mean),
+            "std": float(std),
+            "ci95_low": float(mean - ci_half),
+            "ci95_high": float(mean + ci_half),
+            "q10": float(vals.quantile(0.10)),
+            "q25": float(vals.quantile(0.25)),
+            "q50": float(vals.quantile(0.50)),
+            "q75": float(vals.quantile(0.75)),
+            "q90": float(vals.quantile(0.90)),
+            "min": float(vals.min()),
+            "max": float(vals.max()),
+        })
+
+    out = long_df.groupby("sample_idx", as_index=False).apply(agg_fn)
+    if isinstance(out.index, pd.MultiIndex):
+        out = out.reset_index()
+    if "level_0" in out.columns:
+        out = out.drop(columns=["level_0"])
+
+    return out
+
+
+def build_curve_stats_row(
+    df: pd.DataFrame,
+    scenario: str,
+    role: str,
+    metric: str,
+    curve_scope: str,
+    source_label: str,
+) -> Optional[Dict]:
+    if df is None or df.empty:
+        return None
+
+    mean_stats = compute_stats(df["mean"]) if "mean" in df.columns else compute_stats(pd.Series(dtype=float))
+    std_stats = compute_stats(df["std"]) if "std" in df.columns else compute_stats(pd.Series(dtype=float))
+
+    if "q75" in df.columns and "q25" in df.columns:
+        iqr_width = pd.to_numeric(df["q75"], errors="coerce") - pd.to_numeric(df["q25"], errors="coerce")
+    else:
+        iqr_width = pd.Series(dtype=float)
+
+    if "q90" in df.columns and "q10" in df.columns:
+        p10p90_width = pd.to_numeric(df["q90"], errors="coerce") - pd.to_numeric(df["q10"], errors="coerce")
+    else:
+        p10p90_width = pd.Series(dtype=float)
+
+    if "ci95_high" in df.columns and "ci95_low" in df.columns:
+        ci95_width = pd.to_numeric(df["ci95_high"], errors="coerce") - pd.to_numeric(df["ci95_low"], errors="coerce")
+    else:
+        ci95_width = pd.Series(dtype=float)
+
+    iqr_stats = compute_stats(iqr_width)
+    p10p90_stats = compute_stats(p10p90_width)
+    ci95_stats = compute_stats(ci95_width)
+
+    n_runs_stats = compute_stats(pd.to_numeric(df["n_runs"], errors="coerce")) if "n_runs" in df.columns else compute_stats(pd.Series(dtype=float))
+
+    abs_mean_stats = compute_stats(pd.to_numeric(df["mean"], errors="coerce").abs()) if "mean" in df.columns else compute_stats(pd.Series(dtype=float))
+
+    return {
+        "scenario": scenario,
+        "role": role,
+        "metric": metric,
+        "curve_scope": curve_scope,
+        "source_file": source_label,
+        "n_samples_aggregated": int(len(df)),
+
+        "central_n_valid": mean_stats["n_valid"],
+        "central_mean": mean_stats["mean"],
+        "central_std": mean_stats["std"],
+        "central_min": mean_stats["min"],
+        "central_q25": mean_stats["q25"],
+        "central_median": mean_stats["median"],
+        "central_q75": mean_stats["q75"],
+        "central_max": mean_stats["max"],
+        "central_iqr": mean_stats["iqr"],
+
+        "central_abs_mean": abs_mean_stats["mean"],
+        "central_abs_q95": float(pd.to_numeric(df["mean"], errors="coerce").abs().quantile(0.95)) if "mean" in df.columns and not pd.to_numeric(df["mean"], errors="coerce").dropna().empty else np.nan,
+        "central_abs_max": float(pd.to_numeric(df["mean"], errors="coerce").abs().max()) if "mean" in df.columns and not pd.to_numeric(df["mean"], errors="coerce").dropna().empty else np.nan,
+
+        "iqr_width_n_valid": iqr_stats["n_valid"],
+        "iqr_width_mean": iqr_stats["mean"],
+        "iqr_width_std": iqr_stats["std"],
+        "iqr_width_min": iqr_stats["min"],
+        "iqr_width_q25": iqr_stats["q25"],
+        "iqr_width_median": iqr_stats["median"],
+        "iqr_width_q75": iqr_stats["q75"],
+        "iqr_width_max": iqr_stats["max"],
+        "iqr_width_iqr": iqr_stats["iqr"],
+
+        "p10p90_width_n_valid": p10p90_stats["n_valid"],
+        "p10p90_width_mean": p10p90_stats["mean"],
+        "p10p90_width_std": p10p90_stats["std"],
+        "p10p90_width_min": p10p90_stats["min"],
+        "p10p90_width_q25": p10p90_stats["q25"],
+        "p10p90_width_median": p10p90_stats["median"],
+        "p10p90_width_q75": p10p90_stats["q75"],
+        "p10p90_width_max": p10p90_stats["max"],
+        "p10p90_width_iqr": p10p90_stats["iqr"],
+
+        "ci95_width_n_valid": ci95_stats["n_valid"],
+        "ci95_width_mean": ci95_stats["mean"],
+        "ci95_width_std": ci95_stats["std"],
+        "ci95_width_min": ci95_stats["min"],
+        "ci95_width_q25": ci95_stats["q25"],
+        "ci95_width_median": ci95_stats["median"],
+        "ci95_width_q75": ci95_stats["q75"],
+        "ci95_width_max": ci95_stats["max"],
+        "ci95_width_iqr": ci95_stats["iqr"],
+
+        "n_runs_n_valid": n_runs_stats["n_valid"],
+        "n_runs_mean": n_runs_stats["mean"],
+        "n_runs_std": n_runs_stats["std"],
+        "n_runs_min": n_runs_stats["min"],
+        "n_runs_q25": n_runs_stats["q25"],
+        "n_runs_median": n_runs_stats["median"],
+        "n_runs_q75": n_runs_stats["q75"],
+        "n_runs_max": n_runs_stats["max"],
+        "n_runs_iqr": n_runs_stats["iqr"],
+    }
+
+
 def build_aggregated_curve_stats(
     root: Path,
     scenario: str,
     role: str,
+    df_all: pd.DataFrame,
 ) -> pd.DataFrame:
     rows = []
 
     for metric in METRICS:
-        df = load_aggregated_curve_csv(root, scenario, role, metric)
-        if df is None or df.empty:
-            continue
+        raw_curve = load_aggregated_curve_csv(root, scenario, role, metric)
+        post_curve = rebuild_post_selected_curve(df_all, metric)
 
-        mean_stats = compute_stats(df["mean"]) if "mean" in df.columns else compute_stats(pd.Series(dtype=float))
-        std_stats = compute_stats(df["std"]) if "std" in df.columns else compute_stats(pd.Series(dtype=float))
+        raw_row = build_curve_stats_row(
+            df=raw_curve,
+            scenario=scenario,
+            role=role,
+            metric=metric,
+            curve_scope="raw",
+            source_label=f"{metric}_aggregated.csv",
+        )
+        if raw_row is not None:
+            rows.append(raw_row)
 
-        if "q75" in df.columns and "q25" in df.columns:
-            iqr_width = pd.to_numeric(df["q75"], errors="coerce") - pd.to_numeric(df["q25"], errors="coerce")
-        else:
-            iqr_width = pd.Series(dtype=float)
-
-        if "q90" in df.columns and "q10" in df.columns:
-            p10p90_width = pd.to_numeric(df["q90"], errors="coerce") - pd.to_numeric(df["q10"], errors="coerce")
-        else:
-            p10p90_width = pd.Series(dtype=float)
-
-        iqr_stats = compute_stats(iqr_width)
-        p10p90_stats = compute_stats(p10p90_width)
-
-        n_runs_series = pd.to_numeric(df["n_runs"], errors="coerce") if "n_runs" in df.columns else pd.Series(dtype=float)
-
-        rows.append({
-            "scenario": scenario,
-            "role": role,
-            "metric": metric,
-            "source": "aggregated_curve_over_sample_idx",
-            "n_points_curve": int(len(df)),
-            "n_runs_min": int(n_runs_series.min()) if not n_runs_series.dropna().empty else np.nan,
-            "n_runs_max": int(n_runs_series.max()) if not n_runs_series.dropna().empty else np.nan,
-
-            "curve_mean_of_mean": mean_stats["mean"],
-            "curve_std_of_mean": mean_stats["std"],
-            "curve_min_of_mean": mean_stats["min"],
-            "curve_q10_of_mean": mean_stats["q10"],
-            "curve_q25_of_mean": mean_stats["q25"],
-            "curve_median_of_mean": mean_stats["median"],
-            "curve_q75_of_mean": mean_stats["q75"],
-            "curve_q90_of_mean": mean_stats["q90"],
-            "curve_max_of_mean": mean_stats["max"],
-            "curve_range_of_mean": mean_stats["range"],
-            "curve_iqr_of_mean": mean_stats["iqr"],
-            "curve_cv_of_mean": mean_stats["cv"],
-
-            "curve_mean_of_std": std_stats["mean"],
-            "curve_std_of_std": std_stats["std"],
-            "curve_max_of_std": std_stats["max"],
-
-            "curve_mean_iqr_width": iqr_stats["mean"],
-            "curve_std_iqr_width": iqr_stats["std"],
-            "curve_median_iqr_width": iqr_stats["median"],
-            "curve_max_iqr_width": iqr_stats["max"],
-
-            "curve_mean_p10p90_width": p10p90_stats["mean"],
-            "curve_std_p10p90_width": p10p90_stats["std"],
-            "curve_median_p10p90_width": p10p90_stats["median"],
-            "curve_max_p10p90_width": p10p90_stats["max"],
-        })
+        post_row = build_curve_stats_row(
+            df=post_curve,
+            scenario=scenario,
+            role=role,
+            metric=metric,
+            curve_scope="post_selected",
+            source_label=f"{metric}_aggregated_post_selected_rebuilt",
+        )
+        if post_row is not None:
+            rows.append(post_row)
 
     return pd.DataFrame(rows)
 
@@ -353,7 +498,7 @@ def main() -> None:
                 source_label="post_selected_samples_across_runs",
             )
 
-            curve_stats = build_aggregated_curve_stats(root, scenario, role)
+            curve_stats = build_aggregated_curve_stats(root, scenario, role, df_all)
 
             per_run_raw = build_per_run_summary(
                 df_all=df_all,
